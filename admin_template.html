@@ -116,6 +116,8 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 .toggle::after{content:'';position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:var(--hueso);transition:transform .12s}
 .toggle.on::after{transform:translateX(16px);background:var(--tinta)}
 .acciones-fila{display:flex;gap:6px}
+.modelo-chip{display:none}
+.btn-txt{display:none}
 .icono-btn{background:none;border:1px solid var(--linea);color:var(--humo);width:28px;height:28px;cursor:pointer;font-size:12px}
 .icono-btn:hover{color:var(--hueso);border-color:var(--hueso)}
 
@@ -141,6 +143,14 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 .fila-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .foto-preview{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--linea);margin-bottom:8px;background:var(--asfalto)}
 .galeria-editor{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.input-archivo{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.btn-archivo{
+  display:inline-block;background:none;border:1px solid var(--linea);color:var(--hueso);
+  padding:9px 16px;font-size:12.5px;cursor:pointer;
+}
+.btn-archivo:hover{border-color:var(--hueso)}
+.input-archivo:focus-visible + .btn-archivo,
+.btn-archivo:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
 .galeria-item{position:relative;width:84px;height:84px}
 .galeria-item img{width:100%;height:100%;object-fit:cover;border:1px solid var(--linea);background:var(--asfalto)}
 .galeria-item.principal img{border-color:var(--oro)}
@@ -148,7 +158,7 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 .talles-editor{display:flex;flex-wrap:wrap;gap:8px}
 .talle-campo{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--asfalto);border:1px solid var(--linea);padding:6px 8px}
 .talle-campo span{font-size:10px;color:var(--humo)}
-.talle-campo input{width:44px;text-align:center;background:none;border:none;border-bottom:1px solid var(--linea);color:var(--hueso);padding:2px}
+.talle-campo input[type=number]{width:44px;text-align:center;background:none;border:none;border-bottom:1px solid var(--linea);color:var(--hueso);padding:2px}
 .modal-pie{padding:16px 20px;border-top:1px solid var(--linea);display:flex;justify-content:flex-end;gap:10px}
 .check-linea{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:10px}
 
@@ -183,15 +193,141 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 
 .vacio{color:var(--humo);font-size:13px;padding:30px;text-align:center;border:1px dashed var(--linea)}
 
+.tabla-scroll{overflow-x:auto}
+
+/* =========================================================================
+   CELULAR
+   El panel se usa desde el telefono (cargar un pedido, cambiar un precio,
+   marcar algo agotado). En 390 px la tabla de productos tiene 769 px de
+   ancho: los toggles de destacado/activo y los botones de editar/eliminar
+   quedaban fuera de la pantalla, y para llegar a ellos habia que scrollear
+   la tabla al costado, perdiendo de vista de que producto era cada fila.
+   Abajo de 800 px la tabla pasa a ser una lista de tarjetas.
+   ========================================================================= */
 @media(max-width:800px){
   #app{flex-direction:column}
-  .nav-lateral{width:100%;min-height:auto;position:static;display:flex;overflow-x:auto;padding:10px 0}
+
+  /* --- navegacion como pestañas horizontales, fija arriba --- */
+  .nav-lateral{
+    width:100%;min-height:auto;padding:0;
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:stretch;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+    border-right:none;border-bottom:1px solid var(--linea);
+  }
+  .nav-lateral::-webkit-scrollbar{display:none}
   .nav-marca{display:none}
-  .nav-item{white-space:nowrap;border-left:none;border-bottom:2px solid transparent;padding:10px 14px}
-  .nav-item.activo{border-left:none;border-bottom-color:var(--oro)}
-  .contenido{padding:20px}
-  .tarjetas{grid-template-columns:1fr 1fr}
+  .nav-item{
+    white-space:nowrap;border-left:none;border-bottom:2px solid transparent;
+    padding:14px 16px;flex:none;
+  }
+  .nav-item.activo{border-left:none;border-bottom-color:var(--oro);background:none}
+  /* el link "ver la web" se partia en tres renglones dentro de la barra de
+     pestañas: queda como ultimo item de la barra, en una sola linea */
+  .nav-pie{
+    border-top:none;margin:0;padding:0 16px;flex:none;
+    display:flex;align-items:center;
+  }
+  .nav-pie a{white-space:nowrap}
+
+  .contenido{padding:18px 16px 48px}
+  .contenido-cab h2{font-size:21px}
+  .contenido-cab>button,.contenido-cab .btn{width:100%}
+
+  /* --- dashboard: una sola columna, y que etiqueta y valor no choquen --- */
+  .tarjetas{grid-template-columns:1fr;gap:12px}
+  .tarjeta-fila{flex-wrap:wrap;gap:4px 10px}
+  .tarjeta-fila b{margin-left:auto}
+
+  /* --- barra de acciones --- */
+  .barra-acciones{flex-direction:column;align-items:stretch}
+  .buscador{width:100%}
+  .barra-acciones .btn{width:100%;padding:12px 16px}
+
+  /* --- tabla de productos convertida en tarjetas --- */
+  .tabla-scroll{overflow-x:visible}
+  #vista-productos table{border:none;background:none;display:block}
+  #vista-productos thead{display:none}
+  #vista-productos tbody{display:flex;flex-direction:column;gap:10px}
+  #vista-productos tr{
+    display:grid;grid-template-columns:60px 1fr 1fr;gap:0 12px;
+    background:var(--militar);border:1px solid var(--linea);padding:12px;
+  }
+  #vista-productos td{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    grid-column:1 / -1;border:none;padding:6px 0;min-height:36px;
+    border-top:1px solid var(--linea);
+  }
+  /* destacado y activo comparten renglon: son dos interruptores, no hace
+     falta un renglon entero para cada uno */
+  #vista-productos td[data-col=Destacado]{grid-column:1 / 3}
+  #vista-productos td[data-col=Activo]{grid-column:3 / -1}
+  /* el modelo ya viaja como chip al lado del nombre */
+  #vista-productos td[data-col=Modelo]{display:none}
+  .modelo-chip{
+    display:inline-block;margin-top:5px;font-size:10px;color:var(--humo);
+    border:1px solid var(--linea);padding:1px 6px;text-transform:uppercase;
+  }
+  #vista-productos td[data-col]:not([data-col=foto]):not([data-col=producto]):not([data-col=acciones])::before{
+    content:attr(data-col);
+    color:var(--humo);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;flex:none;
+  }
+  #vista-productos td[data-col=foto]{grid-column:1;grid-row:1;padding:0;border-top:none;min-height:0}
+  #vista-productos td[data-col=foto] img{width:60px;height:60px}
+  #vista-productos td[data-col=producto]{
+    grid-column:2 / -1;grid-row:1;display:block;padding:0;border-top:none;min-height:0;
+    align-self:center;font-size:14px;line-height:1.35;
+  }
+  /* la celda de etiquetas suele venir vacia (producto activo y sin oferta) */
+  #vista-productos td[data-col=Etiquetas]:empty{display:none}
+  #vista-productos td[data-col=acciones]{justify-content:flex-end}
+  #vista-productos .acciones-fila{gap:8px}
+  #vista-productos .icono-btn{width:auto;min-width:44px;height:40px;padding:0 14px;font-size:13px}
+  #vista-productos .btn-txt{display:inline;margin-left:6px}
+  #vista-productos .input-precio{width:130px;text-align:right;padding:9px 10px;font-size:14px}
+  #vista-productos .toggle{width:46px;height:26px;border-radius:13px}
+  #vista-productos .toggle::after{width:22px;height:22px}
+  #vista-productos .toggle.on::after{transform:translateX(20px)}
+  #vista-productos tr.fila-vacia{display:block;background:none;border:none;padding:0}
+  #vista-productos tr.fila-vacia td{display:block;border:none;min-height:0}
+
+  /* --- pedidos: columnas vacias no tienen por que ocupar 200 px cada una --- */
+  .kanban-col{min-height:0}
+  .kanban-lista:empty{min-height:44px}
+
+  /* --- formularios --- */
   .fila-2{grid-template-columns:1fr}
+  .calc-envio{max-width:none}
+  /* iOS hace zoom al enfocar un input de menos de 16 px */
+  .campo input[type=text],.campo input[type=number],.campo select,.campo textarea,
+  .buscador,.input-precio{font-size:16px}
+
+  /* --- modal como hoja a pantalla completa, con los botones siempre a mano --- */
+  .modal{
+    top:auto;left:0;bottom:0;transform:none;
+    width:100%;max-width:none;max-height:92vh;
+    display:none;flex-direction:column;
+    border:none;border-top:1px solid var(--linea);
+  }
+  .modal.abierto{display:flex}
+  .modal-cab{padding:14px 16px;flex:none}
+  .modal-cuerpo{padding:16px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+  .modal-pie{
+    padding:12px 16px;flex:none;
+    position:sticky;bottom:0;background:var(--militar);
+  }
+  .modal-pie .btn{flex:1;padding:13px 16px}
+  .modal-pie .btn-peligro{flex:0 1 auto;padding:13px 14px}
+  .talle-campo{padding:8px 10px}
+  .talle-campo input[type=number]{width:52px;font-size:16px;padding:4px 2px}
+  .galeria-item{width:76px;height:76px}
+}
+
+@media(max-width:400px){
+  .contenido{padding:16px 12px 44px}
+  #vista-productos tr{grid-template-columns:52px 1fr 1fr;padding:10px}
+  #vista-productos td[data-col=foto] img{width:52px;height:52px}
 }
 </style>
 </head>
@@ -242,7 +378,7 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
         <input class="buscador" id="buscadorProd" placeholder="Buscar por nombre o colorway…">
         <button class="btn btn-primario" id="btnNuevoProducto">+ Agregar producto</button>
       </div>
-      <div style="overflow-x:auto">
+      <div class="tabla-scroll">
       <table>
         <thead><tr>
           <th></th><th>Producto</th><th>Modelo</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Destacado</th><th>Activo</th><th></th>
@@ -394,7 +530,8 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
     <div class="campo">
       <label>Fotos (la primera es la que se ve en el catálogo)</label>
       <div class="galeria-editor" id="prodGaleriaEditor"></div>
-      <input type="file" id="prodFotoInput" accept="image/*">
+      <label class="btn-archivo" for="prodFotoInput">+ Agregar foto</label>
+      <input type="file" id="prodFotoInput" accept="image/*" class="input-archivo">
     </div>
     <div class="fila-2">
       <div class="campo"><label>Nombre</label><input type="text" id="prodNombre" placeholder="Nike Air Max Plus"></div>
@@ -658,22 +795,27 @@ function renderTablaProductos(filtro){
       var estado = stock === 0
         ? '<span class="badge badge-agotado">Agotado</span>'
         : '<span class="badge badge-ok">'+stock+' pares</span>';
+      /* data-col lo usa el CSS de celular para etiquetar cada dato cuando la
+         tabla se convierte en tarjetas (en una pantalla de 390 px no entran
+         nueve columnas, y sin esto los toggles y los botones quedaban fuera
+         de la pantalla). */
       return '<tr data-id="'+p.id+'">' +
-        '<td><img src="'+p.img+'" alt=""></td>' +
-        '<td><b>'+p.nombre+'</b><br><span style="color:var(--humo)">'+p.colorway+'</span></td>' +
-        '<td class="mono">'+p.modelo+'</td>' +
-        '<td><div class="celda-precio-edit"><input type="number" class="input-precio" data-campo="precio" value="'+p.precio+'"></div></td>' +
-        '<td>'+estado+'</td>' +
-        '<td>'+(p.activo ? '' : '<span class="badge badge-inactivo">Inactivo</span>')+(p.enOferta ? ' <span class="badge badge-oferta">Oferta</span>' : '')+'</td>' +
-        '<td><div class="toggle'+(p.destacado?' on':'')+'" data-toggle="destacado"></div></td>' +
-        '<td><div class="toggle'+(p.activo?' on':'')+'" data-toggle="activo"></div></td>' +
-        '<td><div class="acciones-fila">' +
-          '<button class="icono-btn" data-accion="editar" title="Editar">✎</button>' +
+        '<td data-col="foto"><img src="'+p.img+'" alt=""></td>' +
+        '<td data-col="producto"><b>'+p.nombre+'</b><br><span style="color:var(--humo)">'+p.colorway+'</span>' +
+          '<span class="modelo-chip mono">'+p.modelo+'</span></td>' +
+        '<td class="mono" data-col="Modelo">'+p.modelo+'</td>' +
+        '<td data-col="Precio"><div class="celda-precio-edit"><input type="number" class="input-precio" data-campo="precio" value="'+p.precio+'"></div></td>' +
+        '<td data-col="Stock">'+estado+'</td>' +
+        '<td data-col="Etiquetas">'+(p.activo ? '' : '<span class="badge badge-inactivo">Inactivo</span>')+(p.enOferta ? ' <span class="badge badge-oferta">Oferta</span>' : '')+'</td>' +
+        '<td data-col="Destacado"><div class="toggle'+(p.destacado?' on':'')+'" data-toggle="destacado"></div></td>' +
+        '<td data-col="Activo"><div class="toggle'+(p.activo?' on':'')+'" data-toggle="activo"></div></td>' +
+        '<td data-col="acciones"><div class="acciones-fila">' +
+          '<button class="icono-btn" data-accion="editar" title="Editar">✎<span class="btn-txt">Editar</span></button>' +
           '<button class="icono-btn" data-accion="eliminar" title="Eliminar">🗑</button>' +
         '</div></td>' +
       '</tr>';
     }).join('');
-  document.getElementById('tablaProductos').innerHTML = filas || '<tr><td colspan="9" class="vacio">No hay productos que coincidan.</td></tr>';
+  document.getElementById('tablaProductos').innerHTML = filas || '<tr class="fila-vacia"><td colspan="9" class="vacio">No hay productos que coincidan.</td></tr>';
 
   /* precio rapido */
   document.querySelectorAll('.input-precio').forEach(function(inp){
