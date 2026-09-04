@@ -544,7 +544,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 .pd-cantidad-fila .btn{flex:1;justify-content:center}
 .pd-agregado{color:var(--oro-texto)}
 .pd-agregado a{color:var(--oro-texto);text-decoration:underline;cursor:pointer}
-.pd-error{color:var(--rojo);font-size:11px;display:none}
+.pd-error{color:var(--rojo);font-size:11px}
 .pd-descripcion{color:var(--humo);font-size:13.5px;line-height:1.7;max-width:56ch}
 .pd-similares{padding:40px var(--gutter) 56px;border-bottom:1px solid var(--linea)}
 .pd-similares h2{font-size:clamp(20px,2.6vw,30px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;margin-bottom:18px}
@@ -1108,6 +1108,8 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
     </div>
     <div id="bolsaAccionesPago" style="display:none">
       <button class="btn btn-full" id="bolsaWhatsapp" type="button">Finalizar por WhatsApp</button>
+      <button class="btn btn-full" id="bolsaPagarMP" type="button" style="display:none">Pagar con Mercado Pago</button>
+      <div class="pd-error mono" id="bolsaPagarMPError" style="display:none"></div>
       <button class="bolsa-vaciar mono" id="bolsaVolverEntrega" type="button">← Volver</button>
     </div>
     <button class="bolsa-vaciar mono" id="bolsaVaciar" type="button">Vaciar bolsa</button>
@@ -1292,7 +1294,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
         </div>
         <button class="btn btn-full" id="pdAgregar" type="button">Agregar al carrito</button>
       </div>
-      <div class="pd-error mono" id="pdAgregarError"></div>
+      <div class="pd-error mono" id="pdAgregarError" style="display:none"></div>
       <div class="pd-agregado mono" id="pdAgregadoMsg" style="display:none">Ya agregaste este producto. <a id="pdVerCarrito">Ver carrito</a></div>
       <p class="pd-descripcion" id="pdDescripcion"></p>
     </div>
@@ -2203,7 +2205,7 @@ var LS_PAGOS = 'tn_baires_pagos';
 var PAGOS_DEFAULT = {
   recargoPorcentaje: 10,
   transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
-  mpAlias: '', mpUsuario: '',
+  mpAlias: '', mpUsuario: '', mpFuncionUrl: '',
   rapipagoTexto: '', pagofacilTexto: ''
 };
 function cargarPagos(){
@@ -2340,9 +2342,13 @@ function renderPagoDetalle(){
       ? 'Transferí el total a:<br>Alias: <b>'+(pg.transferenciaAlias || '—')+'</b><br>CBU/CVU: <b>'+(pg.transferenciaCbu || '—')+'</b>' + (pg.transferenciaTitular ? '<br>Titular: '+pg.transferenciaTitular : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
       : 'El local todavía no cargó sus datos de transferencia. Vas a coordinarlo por WhatsApp.';
   }else if(metodoPagoSeleccionado === 'mercadopago'){
-    el.innerHTML = (pg.mpAlias || pg.mpUsuario)
-      ? 'Enviá el total desde tu app de Mercado Pago a:<br>Alias: <b>'+(pg.mpAlias || '—')+'</b>' + (pg.mpUsuario ? '<br>Usuario: '+pg.mpUsuario : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
-      : 'El local todavía no cargó sus datos de Mercado Pago. Vas a coordinarlo por WhatsApp.';
+    if(pg.mpFuncionUrl){
+      el.innerHTML = 'Pagás de verdad con Mercado Pago (tarjeta, dinero en cuenta, etc.) — se confirma solo, automáticamente.';
+    }else{
+      el.innerHTML = (pg.mpAlias || pg.mpUsuario)
+        ? 'Enviá el total desde tu app de Mercado Pago a:<br>Alias: <b>'+(pg.mpAlias || '—')+'</b>' + (pg.mpUsuario ? '<br>Usuario: '+pg.mpUsuario : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
+        : 'El local todavía no cargó sus datos de Mercado Pago. Vas a coordinarlo por WhatsApp.';
+    }
   }else if(metodoPagoSeleccionado === 'rapipago'){
     el.innerHTML = pg.rapipagoTexto
       ? pg.rapipagoTexto.replace(/\n/g,'<br>')
@@ -2354,6 +2360,12 @@ function renderPagoDetalle(){
   }else{
     el.innerHTML = 'Pagás en efectivo al retirar o al recibir tu pedido.';
   }
+  /* si el dueño ya conectó el checkout automático de MP, ese boton
+     reemplaza al de WhatsApp cuando el metodo elegido es Mercado Pago */
+  var usaCheckoutMP = metodoPagoSeleccionado === 'mercadopago' && !!pg.mpFuncionUrl;
+  document.getElementById('bolsaWhatsapp').style.display = usaCheckoutMP ? 'none' : '';
+  document.getElementById('bolsaPagarMP').style.display = usaCheckoutMP ? '' : 'none';
+  document.getElementById('bolsaPagarMPError').style.display = 'none';
 }
 bolsaFondo.addEventListener('click', cerrarBolsa);
 document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') cerrarBolsa(); });
@@ -2369,12 +2381,16 @@ document.getElementById('bolsaVaciar').addEventListener('click', function(){
    FINALIZAR PEDIDO — arma el mensaje de WhatsApp con el detalle completo:
    productos, envío y método de pago elegido (con el recargo si aplica).
 
-   Nota sobre Mercado Pago / Rapipago / Pago Fácil: sin backend propio no hay
-   forma de que el sitio confirme automáticamente que el pago se acreditó
-   (eso requiere un webhook server-side con el Access Token privado de la
-   cuenta — ver README del proyecto). Por eso estos métodos muestran los
-   datos para pagar y el pedido se coordina igual por WhatsApp: el dueño
-   confirma el pago a mano cuando le llega el comprobante.
+   Nota sobre Mercado Pago / Rapipago / Pago Fácil: sin el backend de
+   backend/README.md conectado (campo "URL de la función" en el panel,
+   pestaña Pagos) no hay forma de que el sitio confirme automáticamente que
+   el pago se acreditó — eso requiere un webhook server-side con el Access
+   Token privado de la cuenta. Por eso, mientras no esté conectado, estos
+   métodos muestran los datos para pagar y el pedido se coordina por
+   WhatsApp: el dueño confirma el pago a mano cuando le llega el
+   comprobante. Apenas se carga esa URL, "Pagar con Mercado Pago" (más
+   abajo) reemplaza a este botón para el método Mercado Pago y el pago pasa
+   a confirmarse solo.
    ========================================================================== */
 document.getElementById('bolsaWhatsapp').addEventListener('click', function(){
   if(bolsaItems.length === 0){ abrirBolsa(); return; }
@@ -2400,6 +2416,56 @@ document.getElementById('bolsaWhatsapp').addEventListener('click', function(){
     msg += '\n\n' + textoCorreo();
   }
   window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
+});
+
+/* ==========================================================================
+   CHECKOUT AUTOMATICO DE MERCADO PAGO — solo activo cuando el dueño cargó
+   la URL de la función "crear preferencia" (panel > Pagos). Le pide al
+   backend (backend/README.md) que arme el checkout real y redirige ahí;
+   la confirmación del pago la hace el backend por su cuenta (webhook),
+   no esta página.
+   ========================================================================== */
+document.getElementById('bolsaPagarMP').addEventListener('click', function(){
+  if(bolsaItems.length === 0){ abrirBolsa(); return; }
+  var pg = cargarPagos();
+  var errEl = document.getElementById('bolsaPagarMPError');
+  errEl.style.display = 'none';
+  if(!pg.mpFuncionUrl){ return; } /* no debería poder llegar acá sin URL configurada */
+
+  var items = bolsaItems.map(function(it){
+    return {nombre: it.nombre, cw: it.cw, talle: it.talle, precio: it.precio, cantidad: 1};
+  });
+  if(envioSeleccionado.costo > 0){
+    var envioNombre = envioSeleccionado.tipo === 'correo' ? 'Correo Argentino' : 'Envío en moto';
+    items.push({nombre: envioNombre, cw: '', talle: '', precio: envioSeleccionado.costo, cantidad: 1});
+  }
+  var subtotal = bolsaItems.reduce(function(acc,it){ return acc + it.precio; }, 0);
+  var recargoMonto = totalConRecargo(subtotal, envioSeleccionado.costo) - subtotal - (envioSeleccionado.costo || 0);
+  if(recargoMonto > 0){
+    items.push({nombre: 'Recargo Mercado Pago (' + pg.recargoPorcentaje + '%)', cw: '', talle: '', precio: recargoMonto, cantidad: 1});
+  }
+
+  var btn = this;
+  var textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Redirigiendo a Mercado Pago…';
+
+  fetch(pg.mpFuncionUrl, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({items: items, externalReference: 'tn-' + Date.now()})
+  }).then(function(r){
+    if(!r.ok) throw new Error('backend http ' + r.status);
+    return r.json();
+  }).then(function(data){
+    if(!data.init_point) throw new Error('el backend no devolvió init_point');
+    window.location.href = data.init_point;
+  }).catch(function(err){
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+    errEl.textContent = 'No pudimos iniciar el pago con Mercado Pago (' + err.message + '). Probá de nuevo o elegí otro método.';
+    errEl.style.display = '';
+  });
 });
 
 function agregarABolsa(item){

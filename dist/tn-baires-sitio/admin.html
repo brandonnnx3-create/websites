@@ -345,11 +345,18 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 
       <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px;margin-top:14px">Mercado Pago</h3>
       <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
-        El cliente te transfiere desde su app de Mercado Pago a tu alias — es una transferencia entre personas, sin comisión. Vos confirmás el pago a mano.
+        Sin la URL de la función de abajo: el cliente te transfiere desde su app de Mercado Pago a tu alias (transferencia entre personas, sin comisión) y vos confirmás el pago a mano.
       </p>
-      <div class="fila-2" style="max-width:480px;margin-bottom:24px">
+      <div class="fila-2" style="max-width:480px;margin-bottom:10px">
         <div class="campo"><label>Alias de Mercado Pago</label><input type="text" id="pagoMpAlias" placeholder="tn.baires"></div>
         <div class="campo"><label>Usuario (opcional)</label><input type="text" id="pagoMpUsuario" placeholder="@tn_baires"></div>
+      </div>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
+        Con la URL cargada: el cliente paga de verdad con Mercado Pago (tarjeta, dinero en cuenta, etc.) y el pago se confirma solo, automáticamente — requiere el backend de <code>backend/README.md</code> ya desplegado con las credenciales reales de Mercado Pago.
+      </p>
+      <div class="campo" style="max-width:480px;margin-bottom:24px">
+        <label>URL de la función "crear preferencia" (Supabase)</label>
+        <input type="text" id="pagoMpFuncionUrl" placeholder="https://TU-PROYECTO.supabase.co/functions/v1/mp-crear-preferencia">
       </div>
 
       <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Rapipago</h3>
@@ -520,7 +527,7 @@ function cargarPagos(){
   return leer(LS_PAGOS, {
     recargoPorcentaje: 10,
     transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
-    mpAlias: '', mpUsuario: '',
+    mpAlias: '', mpUsuario: '', mpFuncionUrl: '',
     rapipagoTexto: '', pagofacilTexto: ''
   });
 }
@@ -959,6 +966,7 @@ function renderPagos(){
   document.getElementById('pagoTransferenciaTitular').value = p.transferenciaTitular;
   document.getElementById('pagoMpAlias').value = p.mpAlias;
   document.getElementById('pagoMpUsuario').value = p.mpUsuario;
+  document.getElementById('pagoMpFuncionUrl').value = p.mpFuncionUrl || '';
   document.getElementById('pagoRapipagoTexto').value = p.rapipagoTexto;
   document.getElementById('pagoPagofacilTexto').value = p.pagofacilTexto;
 }
@@ -970,6 +978,7 @@ document.getElementById('btnGuardarPagos').addEventListener('click', function(){
     transferenciaTitular: document.getElementById('pagoTransferenciaTitular').value.trim(),
     mpAlias: document.getElementById('pagoMpAlias').value.trim(),
     mpUsuario: document.getElementById('pagoMpUsuario').value.trim(),
+    mpFuncionUrl: document.getElementById('pagoMpFuncionUrl').value.trim(),
     rapipagoTexto: document.getElementById('pagoRapipagoTexto').value.trim(),
     pagofacilTexto: document.getElementById('pagoPagofacilTexto').value.trim()
   });
