@@ -1562,7 +1562,15 @@ function mostrarProductoDetalle(prod){
     '<a href="#inicio">Inicio</a> . <a href="#drop" data-filtro-modelo="'+prod.modelo+'">'+nombreModeloTxt.toUpperCase()+'</a> . ' +
     (prod.nombre+' '+prod.colorway).toUpperCase();
   document.querySelectorAll('#pdMigas [data-filtro-modelo]').forEach(function(a){
-    a.addEventListener('click', function(ev){ ev.preventDefault(); location.hash = 'drop'; setTimeout(function(){ irAFiltro(prod.modelo); }, 0); });
+    a.addEventListener('click', function(ev){
+      ev.preventDefault();
+      /* ir directo con mostrarHome() + replaceState en vez de location.hash=
+         para no disparar el salto instantaneo nativo del navegador antes de
+         que irAFiltro() haga su scroll suave */
+      mostrarHome();
+      history.replaceState(null, '', '#drop');
+      irAFiltro(prod.modelo);
+    });
   });
 
   var fotos = (prod.fotos && prod.fotos.length) ? prod.fotos : [prod.img];
