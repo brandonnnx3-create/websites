@@ -1800,6 +1800,16 @@ document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') cerra
 var topBar = document.getElementById('top');
 var marca = topBar.querySelector('.marca');
 marca.addEventListener('click', function(ev){
+  var vistaProd = document.getElementById('vistaProducto');
+  if(vistaProd && vistaProd.style.display !== 'none'){
+    /* viendo el detalle de un producto: el logo siempre vuelve al catalogo,
+       tanto en celular (donde si no, tocar el logo abria el menu) como en PC */
+    ev.preventDefault();
+    mostrarHome();
+    history.replaceState(null, '', '#inicio');
+    window.scrollTo(0, 0);
+    return;
+  }
   if(window.matchMedia('(hover: hover)').matches) return; /* con mouse ya funciona por hover */
   ev.preventDefault();
   topBar.classList.toggle('abierto');
