@@ -416,6 +416,11 @@ span.talle-mini.agotada{text-decoration:line-through;opacity:.4;padding:4px 7px;
 .talla:hover:not([disabled]){border-color:var(--hueso)}
 .talla[aria-pressed="true"]{background:var(--hueso);color:var(--asfalto);border-color:var(--hueso)}
 .talla[disabled]{color:var(--humo);opacity:.42;cursor:not-allowed;text-decoration:line-through}
+.pd-talles-cab{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pd-talles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pd-talles-grid .talla{
+  min-width:0;padding:15px 10px;font-size:13px;letter-spacing:.08em;
+}
 .dest-precio{font-variation-settings:'wdth' 74,'wght' 800;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em}
 .dest-cuotas{color:var(--humo);margin-top:5px}
 .stock{display:flex;align-items:center;gap:9px;color:var(--oro-texto)}
@@ -547,12 +552,12 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 .pd-agregado a{color:var(--oro-texto);text-decoration:underline;cursor:pointer}
 .pd-error{color:var(--rojo);font-size:11px}
 .pd-descripcion{color:var(--humo);font-size:13.5px;line-height:1.7;max-width:56ch}
-.pd-similares{padding:40px var(--gutter) 56px;border-bottom:1px solid var(--linea)}
-.pd-similares h2{font-size:clamp(20px,2.6vw,30px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;margin-bottom:18px}
+.pd-similares{padding:28px var(--gutter) 36px;border-bottom:1px solid var(--linea)}
+.pd-similares h2{font-size:clamp(16px,1.6vw,20px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;margin-bottom:14px}
 .similares-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .similares-pista{display:flex}
 .similares-item{
-  scroll-snap-align:start;flex:0 0 44%;min-width:230px;background:var(--asfalto);
+  scroll-snap-align:start;flex:0 0 200px;min-width:170px;background:var(--asfalto);
   text-decoration:none;color:inherit;display:flex;flex-direction:column;
   border-right:1px solid var(--linea);
 }
@@ -1285,8 +1290,11 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
       <h1 id="pdNombre"></h1>
       <div id="pdPrecio"></div>
       <div class="bloque-dato">
-        <div class="mono">Talle — AR</div>
-        <div class="talles" id="pdTalles" role="group" aria-label="Elegir talle"></div>
+        <div class="pd-talles-cab">
+          <div class="mono">Seleccionar talle</div>
+          <button class="link-info mono" data-info="talles" type="button" style="font-size:11px;text-decoration:underline">Guía de talles</button>
+        </div>
+        <div class="pd-talles-grid" id="pdTalles" role="group" aria-label="Elegir talle"></div>
       </div>
       <div class="pd-cantidad-fila">
         <div class="pd-cantidad">
