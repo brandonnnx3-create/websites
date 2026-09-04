@@ -139,6 +139,11 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 .campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--oro);outline:none}
 .fila-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .foto-preview{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--linea);margin-bottom:8px;background:var(--asfalto)}
+.galeria-editor{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.galeria-item{position:relative;width:84px;height:84px}
+.galeria-item img{width:100%;height:100%;object-fit:cover;border:1px solid var(--linea);background:var(--asfalto)}
+.galeria-item.principal img{border-color:var(--oro)}
+.galeria-item-quitar{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--rojo);color:#fff;border:none;font-size:11px;line-height:1;cursor:pointer}
 .talles-editor{display:flex;flex-wrap:wrap;gap:8px}
 .talle-campo{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--asfalto);border:1px solid var(--linea);padding:6px 8px}
 .talle-campo span{font-size:10px;color:var(--humo)}
@@ -210,6 +215,7 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
     <div class="nav-item" data-vista="pedidos"><span class="ico">▣</span> Pedidos</div>
     <div class="nav-item" data-vista="envios"><span class="ico">▲</span> Envíos</div>
     <div class="nav-item" data-vista="promos"><span class="ico">✱</span> Promociones</div>
+    <div class="nav-item" data-vista="pagos"><span class="ico">$</span> Pagos</div>
     <div class="nav-pie">
       <a href="index.html" target="_blank">Ver la web →</a>
     </div>
@@ -256,19 +262,12 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 
     <!-- ENVIOS -->
     <section class="vista" id="vista-envios">
-      <div class="contenido-cab"><div><h2>Envíos</h2><p>Moto calculada por ruta real (calles) + nafta, Correo a tarifa fija.</p></div></div>
+      <div class="contenido-cab"><div><h2>Envíos</h2><p>Moto: el cliente escribe su dirección, se calcula la ruta con OpenStreetMap y se cobra por km. Correo a tarifa fija.</p></div></div>
 
-      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Ruta real por calles (OpenRouteService)</h3>
-      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
-        Gratis, sin tarjeta — 2.500 consultas por día. Registrate en
-        <a href="https://openrouteservice.org/dev/#/signup" target="_blank" rel="noopener" style="color:var(--oro);text-decoration:underline">openrouteservice.org</a>
-        con tu mail, copiá la clave que te dan y pegala acá. Sin esto, el sitio sigue funcionando pero calcula la distancia en línea recta (menos precisa).
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Ruta real por calles (OpenStreetMap)</h3>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:24px;max-width:480px">
+        Usa OpenStreetMap (Nominatim para buscar la dirección, OSRM para calcular la ruta) — es gratis y no hace falta ninguna clave. Si el servicio de ruteo no responde, el sitio calcula distancia en línea recta × un factor de corrección como respaldo, así el cálculo nunca se rompe.
       </p>
-      <div class="campo" style="max-width:480px;margin-bottom:10px">
-        <label>API Key de OpenRouteService</label>
-        <input type="text" id="envioOrsKey" placeholder="Pegá acá tu clave (opcional)">
-      </div>
-      <div class="campo" style="max-width:480px;margin-bottom:24px" id="envioOrsEstado"></div>
 
       <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Ubicación del local</h3>
       <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
@@ -283,18 +282,8 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
       <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Tarifas</h3>
       <div class="campo fila-2" style="max-width:420px">
         <div>
-          <label>Consumo del vehículo (L / 100km)</label>
-          <input type="number" id="envioConsumo" step="0.1">
-        </div>
-        <div>
-          <label>Precio de la nafta ($/L)</label>
-          <input type="number" id="envioPrecioNafta" step="10">
-        </div>
-      </div>
-      <div class="campo fila-2" style="max-width:420px">
-        <div>
-          <label>Mano de obra fija ($)</label>
-          <input type="number" id="envioCostoBase" step="100">
+          <label>Tarifa por km ($)</label>
+          <input type="number" id="envioTarifaKm" step="10">
         </div>
         <div>
           <label>Factor de corrección (solo si falla la ruta real)</label>
@@ -302,7 +291,7 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
         </div>
       </div>
       <p style="color:var(--humo);font-size:11px;line-height:1.5;max-width:420px;margin-bottom:14px">
-        Con la API Key configurada, la distancia es la ruta real por calle. Si no hay clave (o falla la consulta), se usa línea recta × este factor como respaldo. Precio final = mano de obra + (litros de nafta usados × precio del litro).
+        Precio del envío en moto = km recorridos × tarifa por km.
       </p>
       <div class="campo" style="max-width:200px">
         <label>Correo Argentino — tarifa fija ($)</label>
@@ -332,6 +321,56 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
       <div id="listaPromos"></div>
     </section>
 
+    <!-- PAGOS -->
+    <section class="vista" id="vista-pagos">
+      <div class="contenido-cab"><div><h2>Pagos</h2><p>Datos que ve el cliente al elegir cada método. Sin backend propio, la confirmación de pago la hacés vos a mano cuando te llega el comprobante — ver nota al pie.</p></div></div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Recargo por transferencia / Mercado Pago</h3>
+      <div class="campo" style="max-width:200px">
+        <label>Recargo (%)</label>
+        <input type="number" id="pagoRecargo" step="1" min="0">
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px;margin-top:14px">Transferencia bancaria</h3>
+      <div class="fila-2" style="max-width:480px">
+        <div class="campo"><label>Alias</label><input type="text" id="pagoTransferenciaAlias" placeholder="tn.baires.mp"></div>
+        <div class="campo"><label>CBU / CVU</label><input type="text" id="pagoTransferenciaCbu" placeholder="0000003100...">
+        </div>
+      </div>
+      <div class="campo" style="max-width:480px">
+        <label>Titular (opcional)</label>
+        <input type="text" id="pagoTransferenciaTitular" placeholder="Nombre del titular de la cuenta">
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px;margin-top:14px">Mercado Pago</h3>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
+        El cliente te transfiere desde su app de Mercado Pago a tu alias — es una transferencia entre personas, sin comisión. Vos confirmás el pago a mano.
+      </p>
+      <div class="fila-2" style="max-width:480px;margin-bottom:24px">
+        <div class="campo"><label>Alias de Mercado Pago</label><input type="text" id="pagoMpAlias" placeholder="tn.baires"></div>
+        <div class="campo"><label>Usuario (opcional)</label><input type="text" id="pagoMpUsuario" placeholder="@tn_baires"></div>
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Rapipago</h3>
+      <div class="campo" style="max-width:480px">
+        <label>Instrucciones para el cliente</label>
+        <textarea id="pagoRapipagoTexto" rows="3" placeholder="Ej: Decile al cajero que es un pago a favor de... / código..."></textarea>
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Pago Fácil</h3>
+      <div class="campo" style="max-width:480px">
+        <label>Instrucciones para el cliente</label>
+        <textarea id="pagoPagofacilTexto" rows="3" placeholder="Ej: Decile al cajero que es un pago a favor de... / código..."></textarea>
+      </div>
+
+      <button class="btn btn-primario" id="btnGuardarPagos" style="margin-bottom:20px">Guardar</button>
+      <p style="color:var(--humo);font-size:11px;line-height:1.6;max-width:520px">
+        Rapipago y Pago Fácil acá son solo texto informativo (sin cupón con código de barras real):
+        generar un cupón válido requiere integrarse con un procesador de pagos (el mismo problema
+        de backend que Mercado Pago). Si en algún momento querés eso, hace falta desarrollo adicional.
+      </p>
+    </section>
+
   </main>
 </div>
 
@@ -345,8 +384,8 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
   <div class="modal-cuerpo">
     <input type="hidden" id="prodId">
     <div class="campo">
-      <label>Foto</label>
-      <img class="foto-preview" id="prodFotoPreview" alt="">
+      <label>Fotos (la primera es la que se ve en el catálogo)</label>
+      <div class="galeria-editor" id="prodGaleriaEditor"></div>
       <input type="file" id="prodFotoInput" accept="image/*">
     </div>
     <div class="fila-2">
@@ -370,6 +409,10 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
     <div class="campo">
       <label>Talles y stock</label>
       <div class="talles-editor" id="prodTalles"></div>
+    </div>
+    <div class="campo">
+      <label>Descripción (se muestra en la página del producto)</label>
+      <textarea id="prodDescripcion" rows="4" placeholder="Contá algo real del producto: diseño, historia, para qué sirve, con qué combina..."></textarea>
     </div>
     <div class="check-linea"><input type="checkbox" id="prodDestacado"> <label for="prodDestacado" style="margin:0">Marcar como destacado</label></div>
     <div class="check-linea"><input type="checkbox" id="prodActivo" checked> <label for="prodActivo" style="margin:0">Producto activo (visible en la web)</label></div>
@@ -441,12 +484,13 @@ var LS_PRODUCTOS = 'tn_baires_productos';
 var LS_PROMOS    = 'tn_baires_promos';
 var LS_PEDIDOS   = 'tn_baires_pedidos';
 var LS_ENVIOS    = 'tn_baires_envios';
+var LS_PAGOS     = 'tn_baires_pagos';
 var CLAVE_ADMIN  = 'tnbaires2026'; /* ⚠ PLACEHOLDER — cambiala. Esto NO es seguridad real: */
                                     /* cualquiera que vea el código fuente la puede leer.   */
                                     /* Para acceso realmente protegido hace falta un backend */
                                     /* con login de verdad (usuario/contraseña con servidor). */
 
-var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a"},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b"},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"}];
+var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"]},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"]},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"]},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"]},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"]},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"]},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"]},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"]},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"]},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"]},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"]},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"]},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"]},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"]},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"]},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"]},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"]},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"]},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"]},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"]}];
 
 function leer(key, fallback){
   try{ var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }
@@ -462,11 +506,19 @@ function cargarPedidos(){ return leer(LS_PEDIDOS, []); }
 function guardarPedidos(p){ guardar(LS_PEDIDOS, p); }
 function cargarEnvios(){
   return leer(LS_ENVIOS, {
-    lat: null, lng: null, consumo: 3.0, precioNafta: 2050,
-    costoBase: 1000, factorRuta: 1.35, costoCorreo: 4500, orsApiKey: ''
+    lat: null, lng: null, tarifaKm: 500, factorRuta: 1.35, costoCorreo: 4500
   });
 }
 function guardarEnvios(e){ guardar(LS_ENVIOS, e); }
+function cargarPagos(){
+  return leer(LS_PAGOS, {
+    recargoPorcentaje: 10,
+    transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
+    mpAlias: '', mpUsuario: '',
+    rapipagoTexto: '', pagofacilTexto: ''
+  });
+}
+function guardarPagos(p){ guardar(LS_PAGOS, p); }
 
 function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
 function hoyISO(){ return new Date().toISOString().slice(0,10); }
@@ -504,6 +556,7 @@ document.querySelectorAll('.nav-item').forEach(function(it){
     if(it.dataset.vista === 'pedidos') renderKanban();
     if(it.dataset.vista === 'envios') renderEnvios();
     if(it.dataset.vista === 'promos') renderPromos();
+    if(it.dataset.vista === 'pagos') renderPagos();
   });
 });
 
@@ -561,7 +614,26 @@ function renderDashboard(){
    PRODUCTOS
    ========================================================================== */
 var TALLES_POSIBLES = [39,40,41,42,43,44,45];
-var fotoNuevaDataUrl = null;
+var fotosProductoActual = [];
+function renderGaleriaEditor(){
+  var cont = document.getElementById('prodGaleriaEditor');
+  if(fotosProductoActual.length === 0){
+    cont.innerHTML = '<span style="color:var(--humo);font-size:12px">Todavía no hay fotos — agregá al menos una.</span>';
+    return;
+  }
+  cont.innerHTML = fotosProductoActual.map(function(f, i){
+    return '<div class="galeria-item'+(i===0?' principal':'')+'">' +
+      '<img src="'+f+'" alt="">' +
+      '<button type="button" class="galeria-item-quitar" data-idx="'+i+'" title="Quitar foto">✕</button>' +
+    '</div>';
+  }).join('');
+  cont.querySelectorAll('.galeria-item-quitar').forEach(function(b){
+    b.addEventListener('click', function(){
+      fotosProductoActual.splice(parseInt(b.dataset.idx, 10), 1);
+      renderGaleriaEditor();
+    });
+  });
+}
 
 function renderTablaProductos(filtro){
   filtro = (filtro || '').toLowerCase();
@@ -636,20 +708,21 @@ function construirTallesEditor(tallesActuales){
 }
 
 function abrirModalProducto(id){
-  fotoNuevaDataUrl = null;
   var productos = cargarProductos();
   var p = id ? productos.find(function(x){return x.id===id;}) : null;
+  fotosProductoActual = p ? (p.fotos && p.fotos.length ? p.fotos.slice() : [p.img]) : [];
   document.getElementById('modalProductoTitulo').textContent = p ? 'Editar producto' : 'Agregar producto';
   document.getElementById('prodId').value = p ? p.id : '';
   document.getElementById('prodNombre').value = p ? p.nombre : '';
   document.getElementById('prodColorway').value = p ? p.colorway : '';
   document.getElementById('prodModelo').value = p ? p.modelo : 'tn';
   document.getElementById('prodPrecio').value = p ? p.precio : '';
+  document.getElementById('prodDescripcion').value = p ? (p.descripcion || '') : '';
   document.getElementById('prodDestacado').checked = p ? !!p.destacado : false;
   document.getElementById('prodActivo').checked = p ? !!p.activo : true;
-  document.getElementById('prodFotoPreview').src = p ? p.img : '';
   document.getElementById('btnEliminarProducto').style.display = p ? '' : 'none';
   construirTallesEditor(p ? p.talles : []);
+  renderGaleriaEditor();
   document.getElementById('modalProductoFondo').classList.add('abierto');
   document.getElementById('modalProducto').classList.add('abierto');
 }
@@ -667,10 +740,11 @@ document.getElementById('prodFotoInput').addEventListener('change', function(ev)
   if(!file) return;
   var reader = new FileReader();
   reader.onload = function(e){
-    fotoNuevaDataUrl = e.target.result;
-    document.getElementById('prodFotoPreview').src = fotoNuevaDataUrl;
+    fotosProductoActual.push(e.target.result);
+    renderGaleriaEditor();
   };
   reader.readAsDataURL(file);
+  ev.target.value = '';
 });
 
 document.getElementById('guardarProducto').addEventListener('click', function(){
@@ -679,10 +753,12 @@ document.getElementById('guardarProducto').addEventListener('click', function(){
   var nombre = document.getElementById('prodNombre').value.trim();
   var colorway = document.getElementById('prodColorway').value.trim();
   if(!nombre){ alert('Poné un nombre para el producto.'); return; }
+  if(fotosProductoActual.length === 0){ alert('Agregá al menos una foto.'); return; }
 
   var talles = Array.from(document.querySelectorAll('#prodTalles input')).map(function(inp){
     return {talle: parseInt(inp.dataset.talle,10), stock: parseInt(inp.value,10) || 0};
   });
+  var descripcion = document.getElementById('prodDescripcion').value.trim();
 
   if(id){
     var p = productos.find(function(x){return x.id===id;});
@@ -690,17 +766,21 @@ document.getElementById('guardarProducto').addEventListener('click', function(){
     p.modelo = document.getElementById('prodModelo').value;
     p.precio = parseInt(document.getElementById('prodPrecio').value,10) || 0;
     p.talles = talles;
+    p.descripcion = descripcion;
     p.destacado = document.getElementById('prodDestacado').checked;
     p.activo = document.getElementById('prodActivo').checked;
-    if(fotoNuevaDataUrl) p.img = fotoNuevaDataUrl;
+    p.fotos = fotosProductoActual.slice();
+    p.img = p.fotos[0];
   }else{
     productos.push({
       id: 'prod-' + Date.now(),
       modelo: document.getElementById('prodModelo').value,
       nombre: nombre, colorway: colorway,
       precio: parseInt(document.getElementById('prodPrecio').value,10) || 0,
-      img: fotoNuevaDataUrl || 'assets/tn-triple-black.jpg',
+      fotos: fotosProductoActual.slice(),
+      img: fotosProductoActual[0],
       talles: talles,
+      descripcion: descripcion,
       activo: document.getElementById('prodActivo').checked,
       destacado: document.getElementById('prodDestacado').checked,
       layout: 'c'
@@ -797,15 +877,11 @@ document.getElementById('guardarPedido').addEventListener('click', function(){
    ========================================================================== */
 function renderEnvios(){
   var e = cargarEnvios();
-  document.getElementById('envioOrsKey').value = e.orsApiKey || '';
   document.getElementById('envioLat').value = e.lat !== null ? e.lat.toFixed(6) : '';
   document.getElementById('envioLng').value = e.lng !== null ? e.lng.toFixed(6) : '';
-  document.getElementById('envioConsumo').value = e.consumo;
-  document.getElementById('envioPrecioNafta').value = e.precioNafta;
-  document.getElementById('envioCostoBase').value = e.costoBase;
+  document.getElementById('envioTarifaKm').value = e.tarifaKm;
   document.getElementById('envioFactorRuta').value = e.factorRuta;
   document.getElementById('envioCostoCorreo').value = e.costoCorreo;
-  document.getElementById('envioOrsEstado').innerHTML = '';
 }
 document.getElementById('btnUbicacionLocal').addEventListener('click', function(){
   if(!navigator.geolocation){ alert('Tu navegador no permite compartir ubicación.'); return; }
@@ -828,48 +904,53 @@ document.getElementById('btnGuardarEnvios').addEventListener('click', function()
   var lat = parseFloat(document.getElementById('envioLat').value);
   var lng = parseFloat(document.getElementById('envioLng').value);
   guardarEnvios({
-    orsApiKey: document.getElementById('envioOrsKey').value.trim(),
     lat: isNaN(lat) ? null : lat,
     lng: isNaN(lng) ? null : lng,
-    consumo: parseFloat(document.getElementById('envioConsumo').value) || 3.0,
-    precioNafta: parseInt(document.getElementById('envioPrecioNafta').value,10) || 0,
-    costoBase: parseInt(document.getElementById('envioCostoBase').value,10) || 0,
+    tarifaKm: parseInt(document.getElementById('envioTarifaKm').value,10) || 0,
     factorRuta: parseFloat(document.getElementById('envioFactorRuta').value) || 1.3,
     costoCorreo: parseInt(document.getElementById('envioCostoCorreo').value,10) || 0
   });
-  var estadoEl = document.getElementById('envioOrsEstado');
-  var e = cargarEnvios();
-  if(!e.orsApiKey){
-    estadoEl.innerHTML = '<span style="color:var(--humo)">Guardado. Sin clave de OpenRouteService: se va a usar línea recta como respaldo.</span>';
-    return;
-  }
-  if(e.lat === null || e.lng === null){
-    estadoEl.innerHTML = '<span style="color:var(--humo)">Guardado. Configurá también la ubicación del local para poder probar la clave.</span>';
-    return;
-  }
-  estadoEl.innerHTML = '<span style="color:var(--humo)">Guardado. Probando la clave contra OpenRouteService…</span>';
-  var destLat = e.lat + 0.01, destLng = e.lng + 0.01;
-  var url = 'https://api.openrouteservice.org/v2/directions/driving-car?api_key=' + encodeURIComponent(e.orsApiKey) +
-    '&start=' + e.lng + ',' + e.lat + '&end=' + destLng + ',' + destLat;
-  fetch(url).then(function(r){
-    if(!r.ok) throw new Error('http '+r.status);
-    return r.json();
-  }).then(function(data){
-    estadoEl.innerHTML = '<span style="color:var(--verde)">✓ La clave funciona — la ruta real por calles ya está activa en la web.</span>';
-  }).catch(function(err){
-    estadoEl.innerHTML = '<span style="color:var(--rojo)">✕ No se pudo validar la clave (' + err.message + '). Revisá que esté bien copiada. Mientras tanto, la web usa línea recta como respaldo.</span>';
-  });
+  alert('Guardado.');
 });
 document.getElementById('calcKm').addEventListener('input', function(){
   var km = parseFloat(this.value);
   var res = document.getElementById('calcResultado');
   if(!km || km <= 0){ res.classList.remove('mostrar'); return; }
   var e = cargarEnvios();
-  var litros = (km/100) * e.consumo;
-  var precio = Math.round(e.costoBase + litros * e.precioNafta);
+  var precio = Math.round(km * e.tarifaKm);
   document.getElementById('calcKmTexto').textContent = km.toFixed(1) + ' km';
   document.getElementById('calcPrecioTexto').textContent = fmt(precio);
   res.classList.add('mostrar');
+});
+
+/* ==========================================================================
+   PAGOS — alias/CBU de transferencia y Mercado Pago, instrucciones de
+   Rapipago/Pago Fácil. La web publica los lee para mostrarlos al cliente
+   en el paso de pago del carrito.
+   ========================================================================== */
+function renderPagos(){
+  var p = cargarPagos();
+  document.getElementById('pagoRecargo').value = p.recargoPorcentaje;
+  document.getElementById('pagoTransferenciaAlias').value = p.transferenciaAlias;
+  document.getElementById('pagoTransferenciaCbu').value = p.transferenciaCbu;
+  document.getElementById('pagoTransferenciaTitular').value = p.transferenciaTitular;
+  document.getElementById('pagoMpAlias').value = p.mpAlias;
+  document.getElementById('pagoMpUsuario').value = p.mpUsuario;
+  document.getElementById('pagoRapipagoTexto').value = p.rapipagoTexto;
+  document.getElementById('pagoPagofacilTexto').value = p.pagofacilTexto;
+}
+document.getElementById('btnGuardarPagos').addEventListener('click', function(){
+  guardarPagos({
+    recargoPorcentaje: parseInt(document.getElementById('pagoRecargo').value,10) || 0,
+    transferenciaAlias: document.getElementById('pagoTransferenciaAlias').value.trim(),
+    transferenciaCbu: document.getElementById('pagoTransferenciaCbu').value.trim(),
+    transferenciaTitular: document.getElementById('pagoTransferenciaTitular').value.trim(),
+    mpAlias: document.getElementById('pagoMpAlias').value.trim(),
+    mpUsuario: document.getElementById('pagoMpUsuario').value.trim(),
+    rapipagoTexto: document.getElementById('pagoRapipagoTexto').value.trim(),
+    pagofacilTexto: document.getElementById('pagoPagofacilTexto').value.trim()
+  });
+  alert('Guardado.');
 });
 
 /* ==========================================================================

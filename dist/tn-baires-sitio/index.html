@@ -187,6 +187,7 @@ html[data-tema="claro"] .top{background:rgba(241,238,228,.86)}
 .bolsa-item-quitar{color:var(--humo);font-family:'Martian Mono',monospace;font-size:9.5px;text-transform:uppercase;text-decoration:underline;background:none;border:none;cursor:pointer}
 .bolsa-item-quitar:hover{color:var(--rojo)}
 .bolsa-pie{padding:10px var(--gutter) 12px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:7px;flex:none}
+#bolsaAccionesResumen,#bolsaAccionesEntrega,#bolsaAccionesPago{display:flex;flex-direction:column;gap:7px}
 .bolsa-total{display:flex;justify-content:space-between;align-items:baseline;font-family:'Martian Mono',monospace;text-transform:uppercase;font-size:11px;color:var(--humo)}
 .bolsa-total b{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78,'wght' 800;font-size:22px;color:var(--hueso);letter-spacing:-.01em}
 .bolsa-pie .btn{padding:11px 16px}
@@ -226,8 +227,6 @@ html[data-tema="claro"] .top{background:rgba(241,238,228,.86)}
   padding:8px 10px;font-size:12.5px;width:100%;
 }
 .correo-form input:focus{border-color:var(--oro);outline:none}
-.bolsa-mp{border-color:var(--linea);color:var(--humo);font-size:10px}
-.bolsa-mp:hover{background:var(--linea);color:var(--hueso)}
 .bolsa-vaciar{background:none;border:none;color:var(--humo);text-decoration:underline;cursor:pointer;text-align:center;padding-top:2px}
 .bolsa-vaciar:hover{color:var(--hueso)}
 @media(max-width:480px){ .bolsa-panel{width:100vw} }
@@ -335,7 +334,8 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
 .item.a{grid-column:span 7}
 .item.b{grid-column:span 5}
 .item.c,.item.d,.item.e{grid-column:span 4}
-.item-foto{position:relative;overflow:hidden;background:var(--cuero)}
+.item-foto{position:relative;overflow:hidden;background:var(--cuero);display:block}
+.item-titulo-link{color:inherit;text-decoration:none}
 .item.a .item-foto{aspect-ratio:16/11}
 .item.b .item-foto{aspect-ratio:3/4}
 .item.c .item-foto,.item.d .item-foto,.item.e .item-foto{aspect-ratio:4/5}
@@ -472,8 +472,95 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 .logo-gigante em{font-style:normal;color:var(--oro-texto)}
 .pie-fin{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--humo);padding-top:16px;border-top:1px solid var(--linea);margin-top:6px}
 
+/* ---------- pago (dentro de la bolsa) ---------- */
+.pago-metodos{display:flex;flex-direction:column;gap:6px}
+.pago-op{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;
+  border:1px solid var(--linea);cursor:pointer;
+  font-family:'Martian Mono',monospace;font-size:11px;text-transform:uppercase;
+}
+.pago-op span{flex:1}
+.pago-op b{font-weight:400;color:var(--humo)}
+.pago-op:has(input:checked){border-color:var(--oro);background:rgba(240,194,71,.06)}
+.pago-op:has(input:checked) b{color:var(--oro-texto)}
+.pago-detalle{margin-top:10px;padding:12px;background:var(--militar);border:1px solid var(--linea);font-size:11px;line-height:1.7;color:var(--humo)}
+.pago-detalle b{color:var(--hueso)}
+
+/* ---------- direccion con autocompletado (calculadora de envio) ---------- */
+.envio-direccion-wrap{position:relative}
+.envio-direccion-wrap input[type=text]{
+  width:100%;background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);
+  padding:9px 10px;font-family:'Archivo',sans-serif;font-size:13px;
+}
+.envio-direccion-wrap input[type=text]:focus{border-color:var(--oro);outline:none}
+.envio-sugerencias{
+  position:absolute;left:0;right:0;top:100%;z-index:5;
+  background:var(--militar);border:1px solid var(--linea);border-top:none;
+  max-height:180px;overflow-y:auto;
+}
+.envio-sug-item{
+  display:block;width:100%;text-align:left;background:none;border:none;color:var(--hueso);
+  padding:8px 10px;font-size:11.5px;line-height:1.4;cursor:pointer;border-bottom:1px solid var(--linea);
+}
+.envio-sug-item:hover{background:rgba(240,194,71,.08)}
+.envio-sug-item:last-child{border-bottom:none}
+
+/* ---------- pagina de detalle de producto ---------- */
+.migas{color:var(--humo);padding:70px var(--gutter) 14px;border-bottom:1px solid var(--linea)}
+.migas a{color:var(--humo);text-decoration:underline}
+.migas a:hover{color:var(--hueso)}
+.pd-layout{display:grid;grid-template-columns:1.1fr .9fr;border-bottom:1px solid var(--linea)}
+.pd-galeria{position:relative;background:var(--cuero)}
+.pd-galeria-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pd-galeria-pista::-webkit-scrollbar{display:none}
+.pd-galeria-item{scroll-snap-align:start;flex:0 0 100%}
+.pd-galeria-item img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
+.pd-flecha{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:34px;height:34px;background:rgba(10,10,9,.55);color:var(--hueso);
+  border:1px solid rgba(245,242,234,.25);font-size:14px;line-height:1;
+}
+.pd-flecha:hover{background:rgba(10,10,9,.85)}
+.pd-flecha-izq{left:12px}
+.pd-flecha-der{right:12px}
+.pd-dots{position:absolute;bottom:14px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:7px}
+.pd-dot{width:7px;height:7px;border-radius:50%;background:rgba(245,242,234,.35);border:none;padding:0;cursor:pointer}
+.pd-dot.activo{background:var(--oro)}
+.pd-info{padding:36px var(--gutter) 36px 40px;display:flex;flex-direction:column;gap:16px;border-left:1px solid var(--linea)}
+.pd-info h1{font-size:clamp(26px,3.4vw,40px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;line-height:.94;letter-spacing:-.01em}
+.pd-cantidad-fila{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pd-cantidad{display:flex;align-items:center;border:1px solid var(--linea)}
+.pd-cantidad button{width:34px;height:38px;background:none;border:none;color:var(--hueso);font-size:16px;cursor:pointer}
+.pd-cantidad button:hover{background:var(--linea)}
+.pd-cantidad span{width:32px;text-align:center;font-family:'Martian Mono',monospace}
+.pd-cantidad-fila .btn{flex:1;justify-content:center}
+.pd-agregado{color:var(--oro-texto)}
+.pd-agregado a{color:var(--oro-texto);text-decoration:underline;cursor:pointer}
+.pd-error{color:var(--rojo);font-size:11px;display:none}
+.pd-descripcion{color:var(--humo);font-size:13.5px;line-height:1.7;max-width:56ch}
+.pd-similares{padding:40px var(--gutter) 56px;border-bottom:1px solid var(--linea)}
+.pd-similares h2{font-size:clamp(20px,2.6vw,30px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;margin-bottom:18px}
+.similares-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.similares-pista{display:flex;gap:1px;background:var(--linea)}
+.similares-item{
+  scroll-snap-align:start;flex:0 0 44%;min-width:230px;background:var(--asfalto);
+  text-decoration:none;color:inherit;display:flex;flex-direction:column;
+}
+.similares-foto{aspect-ratio:4/5;overflow:hidden;background:var(--cuero)}
+.similares-foto img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1) saturate(.82) brightness(.86);transition:transform 90ms linear}
+.similares-item:hover .similares-foto img{transform:scale(1.02)}
+.similares-info{padding:12px 14px;display:flex;flex-direction:column;gap:5px}
+.similares-info b{font-variation-settings:'wdth' 68,'wght' 800;font-size:14px;text-transform:uppercase;line-height:1}
+.similares-info span{color:var(--oro-texto);font-family:'Martian Mono',monospace;font-size:10px;text-transform:uppercase}
+.similares-flechas{display:flex;gap:8px;margin-top:14px}
+.similares-flechas button{width:36px;height:36px;border:1px solid var(--linea);color:var(--hueso);background:none;font-size:14px}
+.similares-flechas button:hover{background:var(--linea)}
+
 /* ---------- responsive ---------- */
 @media(max-width:1000px){
+  .pd-layout{grid-template-columns:1fr}
+  .pd-info{border-left:none;border-top:1px solid var(--linea);padding:30px var(--gutter)}
+  .similares-item{flex:0 0 70%}
   .destacado{grid-template-columns:1fr}
   .dest-info{border-left:none;border-top:1px solid var(--linea);padding:34px var(--gutter)}
   .dest-foto{min-height:400px}
@@ -492,6 +579,8 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
   .hero-scroll{display:none}
   .tema-btn span{display:none}
   .mega-grid{grid-template-columns:1fr;margin:0}
+  .similares-item{flex:0 0 84%}
+  .pd-cantidad-fila{flex-direction:column;align-items:stretch}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
@@ -938,7 +1027,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
     <button class="bolsa-cerrar" id="bolsaCerrar" aria-label="Cerrar bolsa">✕</button>
   </div>
   <div class="bolsa-lista" id="bolsaLista"></div>
-  <div class="bolsa-envio" id="bolsaEnvio">
+  <div class="bolsa-envio" id="bolsaEnvio" style="display:none">
     <div class="mono bolsa-envio-titulo">Envío</div>
     <div class="envio-opciones" id="envioOpciones">
       <label class="envio-op"><input type="radio" name="tipoEnvio" value="retiro" checked><span>Retiro en el local</span><b>Gratis</b></label>
@@ -946,9 +1035,12 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
       <label class="envio-op"><input type="radio" name="tipoEnvio" value="correo"><span>Correo Argentino</span><b id="envioCorreoPrecioMini">—</b></label>
     </div>
     <div class="envio-moto-panel" id="envioMotoPanel" style="display:none">
+      <div class="envio-direccion-wrap">
+        <input type="text" id="envioDireccionInput" placeholder="Tu dirección (calle, altura, localidad)" autocomplete="off">
+        <div class="envio-sugerencias" id="envioSugerencias" style="display:none"></div>
+      </div>
+      <div class="envio-o mono">o compartí tu ubicación</div>
       <button class="btn" id="btnUbicacion" type="button">📍 Usar mi ubicación</button>
-      <div class="envio-o mono">o ingresá los km a mano</div>
-      <input type="number" id="envioKmManual" placeholder="Ej: 7.4" step="0.1" min="0">
       <div class="envio-resultado mono" id="envioResultado" style="display:none"></div>
       <div class="envio-error mono" id="envioError" style="display:none"></div>
     </div>
@@ -982,14 +1074,35 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
       <div class="envio-error mono" id="correoError" style="display:none"></div>
     </div>
   </div>
+  <div class="bolsa-envio" id="bolsaPago" style="display:none">
+    <div class="mono bolsa-envio-titulo">Pago</div>
+    <div class="pago-metodos" id="pagoMetodos">
+      <label class="pago-op"><input type="radio" name="metodoPago" value="efectivo" checked><span>Efectivo</span><b></b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="transferencia"><span>Transferencia bancaria</span><b id="pagoRecargoTransferenciaTxt">+10%</b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="mercadopago"><span>Mercado Pago</span><b id="pagoRecargoMpTxt">+10%</b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="rapipago"><span>Rapipago</span><b></b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="pagofacil"><span>Pago Fácil</span><b></b></label>
+    </div>
+    <div class="pago-detalle" id="pagoDetalle"></div>
+  </div>
   <div class="bolsa-pie" id="bolsaPie">
     <div class="bolsa-total">
       <span>Total</span>
       <b id="bolsaTotal">$0</b>
     </div>
-    <button class="btn btn-full" id="bolsaWhatsapp">Finalizar por WhatsApp</button>
-    <button class="btn bolsa-mp" id="bolsaMercadoPago" title="Requiere conectar credenciales reales de Mercado Pago desde un backend">Pagar con Mercado Pago</button>
-    <button class="bolsa-vaciar mono" id="bolsaVaciar">Vaciar bolsa</button>
+    <div id="bolsaAccionesResumen">
+      <button class="btn btn-full" id="bolsaIniciarCompra" type="button">Iniciar compra</button>
+      <button class="bolsa-vaciar mono" id="bolsaVerMasProductos" type="button">Ver más productos</button>
+    </div>
+    <div id="bolsaAccionesEntrega" style="display:none">
+      <button class="btn btn-full" id="bolsaContinuarPago" type="button">Continuar a pago</button>
+      <button class="bolsa-vaciar mono" id="bolsaVolverResumen" type="button">← Volver</button>
+    </div>
+    <div id="bolsaAccionesPago" style="display:none">
+      <button class="btn btn-full" id="bolsaWhatsapp" type="button">Finalizar por WhatsApp</button>
+      <button class="bolsa-vaciar mono" id="bolsaVolverEntrega" type="button">← Volver</button>
+    </div>
+    <button class="bolsa-vaciar mono" id="bolsaVaciar" type="button">Vaciar bolsa</button>
   </div>
 </aside>
 
@@ -1145,6 +1258,48 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 
 <div class="grilla" id="grilla"></div>
 
+<section class="producto-detalle" id="vistaProducto" style="display:none">
+  <div class="migas mono" id="pdMigas"></div>
+  <div class="pd-layout">
+    <div class="pd-galeria">
+      <div class="pd-galeria-pista" id="pdGaleriaPista"></div>
+      <button class="pd-flecha pd-flecha-izq" id="pdFlechaIzq" type="button" aria-label="Foto anterior">←</button>
+      <button class="pd-flecha pd-flecha-der" id="pdFlechaDer" type="button" aria-label="Foto siguiente">→</button>
+      <div class="pd-dots" id="pdDots"></div>
+    </div>
+    <div class="pd-info">
+      <div class="mono item-cw" id="pdColorway"></div>
+      <h1 id="pdNombre"></h1>
+      <div id="pdPrecio"></div>
+      <div class="bloque-dato">
+        <div class="mono">Talle — AR</div>
+        <div class="talles" id="pdTalles" role="group" aria-label="Elegir talle"></div>
+      </div>
+      <div class="pd-cantidad-fila">
+        <div class="pd-cantidad">
+          <button type="button" id="pdMenos" aria-label="Restar cantidad">−</button>
+          <span id="pdCantidadTxt">1</span>
+          <button type="button" id="pdMas" aria-label="Sumar cantidad">+</button>
+        </div>
+        <button class="btn btn-full" id="pdAgregar" type="button">Agregar al carrito</button>
+      </div>
+      <div class="pd-error mono" id="pdAgregarError"></div>
+      <div class="pd-agregado mono" id="pdAgregadoMsg" style="display:none">Ya agregaste este producto. <a id="pdVerCarrito">Ver carrito</a></div>
+      <p class="pd-descripcion" id="pdDescripcion"></p>
+    </div>
+  </div>
+  <div class="pd-similares" id="pdSimilaresWrap">
+    <h2>Productos similares</h2>
+    <div class="similares-viewport">
+      <div class="similares-pista" id="similaresPista"></div>
+    </div>
+    <div class="similares-flechas">
+      <button type="button" id="similaresIzq" aria-label="Anterior">←</button>
+      <button type="button" id="similaresDer" aria-label="Siguiente">→</button>
+    </div>
+  </div>
+</section>
+
 <section class="destacado" id="pieza">
   <div class="dest-foto">
     <img src="assets/tn-fuego.jpg" alt="Nike Air Max Plus TN degradé rojo y naranja, foto real de stock tn_baires" loading="lazy" decoding="async">
@@ -1251,7 +1406,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
    localStorage['tn_baires_productos']; si no hay nada guardado todavia,
    se usa este catalogo de fabrica (PRODUCTOS_DEFAULT).
    ========================================================================== */
-var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a"},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b"},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c"},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c"},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c"},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c"}];
+var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"]},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"]},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"]},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"]},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"]},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"]},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"]},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"]},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"]},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"]},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"]},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"]},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"]},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"]},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"]},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"]},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"]},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"]},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"]},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"]}];
 var LS_PRODUCTOS = 'tn_baires_productos';
 var LS_PROMOS    = 'tn_baires_promos';
 
@@ -1322,12 +1477,12 @@ function tarjetaProducto(prod, idx, promo){
 
   return '' +
   '<article class="'+cls+'" data-modelo="'+prod.modelo+'" data-id="'+prod.id+'">' +
-    '<div class="item-foto">' +
+    '<a class="item-foto" href="#producto/'+prod.id+'" aria-label="Ver '+prod.nombre+' '+prod.colorway+'">' +
       '<span class="'+chapaClase+'">'+(agotado?'Sold out':estado.texto)+'</span>' +
       '<img src="'+prod.img+'" alt="'+prod.nombre+' '+prod.colorway+', foto real de stock tn_baires" loading="lazy" decoding="async">' +
-    '</div>' +
+    '</a>' +
     '<div class="item-ficha">' +
-      '<h3>'+prod.nombre+'</h3>' +
+      '<a href="#producto/'+prod.id+'" class="item-titulo-link"><h3>'+prod.nombre+'</h3></a>' +
       '<div class="mono item-cw">'+prod.colorway+'</div>' +
       '<div class="mono item-talles">'+talleshtml+'</div>' +
       '<div class="item-fila">' +
@@ -1347,6 +1502,153 @@ function renderGrilla(){
   cont.innerHTML = productos.map(function(p,i){ return tarjetaProducto(p,i,promo); }).join('');
 }
 renderGrilla();
+
+/* ==========================================================================
+   VISTA DE DETALLE DE PRODUCTO — navegacion por hash (#producto/ID), sin
+   recargar la pagina. Al clickear una zapatilla en la grilla o en
+   "productos similares" se abre esta vista; el boton "atras" del
+   navegador vuelve al catalogo.
+   ========================================================================== */
+var HOME_SELECTORES = ['#inicio', '.slider-sneakers', '#drop', '#grilla', '#pieza', '.tira'];
+function seccionesHome(){
+  return HOME_SELECTORES.map(function(sel){ return document.querySelector(sel); }).filter(Boolean);
+}
+var pdCantidad = 1;
+var pdTalleSeleccionado = null;
+
+function mostrarHome(){
+  seccionesHome().forEach(function(el){ el.style.display = ''; });
+  document.getElementById('vistaProducto').style.display = 'none';
+}
+
+function mostrarProductoDetalle(prod){
+  seccionesHome().forEach(function(el){ el.style.display = 'none'; });
+  var vista = document.getElementById('vistaProducto');
+  vista.style.display = '';
+  window.scrollTo(0, 0);
+
+  pdCantidad = 1;
+  pdTalleSeleccionado = null;
+  document.getElementById('pdCantidadTxt').textContent = '1';
+  document.getElementById('pdAgregadoMsg').style.display = 'none';
+  document.getElementById('pdAgregarError').style.display = 'none';
+
+  var nombreModeloTxt = nombresModelo[prod.modelo] || prod.modelo;
+  document.getElementById('pdMigas').innerHTML =
+    '<a href="#inicio">Inicio</a> . <a href="#drop" data-filtro-modelo="'+prod.modelo+'">'+nombreModeloTxt.toUpperCase()+'</a> . ' +
+    (prod.nombre+' '+prod.colorway).toUpperCase();
+  document.querySelectorAll('#pdMigas [data-filtro-modelo]').forEach(function(a){
+    a.addEventListener('click', function(ev){ ev.preventDefault(); location.hash = 'drop'; setTimeout(function(){ irAFiltro(prod.modelo); }, 0); });
+  });
+
+  var fotos = (prod.fotos && prod.fotos.length) ? prod.fotos : [prod.img];
+  document.getElementById('pdGaleriaPista').innerHTML = fotos.map(function(f){
+    return '<div class="pd-galeria-item"><img src="'+f+'" alt="'+prod.nombre+' '+prod.colorway+'" loading="lazy"></div>';
+  }).join('');
+  document.getElementById('pdDots').innerHTML = fotos.map(function(_, i){
+    return '<button type="button" class="pd-dot'+(i===0?' activo':'')+'" data-idx="'+i+'" aria-label="Foto '+(i+1)+'"></button>';
+  }).join('');
+  document.getElementById('pdFlechaIzq').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdFlechaDer').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdDots').style.display = fotos.length > 1 ? '' : 'none';
+  inicializarGaleria();
+
+  document.getElementById('pdColorway').textContent = prod.colorway;
+  document.getElementById('pdNombre').textContent = prod.nombre;
+
+  var promo = promoActiva();
+  var precioFinal = prod.precio;
+  var precioEl = document.getElementById('pdPrecio');
+  if(promo && promo.descuento > 0){
+    precioFinal = prod.precio * (1 - promo.descuento/100);
+    precioEl.innerHTML = '<div class="precio-promo" style="font-size:28px"><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(precioFinal)+'</div>';
+  }else{
+    precioEl.innerHTML = '<div class="precio" style="font-size:28px">'+fmtPrecio(prod.precio)+'</div>';
+  }
+
+  var tallesOrdenados = prod.talles.slice().sort(function(a,b){ return a.talle - b.talle; });
+  document.getElementById('pdTalles').innerHTML = tallesOrdenados.map(function(t){
+    if(t.stock <= 0) return '<button class="talla" disabled aria-label="Talle '+t.talle+' sin stock">'+t.talle+'</button>';
+    return '<button class="talla" data-talle="'+t.talle+'" aria-pressed="false">'+t.talle+'</button>';
+  }).join('');
+  document.querySelectorAll('#pdTalles .talla[data-talle]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#pdTalles .talla').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      pdTalleSeleccionado = b.dataset.talle;
+      document.getElementById('pdAgregarError').style.display = 'none';
+    });
+  });
+
+  document.getElementById('pdDescripcion').textContent = prod.descripcion || '';
+  var btnAgregar = document.getElementById('pdAgregar');
+  btnAgregar.dataset.nombre = prod.nombre;
+  btnAgregar.dataset.cw = prod.colorway;
+  btnAgregar.dataset.precio = Math.round(precioFinal);
+  btnAgregar.dataset.img = fotos[0];
+
+  renderSimilares(prod);
+}
+
+function inicializarGaleria(){
+  var pista = document.getElementById('pdGaleriaPista');
+  var dots = document.querySelectorAll('#pdDots .pd-dot');
+  function anchoItem(){
+    var it = pista.querySelector('.pd-galeria-item');
+    return it ? it.getBoundingClientRect().width : pista.getBoundingClientRect().width;
+  }
+  document.getElementById('pdFlechaIzq').onclick = function(){ pista.scrollBy({left: -anchoItem(), behavior:'smooth'}); };
+  document.getElementById('pdFlechaDer').onclick = function(){ pista.scrollBy({left: anchoItem(), behavior:'smooth'}); };
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      pista.scrollTo({left: anchoItem() * parseInt(d.dataset.idx, 10), behavior:'smooth'});
+    });
+  });
+  pista.onscroll = function(){
+    var idx = Math.round(pista.scrollLeft / anchoItem());
+    dots.forEach(function(d, i){ d.classList.toggle('activo', i === idx); });
+  };
+}
+
+function renderSimilares(prodActual){
+  var similares = cargarProductos().filter(function(p){
+    return p.activo && p.modelo === prodActual.modelo && p.id !== prodActual.id;
+  });
+  var wrap = document.getElementById('pdSimilaresWrap');
+  if(similares.length === 0){ wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  var promo = promoActiva();
+  document.getElementById('similaresPista').innerHTML = similares.map(function(p){
+    var precioFinal = p.precio, precioHtml;
+    if(promo && promo.descuento > 0){
+      precioFinal = p.precio * (1 - promo.descuento/100);
+      precioHtml = '<div class="precio-promo"><s>'+fmtPrecio(p.precio)+'</s> '+fmtPrecio(precioFinal)+'</div>';
+    }else{
+      precioHtml = '<div class="precio">'+fmtPrecio(p.precio)+'</div>';
+    }
+    return '<a href="#producto/'+p.id+'" class="similares-item">' +
+      '<div class="similares-foto"><img src="'+p.img+'" alt="'+p.nombre+' '+p.colorway+'" loading="lazy"></div>' +
+      '<div class="similares-info"><b>'+p.nombre+'</b><span>'+p.colorway+'</span>'+precioHtml+'</div>' +
+    '</a>';
+  }).join('');
+  var vp = document.querySelector('#pdSimilaresWrap .similares-viewport');
+  function anchoItemSim(){
+    var it = vp.querySelector('.similares-item');
+    return it ? it.getBoundingClientRect().width : vp.getBoundingClientRect().width;
+  }
+  document.getElementById('similaresIzq').onclick = function(){ vp.scrollBy({left: -anchoItemSim(), behavior:'smooth'}); };
+  document.getElementById('similaresDer').onclick = function(){ vp.scrollBy({left: anchoItemSim(), behavior:'smooth'}); };
+}
+
+function renderVistaSegunHash(){
+  var hash = location.hash.replace('#','');
+  if(hash.indexOf('producto/') === 0){
+    var id = hash.slice('producto/'.length);
+    var prod = cargarProductos().find(function(p){ return p.id === id; });
+    if(prod){ mostrarProductoDetalle(prod); return; }
+  }
+  mostrarHome();
+}
 
 function renderPromoBanner(){
   var promo = promoActiva();
@@ -1636,12 +1938,9 @@ document.querySelectorAll('.item-talles').forEach(function(grupo){
    ========================================================================== */
 var LS_ENVIOS = 'tn_baires_envios';
 var ENVIOS_DEFAULT = {
-  orsApiKey: '',                  /* clave gratis de openrouteservice.org — ruta real por calle */
   lat: null, lng: null,           /* ubicacion del local — la carga el dueño desde admin */
-  consumo: 3.0,                   /* litros cada 100km (moto tipica) */
-  precioNafta: 2050,              /* $/litro — actualizar seguido, el combustible sube */
-  costoBase: 1000,                /* mano de obra fija del viaje, aparte de la nafta */
-  factorRuta: 1.35,               /* respaldo: si no hay clave o falla la consulta */
+  tarifaKm: 500,                  /* $ por km recorrido — la fija el dueño */
+  factorRuta: 1.35,               /* respaldo: si falla la consulta de ruta, linea recta x este factor */
   costoCorreo: 4500
 };
 function cargarEnvios(){
@@ -1660,23 +1959,32 @@ function distanciaKm(lat1, lon1, lat2, lon2){
           Math.sin(dLon/2)*Math.sin(dLon/2);
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
-/* distancia real por calle via OpenRouteService (gratis, 2500 consultas/dia) */
-function distanciaRealKm(lat1, lon1, lat2, lon2, apiKey){
-  var url = 'https://api.openrouteservice.org/v2/directions/driving-car?api_key=' + encodeURIComponent(apiKey) +
-    '&start=' + lon1 + ',' + lat1 + '&end=' + lon2 + ',' + lat2;
+/* geocoding de direcciones via Nominatim (OpenStreetMap) — gratis, sin api key.
+   Uso respetuoso: 1 consulta por vez, con debounce, según la politica de uso
+   de Nominatim (nominatim.org/release-docs/latest/api/Search/). */
+function buscarDirecciones(texto){
+  var url = 'https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=ar&q=' + encodeURIComponent(texto);
   return fetch(url).then(function(r){
-    if(!r.ok) throw new Error('ors http ' + r.status);
+    if(!r.ok) throw new Error('nominatim http ' + r.status);
+    return r.json();
+  });
+}
+/* distancia real por calle via OSRM (gratis, sin api key). El servidor publico
+   de demo (router.project-osrm.org) no tiene garantia de disponibilidad —
+   si falla, cae automaticamente en linea recta x factorRuta como respaldo. */
+function distanciaRutaKm(lat1, lon1, lat2, lon2){
+  var url = 'https://router.project-osrm.org/route/v1/driving/' + lon1 + ',' + lat1 + ';' + lon2 + ',' + lat2 + '?overview=false';
+  return fetch(url).then(function(r){
+    if(!r.ok) throw new Error('osrm http ' + r.status);
     return r.json();
   }).then(function(data){
-    var metros = data.routes[0].summary.distance;
-    return metros / 1000;
+    if(!data.routes || !data.routes.length) throw new Error('osrm sin ruta');
+    return data.routes[0].distance / 1000;
   });
 }
 function costoMoto(km){
   var e = cargarEnvios();
-  var litros = (km / 100) * e.consumo;
-  var costoNafta = litros * e.precioNafta;
-  return Math.round(e.costoBase + costoNafta);
+  return Math.round(km * e.tarifaKm);
 }
 
 var envioSeleccionado = {tipo:'retiro', costo:0, km:null};
@@ -1693,6 +2001,9 @@ document.querySelectorAll('input[name="tipoEnvio"]').forEach(function(radio){
     document.getElementById('envioMotoPanel').style.display = radio.value === 'moto' ? '' : 'none';
     document.getElementById('envioCorreoPanel').style.display = radio.value === 'correo' ? '' : 'none';
     document.getElementById('correoError').style.display = 'none';
+    document.getElementById('envioError').style.display = 'none';
+    document.getElementById('envioResultado').style.display = 'none';
+    document.getElementById('envioSugerencias').style.display = 'none';
     var e = cargarEnvios();
     if(radio.value === 'retiro'){ envioSeleccionado = {tipo:'retiro', costo:0, km:null}; }
     else if(radio.value === 'correo'){ envioSeleccionado = {tipo:'correo', costo:e.costoCorreo, km:null}; }
@@ -1759,31 +2070,78 @@ function textoCorreo(){
     'Teléfono: ' + d.telefono;
 }
 
-document.getElementById('envioKmManual').addEventListener('input', function(){
-  var km = parseFloat(this.value);
-  var resEl = document.getElementById('envioResultado');
-  var errEl = document.getElementById('envioError');
-  errEl.style.display = 'none';
-  if(!km || km <= 0){ resEl.style.display = 'none'; envioSeleccionado = {tipo:'moto', costo:0, km:null}; renderBolsa(); return; }
-  var costo = costoMoto(km);
-  envioSeleccionado = {tipo:'moto', costo:costo, km:km};
-  resEl.style.display = '';
-  resEl.textContent = '🚚 Envío en moto — ' + km.toFixed(1) + ' km — ' + formatoPrecio(costo);
-  renderBolsa();
-});
-
-document.getElementById('btnUbicacion').addEventListener('click', function(){
+function calcularEnvioMoto(miLat, miLng){
   var errEl = document.getElementById('envioError');
   var resEl = document.getElementById('envioResultado');
   errEl.style.display = 'none';
   var e = cargarEnvios();
   if(e.lat === null || e.lng === null){
-    errEl.textContent = 'El local todavía no configuró su ubicación. Ingresá los km a mano, o consultanos por WhatsApp.';
+    errEl.textContent = 'El local todavía no configuró su ubicación. Consultanos por WhatsApp para coordinar el envío.';
     errEl.style.display = '';
     return;
   }
+  resEl.style.display = '';
+  resEl.textContent = 'Calculando distancia…';
+  distanciaRutaKm(e.lat, e.lng, miLat, miLng).then(function(km){
+    mostrarResultadoEnvio(km, true);
+  }).catch(function(){
+    /* si falla OSRM (sin señal, servidor caido) cae en linea recta x factor */
+    var recta = distanciaKm(e.lat, e.lng, miLat, miLng) * e.factorRuta;
+    mostrarResultadoEnvio(recta, false);
+  });
+}
+function mostrarResultadoEnvio(km, esRutaReal){
+  var costo = costoMoto(km);
+  envioSeleccionado = {tipo:'moto', costo:costo, km:km};
+  var resEl = document.getElementById('envioResultado');
+  resEl.style.display = '';
+  resEl.textContent = '🚚 Envío en moto — ' + km.toFixed(1) + ' km' + (esRutaReal ? '' : ' (aprox.)') + ' — ' + formatoPrecio(costo);
+  renderBolsa();
+}
+
+/* autocompletado de direcciones (Nominatim / OpenStreetMap) con debounce,
+   para no golpear la API en cada tecla */
+var direccionDebounce = null;
+document.getElementById('envioDireccionInput').addEventListener('input', function(){
+  var texto = this.value.trim();
+  var sugEl = document.getElementById('envioSugerencias');
+  clearTimeout(direccionDebounce);
+  if(texto.length < 5){ sugEl.style.display = 'none'; sugEl.innerHTML = ''; return; }
+  direccionDebounce = setTimeout(function(){
+    buscarDirecciones(texto).then(function(resultados){
+      if(!resultados.length){
+        sugEl.innerHTML = '<div class="envio-sug-item" style="color:var(--humo);cursor:default">Sin resultados — probá con más detalle.</div>';
+        sugEl.style.display = '';
+        return;
+      }
+      sugEl.innerHTML = resultados.map(function(r, i){
+        return '<button type="button" class="envio-sug-item" data-idx="'+i+'">'+r.display_name+'</button>';
+      }).join('');
+      sugEl.style.display = '';
+      sugEl.querySelectorAll('.envio-sug-item[data-idx]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var r = resultados[parseInt(btn.dataset.idx, 10)];
+          document.getElementById('envioDireccionInput').value = r.display_name;
+          sugEl.style.display = 'none';
+          calcularEnvioMoto(parseFloat(r.lat), parseFloat(r.lon));
+        });
+      });
+    }).catch(function(){
+      sugEl.innerHTML = '<div class="envio-sug-item" style="color:var(--humo);cursor:default">No pudimos buscar direcciones ahora. Probá "Usar mi ubicación" o consultanos por WhatsApp.</div>';
+      sugEl.style.display = '';
+    });
+  }, 500);
+});
+document.addEventListener('click', function(ev){
+  var sugEl = document.getElementById('envioSugerencias');
+  if(!sugEl.contains(ev.target) && ev.target.id !== 'envioDireccionInput') sugEl.style.display = 'none';
+});
+
+document.getElementById('btnUbicacion').addEventListener('click', function(){
+  var errEl = document.getElementById('envioError');
+  errEl.style.display = 'none';
   if(!navigator.geolocation){
-    errEl.textContent = 'Tu navegador no permite compartir ubicación. Ingresá los km a mano.';
+    errEl.textContent = 'Tu navegador no permite compartir ubicación. Escribí tu dirección arriba.';
     errEl.style.display = '';
     return;
   }
@@ -1791,41 +2149,14 @@ document.getElementById('btnUbicacion').addEventListener('click', function(){
   var textoOriginal = btn.textContent;
   btn.textContent = 'Buscando tu ubicación…';
   btn.disabled = true;
-
-  function mostrarResultado(km, esRutaReal){
-    var costo = costoMoto(km);
-    envioSeleccionado = {tipo:'moto', costo:costo, km:km};
-    document.getElementById('envioKmManual').value = km.toFixed(1);
-    resEl.style.display = '';
-    resEl.textContent = '🚚 Envío en moto — ' + km.toFixed(1) + ' km' + (esRutaReal ? '' : ' (aprox.)') + ' — ' + formatoPrecio(costo);
-    renderBolsa();
-  }
-
   navigator.geolocation.getCurrentPosition(function(pos){
-    var miLat = pos.coords.latitude, miLng = pos.coords.longitude;
-    if(e.orsApiKey){
-      /* ruta real por calle, como Google Maps */
-      distanciaRealKm(e.lat, e.lng, miLat, miLng, e.orsApiKey).then(function(km){
-        btn.textContent = textoOriginal;
-        btn.disabled = false;
-        mostrarResultado(km, true);
-      }).catch(function(){
-        /* si falla la API (sin señal, clave vencida, limite diario) cae en linea recta */
-        btn.textContent = textoOriginal;
-        btn.disabled = false;
-        var recta = distanciaKm(e.lat, e.lng, miLat, miLng) * e.factorRuta;
-        mostrarResultado(recta, false);
-      });
-    }else{
-      btn.textContent = textoOriginal;
-      btn.disabled = false;
-      var recta = distanciaKm(e.lat, e.lng, miLat, miLng) * e.factorRuta;
-      mostrarResultado(recta, false);
-    }
-  }, function(err){
     btn.textContent = textoOriginal;
     btn.disabled = false;
-    errEl.textContent = 'No pudimos acceder a tu ubicación (¿lo permitiste en el navegador?). Ingresá los km a mano.';
+    calcularEnvioMoto(pos.coords.latitude, pos.coords.longitude);
+  }, function(){
+    btn.textContent = textoOriginal;
+    btn.disabled = false;
+    errEl.textContent = 'No pudimos acceder a tu ubicación (¿lo permitiste en el navegador?). Escribí tu dirección arriba.';
     errEl.style.display = '';
   }, {timeout: 10000});
 });
@@ -1835,6 +2166,35 @@ document.getElementById('btnUbicacion').addEventListener('click', function(){
    ========================================================================== */
 var BOLSA_KEY = 'tn_baires_bolsa_v1';
 var WHATSAPP_NUM = '5491100000000'; /* ⚠ PLACEHOLDER — reemplazar por el numero real de WhatsApp del local */
+
+/* ==========================================================================
+   PAGOS — datos que carga el dueño desde el panel admin (alias/CBU de
+   transferencia y Mercado Pago, instrucciones de Rapipago/Pago Fácil).
+   Sin backend: la confirmacion del pago la hace el dueño a mano (le llega
+   el comprobante por WhatsApp), no hay verificacion automatica.
+   ========================================================================== */
+var LS_PAGOS = 'tn_baires_pagos';
+var PAGOS_DEFAULT = {
+  recargoPorcentaje: 10,
+  transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
+  mpAlias: '', mpUsuario: '',
+  rapipagoTexto: '', pagofacilTexto: ''
+};
+function cargarPagos(){
+  try{
+    var raw = localStorage.getItem(LS_PAGOS);
+    return raw ? Object.assign({}, PAGOS_DEFAULT, JSON.parse(raw)) : PAGOS_DEFAULT;
+  }catch(e){ return PAGOS_DEFAULT; }
+}
+var metodoPagoSeleccionado = 'efectivo';
+function recargoAplicable(){
+  return metodoPagoSeleccionado === 'transferencia' || metodoPagoSeleccionado === 'mercadopago';
+}
+function totalConRecargo(subtotal, envioCosto){
+  var pg = cargarPagos();
+  var base = subtotal + (envioCosto || 0);
+  return recargoAplicable() ? Math.round(base * (1 + pg.recargoPorcentaje/100)) : base;
+}
 
 function leerBolsa(){
   try{
@@ -1879,7 +2239,7 @@ function renderBolsa(){
     });
   }
   var subtotal = bolsaItems.reduce(function(acc,it){ return acc + it.precio; }, 0);
-  var total = subtotal + (envioSeleccionado.costo || 0);
+  var total = totalConRecargo(subtotal, envioSeleccionado.costo);
   bolsaTotalEl.textContent = formatoPrecio(total);
   cuenta.textContent = String(bolsaItems.length).padStart(2,'0');
   bolsa.dataset.lleno = bolsaItems.length > 0 ? '1' : '0';
@@ -1895,10 +2255,80 @@ renderBolsa();
 
 var bolsaFondo = document.getElementById('bolsaFondo');
 var bolsaPanel = document.getElementById('bolsaPanel');
-function abrirBolsa(){ bolsaFondo.classList.add('abierta'); bolsaPanel.classList.add('abierta'); }
+function abrirBolsa(){ bolsaFondo.classList.add('abierta'); bolsaPanel.classList.add('abierta'); mostrarPasoBolsa('resumen'); }
 function cerrarBolsa(){ bolsaFondo.classList.remove('abierta'); bolsaPanel.classList.remove('abierta'); }
 bolsa.addEventListener('click', abrirBolsa);
 document.getElementById('bolsaCerrar').addEventListener('click', cerrarBolsa);
+
+/* ==========================================================================
+   PASOS DE LA COMPRA: Resumen -> Entrega -> Pago -> Finalizar por WhatsApp
+   ========================================================================== */
+var bolsaPaso = 'resumen';
+function mostrarPasoBolsa(paso){
+  bolsaPaso = paso;
+  document.getElementById('bolsaLista').style.display = paso === 'resumen' ? '' : 'none';
+  document.getElementById('bolsaEnvio').style.display = paso === 'entrega' ? '' : 'none';
+  document.getElementById('bolsaPago').style.display = paso === 'pago' ? '' : 'none';
+  document.getElementById('bolsaAccionesResumen').style.display = paso === 'resumen' ? '' : 'none';
+  document.getElementById('bolsaAccionesEntrega').style.display = paso === 'entrega' ? '' : 'none';
+  document.getElementById('bolsaAccionesPago').style.display = paso === 'pago' ? '' : 'none';
+}
+document.getElementById('bolsaIniciarCompra').addEventListener('click', function(){
+  if(bolsaItems.length === 0) return;
+  mostrarPasoBolsa('entrega');
+});
+document.getElementById('bolsaVerMasProductos').addEventListener('click', cerrarBolsa);
+document.getElementById('bolsaVolverResumen').addEventListener('click', function(){ mostrarPasoBolsa('resumen'); });
+document.getElementById('bolsaVolverEntrega').addEventListener('click', function(){ mostrarPasoBolsa('entrega'); });
+document.getElementById('bolsaContinuarPago').addEventListener('click', function(){
+  if(envioSeleccionado.tipo === 'moto' && !envioSeleccionado.km){
+    document.getElementById('envioError').textContent = 'Calculá primero el envío en moto (dirección o ubicación).';
+    document.getElementById('envioError').style.display = '';
+    return;
+  }
+  if(envioSeleccionado.tipo === 'correo' && !correoCompleto()){
+    document.getElementById('correoError').textContent = 'Completá todos los datos para el envío por Correo Argentino.';
+    document.getElementById('correoError').style.display = '';
+    return;
+  }
+  renderPagoDetalle();
+  mostrarPasoBolsa('pago');
+});
+
+/* metodo de pago elegido — efectivo por defecto, transferencia y mercado
+   pago llevan el recargo que fija el dueño (10% por defecto) */
+document.querySelectorAll('input[name="metodoPago"]').forEach(function(radio){
+  radio.addEventListener('change', function(){
+    metodoPagoSeleccionado = radio.value;
+    renderPagoDetalle();
+    renderBolsa();
+  });
+});
+function renderPagoDetalle(){
+  var pg = cargarPagos();
+  document.getElementById('pagoRecargoTransferenciaTxt').textContent = '+' + pg.recargoPorcentaje + '%';
+  document.getElementById('pagoRecargoMpTxt').textContent = '+' + pg.recargoPorcentaje + '%';
+  var el = document.getElementById('pagoDetalle');
+  if(metodoPagoSeleccionado === 'transferencia'){
+    el.innerHTML = (pg.transferenciaAlias || pg.transferenciaCbu)
+      ? 'Transferí el total a:<br>Alias: <b>'+(pg.transferenciaAlias || '—')+'</b><br>CBU/CVU: <b>'+(pg.transferenciaCbu || '—')+'</b>' + (pg.transferenciaTitular ? '<br>Titular: '+pg.transferenciaTitular : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
+      : 'El local todavía no cargó sus datos de transferencia. Vas a coordinarlo por WhatsApp.';
+  }else if(metodoPagoSeleccionado === 'mercadopago'){
+    el.innerHTML = (pg.mpAlias || pg.mpUsuario)
+      ? 'Enviá el total desde tu app de Mercado Pago a:<br>Alias: <b>'+(pg.mpAlias || '—')+'</b>' + (pg.mpUsuario ? '<br>Usuario: '+pg.mpUsuario : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
+      : 'El local todavía no cargó sus datos de Mercado Pago. Vas a coordinarlo por WhatsApp.';
+  }else if(metodoPagoSeleccionado === 'rapipago'){
+    el.innerHTML = pg.rapipagoTexto
+      ? pg.rapipagoTexto.replace(/\n/g,'<br>')
+      : 'El local todavía no cargó las instrucciones de Rapipago. Vas a coordinarlo por WhatsApp.';
+  }else if(metodoPagoSeleccionado === 'pagofacil'){
+    el.innerHTML = pg.pagofacilTexto
+      ? pg.pagofacilTexto.replace(/\n/g,'<br>')
+      : 'El local todavía no cargó las instrucciones de Pago Fácil. Vas a coordinarlo por WhatsApp.';
+  }else{
+    el.innerHTML = 'Pagás en efectivo al retirar o al recibir tu pedido.';
+  }
+}
 bolsaFondo.addEventListener('click', cerrarBolsa);
 document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') cerrarBolsa(); });
 
@@ -1909,18 +2339,19 @@ document.getElementById('bolsaVaciar').addEventListener('click', function(){
   renderBolsa();
 });
 
+/* ==========================================================================
+   FINALIZAR PEDIDO — arma el mensaje de WhatsApp con el detalle completo:
+   productos, envío y método de pago elegido (con el recargo si aplica).
+
+   Nota sobre Mercado Pago / Rapipago / Pago Fácil: sin backend propio no hay
+   forma de que el sitio confirme automáticamente que el pago se acreditó
+   (eso requiere un webhook server-side con el Access Token privado de la
+   cuenta — ver README del proyecto). Por eso estos métodos muestran los
+   datos para pagar y el pedido se coordina igual por WhatsApp: el dueño
+   confirma el pago a mano cuando le llega el comprobante.
+   ========================================================================== */
 document.getElementById('bolsaWhatsapp').addEventListener('click', function(){
   if(bolsaItems.length === 0){ abrirBolsa(); return; }
-  if(envioSeleccionado.tipo === 'moto' && !envioSeleccionado.km){
-    document.getElementById('envioError').textContent = 'Calculá primero el envío en moto (ubicación o km a mano).';
-    document.getElementById('envioError').style.display = '';
-    return;
-  }
-  if(envioSeleccionado.tipo === 'correo' && !correoCompleto()){
-    document.getElementById('correoError').textContent = 'Completá todos los datos para el envío por Correo Argentino.';
-    document.getElementById('correoError').style.display = '';
-    return;
-  }
   var lineas = bolsaItems.map(function(it){
     return '• ' + it.nombre + ' ' + it.cw + ' — Talle ' + it.talle + ' — ' + formatoPrecio(it.precio);
   });
@@ -1928,41 +2359,21 @@ document.getElementById('bolsaWhatsapp').addEventListener('click', function(){
   var envioTxt = envioSeleccionado.tipo === 'retiro' ? 'Retiro en el local — Gratis'
     : envioSeleccionado.tipo === 'correo' ? 'Correo Argentino — ' + formatoPrecio(envioSeleccionado.costo)
     : 'Moto (' + envioSeleccionado.km.toFixed(1) + ' km) — ' + formatoPrecio(envioSeleccionado.costo);
-  var total = subtotal + (envioSeleccionado.costo || 0);
+  var pg = cargarPagos();
+  var metodoTxt = {
+    efectivo:'Efectivo', transferencia:'Transferencia bancaria', mercadopago:'Mercado Pago',
+    rapipago:'Rapipago', pagofacil:'Pago Fácil'
+  }[metodoPagoSeleccionado];
+  var recargoTxt = recargoAplicable() ? ' (+' + pg.recargoPorcentaje + '%)' : '';
+  var total = totalConRecargo(subtotal, envioSeleccionado.costo);
   var msg = 'Hola! Quiero encargar:\n' + lineas.join('\n') +
     '\n\nEnvío: ' + envioTxt +
+    '\nPago: ' + metodoTxt + recargoTxt +
     '\nTotal: ' + formatoPrecio(total);
   if(envioSeleccionado.tipo === 'correo'){
     msg += '\n\n' + textoCorreo();
   }
   window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
-});
-
-document.getElementById('bolsaMercadoPago').addEventListener('click', function(){
-  /* ============================================================================
-     INTEGRACION MERCADO PAGO (Checkout Pro) — A CONECTAR POR UN DEV
-     No se puede cobrar con tarjeta desde el frontend solo: crear una
-     "preference" requiere el Access Token PRIVADO de la cuenta de Mercado
-     Pago, que nunca debe exponerse en el navegador. Hace falta un backend.
-
-     Pasos para conectarlo:
-       1) Backend: endpoint (ej. POST /api/crear-preferencia) que reciba
-          bolsaItems y arme la preferencia con el SDK server-side de MP,
-          usando el ACCESS_TOKEN privado de la cuenta.
-       2) Ese endpoint devuelve "init_point" (o "sandbox_init_point" en test).
-       3) Reemplazar este alert por:
-            fetch('/api/crear-preferencia', {
-              method:'POST',
-              headers:{'Content-Type':'application/json'},
-              body: JSON.stringify(bolsaItems)
-            })
-            .then(function(r){ return r.json(); })
-            .then(function(data){ window.location.href = data.init_point; });
-       4) Si usan Checkout Bricks en vez de redirect, cargar en el <head>:
-            [script src="https://sdk.mercadopago.com/js/v2"]
-          y luego: const mp = new MercadoPago('PUBLIC_KEY_ACA');
-     ============================================================================ */
-  alert('El cobro con Mercado Pago todavía no está conectado: hace falta un backend propio con las credenciales reales de la cuenta. Por ahora, el pedido se coordina por WhatsApp con el botón de arriba.');
 });
 
 function agregarABolsa(item){
@@ -2010,6 +2421,42 @@ document.querySelectorAll('[data-notificar]').forEach(function(b){
     window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
   });
 });
+
+/* ==========================================================================
+   Pagina de detalle de producto — cantidad, talle y agregar al carrito.
+   ========================================================================== */
+document.getElementById('pdMenos').addEventListener('click', function(){
+  if(pdCantidad > 1){ pdCantidad--; document.getElementById('pdCantidadTxt').textContent = pdCantidad; }
+});
+document.getElementById('pdMas').addEventListener('click', function(){
+  pdCantidad++; document.getElementById('pdCantidadTxt').textContent = pdCantidad;
+});
+document.getElementById('pdAgregar').addEventListener('click', function(){
+  var errEl = document.getElementById('pdAgregarError');
+  if(!pdTalleSeleccionado){
+    errEl.textContent = 'Elegí un talle antes de agregar al carrito.';
+    errEl.style.display = '';
+    return;
+  }
+  errEl.style.display = 'none';
+  for(var i = 0; i < pdCantidad; i++){
+    agregarABolsa({
+      nombre: this.dataset.nombre,
+      cw: this.dataset.cw,
+      precio: parseInt(this.dataset.precio, 10) || 0,
+      talle: pdTalleSeleccionado,
+      img: this.dataset.img
+    });
+  }
+  document.getElementById('pdAgregadoMsg').style.display = '';
+});
+document.getElementById('pdVerCarrito').addEventListener('click', function(ev){
+  ev.preventDefault();
+  abrirBolsa();
+});
+
+window.addEventListener('hashchange', renderVistaSegunHash);
+renderVistaSegunHash();
 </script>
 </body>
 </html>
