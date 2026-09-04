@@ -528,7 +528,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 .pd-galeria-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .pd-galeria-pista::-webkit-scrollbar{display:none}
 .pd-galeria-item{scroll-snap-align:start;flex:0 0 100%}
-.pd-galeria-item img{width:100%;aspect-ratio:1/1;max-height:560px;object-fit:cover;display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
+.pd-galeria-item img{width:100%;height:min(72vh,640px);object-fit:contain;background:var(--cuero);display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
 .pd-flecha{
   position:absolute;top:50%;transform:translateY(-50%);z-index:2;
   width:34px;height:34px;background:rgba(10,10,9,.55);color:var(--hueso);
