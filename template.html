@@ -146,6 +146,7 @@ html[data-tema="claro"] .top{background:rgba(241,238,228,.86)}
     opacity:1;visibility:visible;transform:none;pointer-events:auto;
   }
 }
+.top.cerrando-menu .mega{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(-6px)!important}
 .mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--linea);margin:0 var(--gutter)}
 .mega-col{background:var(--militar);padding:20px 18px 24px;display:flex;flex-direction:column;gap:10px}
 .mega-col h4{font-family:'Martian Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--oro-texto);font-weight:600;margin-bottom:2px}
@@ -1802,6 +1803,12 @@ document.addEventListener('click', function(ev){
 function cerrarMenuMobile(){
   topBar.classList.remove('abierto');
   if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  /* en PC el mega menu se abre con :hover puro (CSS), asi que blur() y sacar
+     la clase "abierto" no lo cierran — se queda pegado arriba tapando el
+     scroll suave. Lo forzamos cerrado un momento con esta clase. */
+  topBar.classList.add('cerrando-menu');
+  clearTimeout(cerrarMenuMobile._t);
+  cerrarMenuMobile._t = setTimeout(function(){ topBar.classList.remove('cerrando-menu'); }, 500);
 }
 
 /* links del mega menu que no filtran (Buzos/Pantalones/Remeras, nav normal): solo cierran */
@@ -1836,13 +1843,35 @@ function aplicarFiltro(valor){
   }
 }
 
+/* scroll suave propio, con duracion fija y easing — el scrollIntoView
+   nativo del navegador varia mucho de velocidad/sensacion entre celular
+   y PC (y entre navegadores), esto se ve igual en todos lados */
+function scrollSuaveHasta(el, duracionMs){
+  duracionMs = duracionMs || 650;
+  var headerEl = document.getElementById('top');
+  var offsetHeader = headerEl ? headerEl.offsetHeight : 0;
+  var destino = el.getBoundingClientRect().top + window.pageYOffset - offsetHeader - 12;
+  var inicio = window.pageYOffset;
+  var distancia = destino - inicio;
+  if(Math.abs(distancia) < 2) return;
+  var t0 = null;
+  function easeInOutQuad(t){ return t < 0.5 ? 2*t*t : -1 + (4-2*t)*t; }
+  function paso(ts){
+    if(t0 === null) t0 = ts;
+    var progreso = Math.min((ts - t0) / duracionMs, 1);
+    window.scrollTo(0, inicio + distancia * easeInOutQuad(progreso));
+    if(progreso < 1) requestAnimationFrame(paso);
+  }
+  requestAnimationFrame(paso);
+}
+
 /* aplica el filtro, cierra el menu mobile si estaba abierto, y siempre deja
    la barra de filtros pegada arriba — un solo scroll, suave */
 function irAFiltro(valor){
   aplicarFiltro(valor);
   cerrarMenuMobile();
   requestAnimationFrame(function(){
-    if(filtros) filtros.scrollIntoView({block:'start', behavior:'smooth'});
+    if(filtros) scrollSuaveHasta(filtros);
   });
 }
 
