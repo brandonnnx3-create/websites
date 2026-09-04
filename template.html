@@ -307,11 +307,11 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
 .slider-pista.arrastrando{cursor:grabbing;scroll-behavior:auto}
 .slider-item{
   display:block;flex:none;width:190px;height:190px;
-  border:1px solid var(--linea);overflow:hidden;
+  border:1px solid var(--linea);overflow:hidden;background:var(--militar);
   -webkit-user-drag:none;user-select:none;
 }
 .slider-pista img{
-  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+  width:100%;height:100%;object-fit:contain;object-position:center;display:block;
   filter:contrast(1.08) saturate(.9) brightness(.92);
   -webkit-user-drag:none;user-select:none;pointer-events:none;
 }
@@ -524,11 +524,21 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 .migas a{color:var(--humo);text-decoration:underline}
 .migas a:hover{color:var(--hueso)}
 .pd-layout{display:grid;grid-template-columns:1.1fr .9fr;border-bottom:1px solid var(--linea)}
-.pd-galeria{position:relative;background:var(--cuero)}
+.pd-galeria{background:var(--asfalto);display:flex;gap:8px;padding:8px}
+.pd-miniaturas{display:flex;flex-direction:column;gap:8px;width:64px;flex:none;overflow-y:auto;max-height:min(72vh,640px)}
+.pd-miniatura{
+  width:64px;height:64px;flex:none;border:1px solid var(--linea);background:var(--asfalto);
+  padding:0;cursor:pointer;overflow:hidden;opacity:.6;
+  transition:opacity 60ms linear,border-color 60ms linear;
+}
+.pd-miniatura img{width:100%;height:100%;object-fit:contain;display:block}
+.pd-miniatura:hover{opacity:.85}
+.pd-miniatura.activo{opacity:1;border-color:var(--oro)}
+.pd-galeria-principal{position:relative;flex:1;min-width:0}
 .pd-galeria-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .pd-galeria-pista::-webkit-scrollbar{display:none}
 .pd-galeria-item{scroll-snap-align:start;flex:0 0 100%}
-.pd-galeria-item img{width:100%;height:min(72vh,640px);object-fit:contain;background:var(--cuero);display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
+.pd-galeria-item img{width:100%;height:min(72vh,640px);object-fit:contain;background:var(--asfalto);display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
 .pd-flecha{
   position:absolute;top:50%;transform:translateY(-50%);z-index:2;
   width:34px;height:34px;background:rgba(10,10,9,.55);color:var(--hueso);
@@ -588,6 +598,8 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 @media(max-width:660px){
   .nav{display:none}
   .marca-zona{gap:14px}
+  .pd-miniaturas{width:48px}
+  .pd-miniatura{width:48px;height:48px}
   .item.a,.item.b,.item.c,.item.d,.item.e{grid-column:span 12}
   .tira{grid-template-columns:1fr}
   .hero-pie{align-items:flex-start;flex-direction:column;gap:16px}
@@ -1280,10 +1292,13 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
   <div class="migas mono" id="pdMigas"></div>
   <div class="pd-layout">
     <div class="pd-galeria">
-      <div class="pd-galeria-pista" id="pdGaleriaPista"></div>
-      <button class="pd-flecha pd-flecha-izq" id="pdFlechaIzq" type="button" aria-label="Foto anterior">←</button>
-      <button class="pd-flecha pd-flecha-der" id="pdFlechaDer" type="button" aria-label="Foto siguiente">→</button>
-      <div class="pd-dots" id="pdDots"></div>
+      <div class="pd-miniaturas" id="pdMiniaturas"></div>
+      <div class="pd-galeria-principal">
+        <div class="pd-galeria-pista" id="pdGaleriaPista"></div>
+        <button class="pd-flecha pd-flecha-izq" id="pdFlechaIzq" type="button" aria-label="Foto anterior">←</button>
+        <button class="pd-flecha pd-flecha-der" id="pdFlechaDer" type="button" aria-label="Foto siguiente">→</button>
+        <div class="pd-dots" id="pdDots"></div>
+      </div>
     </div>
     <div class="pd-info">
       <div class="mono item-cw" id="pdColorway"></div>
@@ -1589,9 +1604,13 @@ function mostrarProductoDetalle(prod){
   document.getElementById('pdDots').innerHTML = fotos.map(function(_, i){
     return '<button type="button" class="pd-dot'+(i===0?' activo':'')+'" data-idx="'+i+'" aria-label="Foto '+(i+1)+'"></button>';
   }).join('');
+  document.getElementById('pdMiniaturas').innerHTML = fotos.map(function(f, i){
+    return '<button type="button" class="pd-miniatura'+(i===0?' activo':'')+'" data-idx="'+i+'" aria-label="Ver foto '+(i+1)+'"><img src="'+f+'" alt="" loading="lazy"></button>';
+  }).join('');
   document.getElementById('pdFlechaIzq').style.display = fotos.length > 1 ? '' : 'none';
   document.getElementById('pdFlechaDer').style.display = fotos.length > 1 ? '' : 'none';
   document.getElementById('pdDots').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdMiniaturas').style.display = fotos.length > 1 ? '' : 'none';
   inicializarGaleria();
 
   document.getElementById('pdColorway').textContent = prod.colorway;
@@ -1629,20 +1648,26 @@ function mostrarProductoDetalle(prod){
 function inicializarGaleria(){
   var pista = document.getElementById('pdGaleriaPista');
   var dots = document.querySelectorAll('#pdDots .pd-dot');
+  var miniaturas = document.querySelectorAll('#pdMiniaturas .pd-miniatura');
   function anchoItem(){
     var it = pista.querySelector('.pd-galeria-item');
     return it ? it.getBoundingClientRect().width : pista.getBoundingClientRect().width;
   }
+  function irAFoto(idx){
+    pista.scrollTo({left: anchoItem() * idx, behavior:'smooth'});
+  }
   document.getElementById('pdFlechaIzq').onclick = function(){ pista.scrollBy({left: -anchoItem(), behavior:'smooth'}); };
   document.getElementById('pdFlechaDer').onclick = function(){ pista.scrollBy({left: anchoItem(), behavior:'smooth'}); };
   dots.forEach(function(d){
-    d.addEventListener('click', function(){
-      pista.scrollTo({left: anchoItem() * parseInt(d.dataset.idx, 10), behavior:'smooth'});
-    });
+    d.addEventListener('click', function(){ irAFoto(parseInt(d.dataset.idx, 10)); });
+  });
+  miniaturas.forEach(function(m){
+    m.addEventListener('click', function(){ irAFoto(parseInt(m.dataset.idx, 10)); });
   });
   pista.onscroll = function(){
     var idx = Math.round(pista.scrollLeft / anchoItem());
     dots.forEach(function(d, i){ d.classList.toggle('activo', i === idx); });
+    miniaturas.forEach(function(m, i){ m.classList.toggle('activo', i === idx); });
   };
 }
 
