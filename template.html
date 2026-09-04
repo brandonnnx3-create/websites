@@ -292,7 +292,7 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
 }
 .slider-titulo{padding:0 var(--gutter) 14px;color:var(--humo)}
 .slider-pista{
-  display:flex;gap:12px;
+  display:flex;align-items:center;gap:12px;
   overflow-x:auto;
   overflow-y:hidden;
   padding:0 var(--gutter);
@@ -304,14 +304,18 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
 }
 .slider-pista::-webkit-scrollbar{display:none}
 .slider-pista.arrastrando{cursor:grabbing;scroll-behavior:auto}
+.slider-item{
+  display:block;flex:none;width:190px;height:190px;
+  border:1px solid var(--linea);overflow:hidden;
+  -webkit-user-drag:none;user-select:none;
+}
 .slider-pista img{
-  width:130px;height:130px;object-fit:cover;flex:none;
-  border:1px solid var(--linea);
+  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
   filter:contrast(1.08) saturate(.9) brightness(.92);
   -webkit-user-drag:none;user-select:none;pointer-events:none;
 }
 @media(max-width:660px){
-  .slider-pista img{width:96px;height:96px}
+  .slider-item{width:140px;height:140px}
 }
 
 /* ---------- encabezado de seccion ---------- */
@@ -327,6 +331,9 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
 }
 .filtro-chip:hover{border-color:var(--hueso);color:var(--hueso)}
 .filtro-chip.activo{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+.filtro-chip-oferta{border-color:var(--rojo);color:var(--rojo)}
+.filtro-chip-oferta:hover{border-color:var(--rojo);color:#fff;background:var(--rojo)}
+.filtro-chip-oferta.activo{background:var(--rojo);border-color:var(--rojo);color:#fff}
 
 /* ---------- grilla catalogo ---------- */
 .grilla{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--linea);border-bottom:1px solid var(--linea)}
@@ -350,6 +357,7 @@ h1.hero-h i{font-style:normal;color:var(--oro)}
   padding:5px 9px;
 }
 .chapa.neg{background:#F5F2EA;color:#0A0A09}
+.chapa-oferta{left:auto;right:0;background:var(--rojo);color:#fff}
 .chapa.muerta{background:transparent;color:#B8B4A9;border-right:1px solid rgba(245,242,234,.2);border-bottom:1px solid rgba(245,242,234,.2);display:flex;align-items:center;gap:6px}
 .chapa.muerta::before{content:'';width:5px;height:5px;background:var(--rojo);border-radius:50%;flex:none}
 .item-ficha{padding:14px 14px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
@@ -1208,34 +1216,34 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
 <section class="slider-sneakers" aria-label="Todos los modelos">
   <div class="slider-titulo mono">Todos los modelos — mirá el resto en el drop</div>
   <div class="slider-pista" id="sliderPista">
-    <img src="__IMG_SL_1__" alt="Nike Air Max Plus TN Triple Black" loading="lazy" decoding="async">
-    <img src="__IMG_SL_2__" alt="Nike Air Max Plus TN Violet Fade" loading="lazy" decoding="async">
-    <img src="__IMG_SL_3__" alt="Nike Air Max Plus TN degradé fuego" loading="lazy" decoding="async">
-    <img src="__IMG_SL_4__" alt="Nike Air Max Plus TN White Green" loading="lazy" decoding="async">
-    <img src="__IMG_SL_5__" alt="Nike Air Max 95 OG Blue Red" loading="lazy" decoding="async">
-    <img src="__IMG_SL_6__" alt="Nike Air Max 95 Neon Yellow" loading="lazy" decoding="async">
-    <img src="__IMG_SL_7__" alt="Nike Air Max 95 Navy Jewel" loading="lazy" decoding="async">
-    <img src="__IMG_SL_8__" alt="Nike Shox R4 Olive Green" loading="lazy" decoding="async">
-    <img src="__IMG_SL_9__" alt="Nike Shox R4 Cream Red" loading="lazy" decoding="async">
-    <img src="__IMG_SL_10__" alt="Air Jordan 3 White Cement" loading="lazy" decoding="async">
-    <img src="__IMG_SL_11__" alt="Air Jordan 3 Black Cat" loading="lazy" decoding="async">
-    <img src="__IMG_SL_12__" alt="Mizuno Wave Prophecy Black Teal" loading="lazy" decoding="async">
-    <img src="__IMG_SL_13__" alt="NOCTA Hot Step Triple Black" loading="lazy" decoding="async">
-    <img src="__IMG_SL_14__" alt="Air More Uptempo Black White" loading="lazy" decoding="async">
-    <img src="__IMG_SL_1__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_2__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_3__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_4__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_5__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_6__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_7__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_8__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_9__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_10__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_11__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_12__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_13__" alt="" loading="lazy" decoding="async" aria-hidden="true">
-    <img src="__IMG_SL_14__" alt="" loading="lazy" decoding="async" aria-hidden="true">
+    <a href="#producto/tn-1" class="slider-item"><img src="__IMG_SL_1__" alt="Nike Air Max Plus TN Triple Black" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-3" class="slider-item"><img src="__IMG_SL_2__" alt="Nike Air Max Plus TN Violet Fade" loading="lazy" decoding="async"></a>
+    <a href="#pieza" class="slider-item"><img src="__IMG_SL_3__" alt="Nike Air Max Plus TN degradé fuego" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-5" class="slider-item"><img src="__IMG_SL_4__" alt="Nike Air Max Plus TN White Green" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-1" class="slider-item"><img src="__IMG_SL_5__" alt="Nike Air Max 95 OG Blue Red" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-2" class="slider-item"><img src="__IMG_SL_6__" alt="Nike Air Max 95 Neon Yellow" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-5" class="slider-item"><img src="__IMG_SL_7__" alt="Nike Air Max 95 Navy Jewel" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-1" class="slider-item"><img src="__IMG_SL_8__" alt="Nike Shox R4 Olive Green" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-2" class="slider-item"><img src="__IMG_SL_9__" alt="Nike Shox R4 Cream Red" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-1" class="slider-item"><img src="__IMG_SL_10__" alt="Air Jordan 3 White Cement" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-2" class="slider-item"><img src="__IMG_SL_11__" alt="Air Jordan 3 Black Cat" loading="lazy" decoding="async"></a>
+    <a href="#producto/mizuno-1" class="slider-item"><img src="__IMG_SL_12__" alt="Mizuno Wave Prophecy Black Teal" loading="lazy" decoding="async"></a>
+    <a href="#producto/nocta-1" class="slider-item"><img src="__IMG_SL_13__" alt="NOCTA Hot Step Triple Black" loading="lazy" decoding="async"></a>
+    <a href="#producto/uptempo-1" class="slider-item"><img src="__IMG_SL_14__" alt="Air More Uptempo Black White" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_1__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-3" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_2__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#pieza" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_3__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-5" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_4__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_5__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_6__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-5" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_7__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_8__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_9__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_10__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_11__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/mizuno-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_12__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/nocta-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_13__" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/uptempo-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="__IMG_SL_14__" alt="" loading="lazy" decoding="async"></a>
   </div>
 </section>
 
@@ -1246,6 +1254,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
   </div>
   <div class="filtros mono" id="filtros">
     <button class="filtro-chip activo" data-filtro="todos">Todos</button>
+    <button class="filtro-chip filtro-chip-oferta" data-filtro="ofertas">Ofertas</button>
     <button class="filtro-chip" data-filtro="tn">TN</button>
     <button class="filtro-chip" data-filtro="am95">Air Max 95</button>
     <button class="filtro-chip" data-filtro="shox">Shox</button>
@@ -1406,7 +1415,7 @@ footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
    localStorage['tn_baires_productos']; si no hay nada guardado todavia,
    se usa este catalogo de fabrica (PRODUCTOS_DEFAULT).
    ========================================================================== */
-var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"]},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"]},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"]},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"]},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"]},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"]},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"]},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"]},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"]},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"]},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"]},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"]},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"]},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"]},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"]},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"]},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"]},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"]},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"]},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"]}];
+var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"],"enOferta":false,"precioOferta":0}];
 var LS_PRODUCTOS = 'tn_baires_productos';
 var LS_PROMOS    = 'tn_baires_promos';
 
@@ -1435,6 +1444,22 @@ function promoActiva(){
 function fmtPrecio(n){
   return '$' + Math.round(n).toLocaleString('es-AR');
 }
+/* precio a mostrar de un producto: la oferta propia del producto (si tiene)
+   gana por sobre la promo general del sitio, para no acumular descuentos */
+function precioMostrar(prod, promo, fontSize){
+  var estilo = fontSize ? ' style="font-size:'+fontSize+'"' : '';
+  if(prod.enOferta && prod.precioOferta > 0 && prod.precioOferta < prod.precio){
+    return {
+      final: prod.precioOferta,
+      html: '<div class="precio-promo"'+estilo+'><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(prod.precioOferta)+'</div>'
+    };
+  }
+  if(promo && promo.descuento > 0){
+    var final = prod.precio * (1 - promo.descuento/100);
+    return {final: final, html: '<div class="precio-promo"'+estilo+'><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(final)+'</div>'};
+  }
+  return {final: prod.precio, html: '<div class="precio"'+estilo+'>'+fmtPrecio(prod.precio)+'</div>'};
+}
 function totalStock(prod){
   return prod.talles.reduce(function(a,t){ return a + t.stock; }, 0);
 }
@@ -1461,14 +1486,9 @@ function tarjetaProducto(prod, idx, promo){
     return '<span class="talle-mini agotada" aria-hidden="true">'+t.talle+'</span>';
   }).join('');
 
-  var precioFinal = prod.precio;
-  var precioHtml;
-  if(promo && promo.descuento > 0){
-    precioFinal = prod.precio * (1 - promo.descuento/100);
-    precioHtml = '<div class="precio-promo"><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(precioFinal)+'</div>';
-  }else{
-    precioHtml = '<div class="precio">'+fmtPrecio(prod.precio)+'</div>';
-  }
+  var precio = precioMostrar(prod, promo);
+  var precioFinal = precio.final, precioHtml = precio.html;
+  var enOferta = !!(prod.enOferta && prod.precioOferta > 0 && prod.precioOferta < prod.precio);
 
   var stockTxt = agotado ? 'Sold out — 24.08' : (estado.texto + ' — ' + (primerDisp ? String(primerDisp.stock).padStart(2,'0') : '00') + ' pairs');
   var boton = agotado
@@ -1476,9 +1496,10 @@ function tarjetaProducto(prod, idx, promo){
     : '<button class="mini" data-agregar data-id="'+prod.id+'" data-nombre="'+prod.nombre+'" data-cw="'+prod.colorway+'" data-precio="'+Math.round(precioFinal)+'">Quiero el par</button>';
 
   return '' +
-  '<article class="'+cls+'" data-modelo="'+prod.modelo+'" data-id="'+prod.id+'">' +
+  '<article class="'+cls+'" data-modelo="'+prod.modelo+'" data-id="'+prod.id+'" data-oferta="'+(enOferta?'1':'0')+'">' +
     '<a class="item-foto" href="#producto/'+prod.id+'" aria-label="Ver '+prod.nombre+' '+prod.colorway+'">' +
       '<span class="'+chapaClase+'">'+(agotado?'Sold out':estado.texto)+'</span>' +
+      (enOferta ? '<span class="chapa chapa-oferta">Oferta</span>' : '') +
       '<img src="'+prod.img+'" alt="'+prod.nombre+' '+prod.colorway+', foto real de stock tn_baires" loading="lazy" decoding="async">' +
     '</a>' +
     '<div class="item-ficha">' +
@@ -1557,14 +1578,9 @@ function mostrarProductoDetalle(prod){
   document.getElementById('pdNombre').textContent = prod.nombre;
 
   var promo = promoActiva();
-  var precioFinal = prod.precio;
-  var precioEl = document.getElementById('pdPrecio');
-  if(promo && promo.descuento > 0){
-    precioFinal = prod.precio * (1 - promo.descuento/100);
-    precioEl.innerHTML = '<div class="precio-promo" style="font-size:28px"><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(precioFinal)+'</div>';
-  }else{
-    precioEl.innerHTML = '<div class="precio" style="font-size:28px">'+fmtPrecio(prod.precio)+'</div>';
-  }
+  var precio = precioMostrar(prod, promo, '28px');
+  var precioFinal = precio.final;
+  document.getElementById('pdPrecio').innerHTML = precio.html;
 
   var tallesOrdenados = prod.talles.slice().sort(function(a,b){ return a.talle - b.talle; });
   document.getElementById('pdTalles').innerHTML = tallesOrdenados.map(function(t){
@@ -1619,13 +1635,7 @@ function renderSimilares(prodActual){
   wrap.style.display = '';
   var promo = promoActiva();
   document.getElementById('similaresPista').innerHTML = similares.map(function(p){
-    var precioFinal = p.precio, precioHtml;
-    if(promo && promo.descuento > 0){
-      precioFinal = p.precio * (1 - promo.descuento/100);
-      precioHtml = '<div class="precio-promo"><s>'+fmtPrecio(p.precio)+'</s> '+fmtPrecio(precioFinal)+'</div>';
-    }else{
-      precioHtml = '<div class="precio">'+fmtPrecio(p.precio)+'</div>';
-    }
+    var precioHtml = precioMostrar(p, promo).html;
     return '<a href="#producto/'+p.id+'" class="similares-item">' +
       '<div class="similares-foto"><img src="'+p.img+'" alt="'+p.nombre+' '+p.colorway+'" loading="lazy"></div>' +
       '<div class="similares-info"><b>'+p.nombre+'</b><span>'+p.colorway+'</span>'+precioHtml+'</div>' +
@@ -1793,14 +1803,14 @@ var itemsGrilla = document.querySelectorAll('#grilla .item');
 var dropDesc = document.getElementById('dropDesc');
 var filtros = document.getElementById('filtros');
 var nombresModelo = {
-  todos:'', tn:'TN', am95:'Air Max 95', shox:'Shox R4',
+  todos:'', ofertas:'Ofertas', tn:'TN', am95:'Air Max 95', shox:'Shox R4',
   jordan:'Jordan', mizuno:'Mizuno', nocta:'NOCTA', uptempo:'Uptempo'
 };
 
 function aplicarFiltro(valor){
   var visibles = 0;
   itemsGrilla.forEach(function(it){
-    var mostrar = (valor === 'todos') || (it.dataset.modelo === valor);
+    var mostrar = (valor === 'todos') || (valor === 'ofertas' ? it.dataset.oferta === '1' : it.dataset.modelo === valor);
     it.style.display = mostrar ? '' : 'none';
     if(mostrar) visibles++;
   });
@@ -1808,19 +1818,19 @@ function aplicarFiltro(valor){
   if(dropDesc){
     dropDesc.textContent = (valor === 'todos')
       ? 'Veinte pares en el local. Cuando se van, se van: no reponemos numeración.'
+      : (valor === 'ofertas' && visibles === 0)
+      ? 'No hay ofertas activas por ahora — volvé a mirar pronto.'
       : 'Mostrando ' + visibles + (visibles === 1 ? ' par' : ' pares') + ' de ' + nombresModelo[valor] + '.';
   }
 }
 
 /* aplica el filtro, cierra el menu mobile si estaba abierto, y siempre deja
-   la barra de filtros pegada arriba — un solo scroll, instantaneo, sin
-   carreras contra animaciones smooth ni setTimeout que puedan fallar en
-   celulares reales mas lentos */
+   la barra de filtros pegada arriba — un solo scroll, suave */
 function irAFiltro(valor){
   aplicarFiltro(valor);
   cerrarMenuMobile();
   requestAnimationFrame(function(){
-    if(filtros) filtros.scrollIntoView({block:'start'});
+    if(filtros) filtros.scrollIntoView({block:'start', behavior:'smooth'});
   });
 }
 
@@ -1846,14 +1856,20 @@ if(slides.length > 1){
   }, 4200);
 }
 
-/* slider de zapatillas: auto-desliza a la derecha y se puede arrastrar con mouse o dedo */
+/* slider de zapatillas: auto-desliza a la derecha y se puede arrastrar con mouse o dedo.
+   Distingue click de arrastre (para que los links a los productos funcionen) y da
+   un respiro despues de soltar antes de retomar el auto-slide, para no pelear
+   contra el scroll con inercia que dejan mouse/touch al soltar. */
 (function(){
   var pista = document.getElementById('sliderPista');
   if(!pista) return;
   var arrastrando = false;
-  var moviendose = false; /* true mientras hay drag activo, para no pelear con el auto-scroll */
-  var startX = 0, startScroll = 0;
-  var velocidad = 0.55;
+  var pausadoHasta = 0; /* timestamp: mientras Date.now() sea menor a esto, no auto-avanza */
+  var startX = 0, startScroll = 0, distanciaArrastrada = 0;
+  var velocidad = 0.28;
+  var RESPIRO_MS = 900;
+
+  function pausar(){ pausadoHasta = Date.now() + RESPIRO_MS; }
 
   function mitad(){ return pista.scrollWidth / 2; }
 
@@ -1874,7 +1890,7 @@ if(slides.length > 1){
   });
 
   function auto(){
-    if(!arrastrando && !moviendose){
+    if(!arrastrando && Date.now() >= pausadoHasta){
       pista.scrollLeft -= velocidad;
     }
     requestAnimationFrame(auto);
@@ -1884,24 +1900,34 @@ if(slides.length > 1){
   /* arrastre con mouse (desktop) */
   pista.addEventListener('mousedown', function(ev){
     arrastrando = true;
+    distanciaArrastrada = 0;
     pista.classList.add('arrastrando');
     startX = ev.pageX;
     startScroll = pista.scrollLeft;
-    ev.preventDefault();
   });
   window.addEventListener('mousemove', function(ev){
     if(!arrastrando) return;
-    pista.scrollLeft = startScroll - (ev.pageX - startX);
+    var delta = ev.pageX - startX;
+    distanciaArrastrada = Math.max(distanciaArrastrada, Math.abs(delta));
+    pista.scrollLeft = startScroll - delta;
   });
   window.addEventListener('mouseup', function(){
-    if(arrastrando){ arrastrando = false; pista.classList.remove('arrastrando'); }
+    if(!arrastrando) return;
+    arrastrando = false;
+    pista.classList.remove('arrastrando');
+    pausar();
+  });
+  /* si arrastró de verdad, cancela el click para no navegar de golpe al soltar */
+  pista.addEventListener('click', function(ev){
+    if(distanciaArrastrada > 6){ ev.preventDefault(); }
   });
 
   /* en celular el scroll táctil nativo ya permite arrastrar con el dedo; */
-  /* solo pausamos el auto-slide mientras el dedo está tocando */
-  pista.addEventListener('touchstart', function(){ moviendose = true; }, {passive:true});
-  pista.addEventListener('touchend', function(){ moviendose = false; }, {passive:true});
-  pista.addEventListener('touchcancel', function(){ moviendose = false; }, {passive:true});
+  /* pausamos el auto-slide mientras el dedo toca y un rato despues de soltar,
+     para no chocar con la inercia del scroll nativo */
+  pista.addEventListener('touchstart', function(){ arrastrando = true; }, {passive:true});
+  pista.addEventListener('touchend', function(){ arrastrando = false; pausar(); }, {passive:true});
+  pista.addEventListener('touchcancel', function(){ arrastrando = false; pausar(); }, {passive:true});
 })();
 
 /* talles: pieza destacada, ahora con stock real por talle (antes era Math.random) */

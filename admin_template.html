@@ -110,6 +110,7 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
 .badge-ok{color:var(--verde);border-color:rgba(63,181,106,.4)}
 .badge-agotado{color:var(--rojo);border-color:rgba(229,32,47,.4)}
 .badge-inactivo{color:var(--humo)}
+.badge-oferta{color:var(--rojo);border-color:rgba(229,32,47,.4);background:rgba(229,32,47,.08)}
 .toggle{width:36px;height:20px;border:1px solid var(--linea);border-radius:10px;position:relative;cursor:pointer;background:var(--asfalto);flex:none}
 .toggle.on{background:var(--oro);border-color:var(--oro)}
 .toggle::after{content:'';position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:var(--hueso);transition:transform .12s}
@@ -414,6 +415,11 @@ td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);ver
       <label>Descripción (se muestra en la página del producto)</label>
       <textarea id="prodDescripcion" rows="4" placeholder="Contá algo real del producto: diseño, historia, para qué sirve, con qué combina..."></textarea>
     </div>
+    <div class="check-linea"><input type="checkbox" id="prodEnOferta"> <label for="prodEnOferta" style="margin:0">Está en oferta</label></div>
+    <div class="campo" id="prodPrecioOfertaWrap" style="display:none;max-width:200px">
+      <label>Precio de oferta</label>
+      <input type="number" id="prodPrecioOferta" step="1000">
+    </div>
     <div class="check-linea"><input type="checkbox" id="prodDestacado"> <label for="prodDestacado" style="margin:0">Marcar como destacado</label></div>
     <div class="check-linea"><input type="checkbox" id="prodActivo" checked> <label for="prodActivo" style="margin:0">Producto activo (visible en la web)</label></div>
   </div>
@@ -651,7 +657,7 @@ function renderTablaProductos(filtro){
         '<td class="mono">'+p.modelo+'</td>' +
         '<td><div class="celda-precio-edit"><input type="number" class="input-precio" data-campo="precio" value="'+p.precio+'"></div></td>' +
         '<td>'+estado+'</td>' +
-        '<td>'+(p.activo ? '' : '<span class="badge badge-inactivo">Inactivo</span>')+'</td>' +
+        '<td>'+(p.activo ? '' : '<span class="badge badge-inactivo">Inactivo</span>')+(p.enOferta ? ' <span class="badge badge-oferta">Oferta</span>' : '')+'</td>' +
         '<td><div class="toggle'+(p.destacado?' on':'')+'" data-toggle="destacado"></div></td>' +
         '<td><div class="toggle'+(p.activo?' on':'')+'" data-toggle="activo"></div></td>' +
         '<td><div class="acciones-fila">' +
@@ -718,6 +724,9 @@ function abrirModalProducto(id){
   document.getElementById('prodModelo').value = p ? p.modelo : 'tn';
   document.getElementById('prodPrecio').value = p ? p.precio : '';
   document.getElementById('prodDescripcion').value = p ? (p.descripcion || '') : '';
+  document.getElementById('prodEnOferta').checked = p ? !!p.enOferta : false;
+  document.getElementById('prodPrecioOferta').value = p && p.precioOferta ? p.precioOferta : '';
+  document.getElementById('prodPrecioOfertaWrap').style.display = (p && p.enOferta) ? '' : 'none';
   document.getElementById('prodDestacado').checked = p ? !!p.destacado : false;
   document.getElementById('prodActivo').checked = p ? !!p.activo : true;
   document.getElementById('btnEliminarProducto').style.display = p ? '' : 'none';
@@ -730,6 +739,9 @@ function cerrarModalProducto(){
   document.getElementById('modalProductoFondo').classList.remove('abierto');
   document.getElementById('modalProducto').classList.remove('abierto');
 }
+document.getElementById('prodEnOferta').addEventListener('change', function(){
+  document.getElementById('prodPrecioOfertaWrap').style.display = this.checked ? '' : 'none';
+});
 document.getElementById('btnNuevoProducto').addEventListener('click', function(){ abrirModalProducto(null); });
 document.getElementById('cerrarModalProducto').addEventListener('click', cerrarModalProducto);
 document.getElementById('cancelarModalProducto').addEventListener('click', cerrarModalProducto);
@@ -759,14 +771,23 @@ document.getElementById('guardarProducto').addEventListener('click', function(){
     return {talle: parseInt(inp.dataset.talle,10), stock: parseInt(inp.value,10) || 0};
   });
   var descripcion = document.getElementById('prodDescripcion').value.trim();
+  var precio = parseInt(document.getElementById('prodPrecio').value,10) || 0;
+  var enOferta = document.getElementById('prodEnOferta').checked;
+  var precioOferta = parseInt(document.getElementById('prodPrecioOferta').value,10) || 0;
+  if(enOferta && (precioOferta <= 0 || precioOferta >= precio)){
+    alert('El precio de oferta tiene que ser mayor a cero y menor al precio normal.');
+    return;
+  }
 
   if(id){
     var p = productos.find(function(x){return x.id===id;});
     p.nombre = nombre; p.colorway = colorway;
     p.modelo = document.getElementById('prodModelo').value;
-    p.precio = parseInt(document.getElementById('prodPrecio').value,10) || 0;
+    p.precio = precio;
     p.talles = talles;
     p.descripcion = descripcion;
+    p.enOferta = enOferta;
+    p.precioOferta = enOferta ? precioOferta : 0;
     p.destacado = document.getElementById('prodDestacado').checked;
     p.activo = document.getElementById('prodActivo').checked;
     p.fotos = fotosProductoActual.slice();
@@ -776,11 +797,13 @@ document.getElementById('guardarProducto').addEventListener('click', function(){
       id: 'prod-' + Date.now(),
       modelo: document.getElementById('prodModelo').value,
       nombre: nombre, colorway: colorway,
-      precio: parseInt(document.getElementById('prodPrecio').value,10) || 0,
+      precio: precio,
       fotos: fotosProductoActual.slice(),
       img: fotosProductoActual[0],
       talles: talles,
       descripcion: descripcion,
+      enOferta: enOferta,
+      precioOferta: enOferta ? precioOferta : 0,
       activo: document.getElementById('prodActivo').checked,
       destacado: document.getElementById('prodDestacado').checked,
       layout: 'c'
