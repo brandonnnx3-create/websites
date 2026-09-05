@@ -1,10 +1,13 @@
 name: Publicar sitio en GitHub Pages
 
+# Solo desde main. Publicar desde una rama de trabajo era fragil: el sitio en
+# produccion quedaba atado a una rama que en algun momento se borra, y el
+# environment "github-pages" ademas restringe desde que ramas se puede
+# desplegar, asi que cualquier rama nueva falla antes de correr un paso.
 on:
   push:
     branches:
       - main
-      - claude/wonderful-knuth-8683eb
   workflow_dispatch:
 
 permissions:
