@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel — @tn_baires</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wght@200..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalto:#0A0A09; --militar:#141310; --cuero:#1C1916;
+  --hueso:#F5F2EA; --humo:#8A867B; --linea:rgba(245,242,234,.14);
+  --oro:#F0C247; --rojo:#E5202F; --tinta:#0A0805; --verde:#3FB56A;
+  --gutter:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--asfalto);color:var(--hueso);
+  font-family:'Archivo',system-ui,sans-serif;font-variation-settings:'wdth' 100;
+  -webkit-font-smoothing:antialiased;
+  display:flex;min-height:100vh;
+}
+button,input,select,textarea{font-family:inherit;color:inherit}
+.mono{font-family:'Martian Mono',ui-monospace,monospace}
+a{color:inherit}
+
+/* ---------- login gate ---------- */
+#login{
+  position:fixed;inset:0;z-index:500;background:var(--asfalto);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;
+}
+#login.oculto{display:none}
+#login h1{font-variation-settings:'wdth' 62,'wght' 900;font-size:28px;text-transform:uppercase;letter-spacing:-.01em}
+#login p{color:var(--humo);font-size:13px;max-width:320px;text-align:center;line-height:1.5}
+#login input{
+  background:var(--militar);border:1px solid var(--linea);color:var(--hueso);
+  padding:12px 16px;font-size:14px;width:260px;text-align:center;
+}
+#login button{
+  background:var(--oro);color:var(--tinta);border:none;padding:12px 24px;
+  font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+}
+#login .err{color:var(--rojo);font-size:12px;height:16px}
+
+/* ---------- layout ---------- */
+#app{display:flex;width:100%}
+.nav-lateral{
+  width:220px;flex:none;background:var(--militar);border-right:1px solid var(--linea);
+  min-height:100vh;padding:22px 0;position:sticky;top:0;align-self:flex-start;
+}
+.nav-marca{display:flex;align-items:center;gap:8px;padding:0 20px 22px;border-bottom:1px solid var(--linea);margin-bottom:14px}
+.nav-marca img{width:30px;height:30px;border-radius:50%;flex:none}
+.nav-marca b{font-variation-settings:'wdth' 66,'wght' 900;font-size:14px;text-transform:uppercase}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:11px 20px;color:var(--humo);
+  font-size:13px;cursor:pointer;border-left:2px solid transparent;
+}
+.nav-item:hover{color:var(--hueso)}
+.nav-item.activo{color:var(--hueso);border-left-color:var(--oro);background:rgba(240,194,71,.06)}
+.nav-item .ico{width:16px;text-align:center;flex:none}
+.nav-pie{padding:16px 20px 0;margin-top:16px;border-top:1px solid var(--linea)}
+.nav-pie a{font-size:11px;color:var(--humo);text-decoration:underline}
+
+.contenido{flex:1;padding:26px 32px 60px;min-width:0}
+.contenido-cab{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.contenido-cab h2{font-variation-settings:'wdth' 64,'wght' 800;font-size:24px;text-transform:uppercase}
+.contenido-cab p{color:var(--humo);font-size:12.5px;margin-top:4px}
+.vista{display:none}
+.vista.activa{display:block}
+
+/* ---------- dashboard ---------- */
+.aviso-local{
+  background:rgba(240,194,71,.08);border:1px solid rgba(240,194,71,.3);color:var(--oro);
+  padding:12px 16px;font-size:12px;line-height:1.5;margin-bottom:20px;
+}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.tarjeta{background:var(--militar);border:1px solid var(--linea);padding:18px}
+.tarjeta-titulo{display:flex;align-items:center;gap:8px;color:var(--humo);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.tarjeta-filas{display:flex;flex-direction:column;gap:8px}
+.tarjeta-fila{display:flex;justify-content:space-between;align-items:baseline;font-size:13px}
+.tarjeta-fila b{font-variation-settings:'wdth' 76,'wght' 800;font-size:18px}
+.tarjeta-nota{color:var(--humo);font-size:10.5px;margin-top:8px;line-height:1.4}
+.punto-online{width:7px;height:7px;background:var(--verde);border-radius:50%;display:inline-block}
+
+/* ---------- tabla productos ---------- */
+.barra-acciones{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.btn{
+  background:none;border:1px solid var(--linea);color:var(--hueso);padding:9px 16px;
+  font-size:12.5px;cursor:pointer;transition:background .1s,border-color .1s;
+}
+.btn:hover{border-color:var(--hueso)}
+.btn-primario{background:var(--oro);border-color:var(--oro);color:var(--tinta);font-weight:600}
+.btn-primario:hover{background:#ffd166}
+.btn-peligro{color:var(--rojo);border-color:rgba(229,32,47,.4)}
+.btn-peligro:hover{background:rgba(229,32,47,.1);border-color:var(--rojo)}
+.buscador{background:var(--militar);border:1px solid var(--linea);color:var(--hueso);padding:9px 14px;font-size:13px;width:240px}
+
+table{width:100%;border-collapse:collapse;background:var(--militar);border:1px solid var(--linea)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--linea);font-size:12.5px}
+th{color:var(--humo);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:400}
+tr:last-child td{border-bottom:none}
+td img{width:42px;height:42px;object-fit:cover;border:1px solid var(--linea);vertical-align:middle}
+.celda-precio-edit{display:flex;align-items:center;gap:6px}
+.input-precio{background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);padding:5px 8px;width:100px;font-size:12.5px}
+.input-precio:focus{border-color:var(--oro);outline:none}
+.badge{padding:3px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;border:1px solid var(--linea);display:inline-block}
+.badge-ok{color:var(--verde);border-color:rgba(63,181,106,.4)}
+.badge-agotado{color:var(--rojo);border-color:rgba(229,32,47,.4)}
+.badge-inactivo{color:var(--humo)}
+.badge-oferta{color:var(--rojo);border-color:rgba(229,32,47,.4);background:rgba(229,32,47,.08)}
+.toggle{width:36px;height:20px;border:1px solid var(--linea);border-radius:10px;position:relative;cursor:pointer;background:var(--asfalto);flex:none}
+.toggle.on{background:var(--oro);border-color:var(--oro)}
+.toggle::after{content:'';position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:var(--hueso);transition:transform .12s}
+.toggle.on::after{transform:translateX(16px);background:var(--tinta)}
+.acciones-fila{display:flex;gap:6px}
+.modelo-chip{display:none}
+.btn-txt{display:none}
+.icono-btn{background:none;border:1px solid var(--linea);color:var(--humo);width:28px;height:28px;cursor:pointer;font-size:12px}
+.icono-btn:hover{color:var(--hueso);border-color:var(--hueso)}
+
+/* ---------- modal producto ---------- */
+.modal-fondo{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;display:none}
+.modal-fondo.abierto{display:block}
+.modal{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:401;
+  width:min(560px,92vw);max-height:88vh;overflow-y:auto;
+  background:var(--militar);border:1px solid var(--linea);display:none;
+}
+.modal.abierto{display:block}
+.modal-cab{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--linea);position:sticky;top:0;background:var(--militar)}
+.modal-cab h3{font-size:16px;font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase}
+.modal-cuerpo{padding:20px}
+.campo{margin-bottom:14px}
+.campo label{display:block;font-size:11px;color:var(--humo);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.campo input[type=text],.campo input[type=number],.campo select,.campo textarea{
+  width:100%;background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);
+  padding:9px 12px;font-size:13px;
+}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--oro);outline:none}
+.fila-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.foto-preview{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--linea);margin-bottom:8px;background:var(--asfalto)}
+.galeria-editor{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.input-archivo{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.btn-archivo{
+  display:inline-block;background:none;border:1px solid var(--linea);color:var(--hueso);
+  padding:9px 16px;font-size:12.5px;cursor:pointer;
+}
+.btn-archivo:hover{border-color:var(--hueso)}
+.input-archivo:focus-visible + .btn-archivo,
+.btn-archivo:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+.galeria-item{position:relative;width:84px;height:84px}
+.galeria-item img{width:100%;height:100%;object-fit:cover;border:1px solid var(--linea);background:var(--asfalto)}
+.galeria-item.principal img{border-color:var(--oro)}
+.galeria-item-quitar{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--rojo);color:#fff;border:none;font-size:11px;line-height:1;cursor:pointer}
+.talles-editor{display:flex;flex-wrap:wrap;gap:8px}
+.talle-campo{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--asfalto);border:1px solid var(--linea);padding:6px 8px}
+.talle-campo span{font-size:10px;color:var(--humo)}
+.talle-campo input[type=number]{width:44px;text-align:center;background:none;border:none;border-bottom:1px solid var(--linea);color:var(--hueso);padding:2px}
+.modal-pie{padding:16px 20px;border-top:1px solid var(--linea);display:flex;justify-content:flex-end;gap:10px}
+.check-linea{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:10px}
+
+/* ---------- pedidos kanban ---------- */
+.kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+.kanban-col{background:var(--militar);border:1px solid var(--linea);min-height:200px}
+.kanban-col-cab{padding:10px 12px;border-bottom:1px solid var(--linea);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--humo);display:flex;justify-content:space-between}
+.kanban-col-cab b{color:var(--hueso)}
+.kanban-lista{padding:10px;display:flex;flex-direction:column;gap:8px}
+.pedido-card{background:var(--asfalto);border:1px solid var(--linea);padding:10px;font-size:12px}
+.pedido-card .num{color:var(--oro);font-family:'Martian Mono',monospace;font-size:10px}
+.pedido-card .cliente{font-weight:700;margin:4px 0 2px}
+.pedido-card .detalle{color:var(--humo);font-size:11px;line-height:1.5}
+.pedido-card .total{margin-top:6px;font-variation-settings:'wdth' 76,'wght' 700}
+.pedido-card .avanzar{margin-top:8px;width:100%;font-size:10.5px;padding:6px}
+@media(max-width:1100px){ .kanban{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:640px){ .kanban{grid-template-columns:1fr} }
+
+/* ---------- envios ---------- */
+.zonas-tabla{margin-bottom:24px}
+.calc-envio{background:var(--militar);border:1px solid var(--linea);padding:20px;max-width:420px}
+.calc-resultado{margin-top:14px;padding:14px;background:var(--asfalto);border:1px solid var(--linea);display:none}
+.calc-resultado.mostrar{display:block}
+.calc-resultado b{font-size:20px;font-variation-settings:'wdth' 78,'wght' 800}
+
+/* ---------- promos ---------- */
+.promo-card{background:var(--militar);border:1px solid var(--linea);padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.promo-card.vencida{opacity:.5}
+.promo-card .info b{display:block;font-size:14px}
+.promo-card .info span{color:var(--humo);font-size:11.5px}
+.promo-activa-tag{background:var(--verde);color:var(--tinta);font-size:9px;padding:2px 6px;margin-left:8px;text-transform:uppercase;font-weight:700}
+
+.vacio{color:var(--humo);font-size:13px;padding:30px;text-align:center;border:1px dashed var(--linea)}
+
+.tabla-scroll{overflow-x:auto}
+
+/* =========================================================================
+   CELULAR
+   El panel se usa desde el telefono (cargar un pedido, cambiar un precio,
+   marcar algo agotado). En 390 px la tabla de productos tiene 769 px de
+   ancho: los toggles de destacado/activo y los botones de editar/eliminar
+   quedaban fuera de la pantalla, y para llegar a ellos habia que scrollear
+   la tabla al costado, perdiendo de vista de que producto era cada fila.
+   Abajo de 800 px la tabla pasa a ser una lista de tarjetas.
+   ========================================================================= */
+@media(max-width:800px){
+  #app{flex-direction:column}
+
+  /* --- navegacion como pestañas horizontales, fija arriba --- */
+  .nav-lateral{
+    width:100%;min-height:auto;padding:0;
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:stretch;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+    border-right:none;border-bottom:1px solid var(--linea);
+  }
+  .nav-lateral::-webkit-scrollbar{display:none}
+  .nav-marca{display:none}
+  .nav-item{
+    white-space:nowrap;border-left:none;border-bottom:2px solid transparent;
+    padding:14px 16px;flex:none;
+  }
+  .nav-item.activo{border-left:none;border-bottom-color:var(--oro);background:none}
+  /* el link "ver la web" se partia en tres renglones dentro de la barra de
+     pestañas: queda como ultimo item de la barra, en una sola linea */
+  .nav-pie{
+    border-top:none;margin:0;padding:0 16px;flex:none;
+    display:flex;align-items:center;
+  }
+  .nav-pie a{white-space:nowrap}
+
+  .contenido{padding:18px 16px 48px}
+  .contenido-cab h2{font-size:21px}
+  .contenido-cab>button,.contenido-cab .btn{width:100%}
+
+  /* --- dashboard: una sola columna, y que etiqueta y valor no choquen --- */
+  .tarjetas{grid-template-columns:1fr;gap:12px}
+  .tarjeta-fila{flex-wrap:wrap;gap:4px 10px}
+  .tarjeta-fila b{margin-left:auto}
+
+  /* --- barra de acciones --- */
+  .barra-acciones{flex-direction:column;align-items:stretch}
+  .buscador{width:100%}
+  .barra-acciones .btn{width:100%;padding:12px 16px}
+
+  /* --- tabla de productos convertida en tarjetas --- */
+  .tabla-scroll{overflow-x:visible}
+  #vista-productos table{border:none;background:none;display:block}
+  #vista-productos thead{display:none}
+  #vista-productos tbody{display:flex;flex-direction:column;gap:10px}
+  #vista-productos tr{
+    display:grid;grid-template-columns:60px 1fr 1fr;gap:0 12px;
+    background:var(--militar);border:1px solid var(--linea);padding:12px;
+  }
+  #vista-productos td{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    grid-column:1 / -1;border:none;padding:6px 0;min-height:36px;
+    border-top:1px solid var(--linea);
+  }
+  /* destacado y activo comparten renglon: son dos interruptores, no hace
+     falta un renglon entero para cada uno */
+  #vista-productos td[data-col=Destacado]{grid-column:1 / 3}
+  #vista-productos td[data-col=Activo]{grid-column:3 / -1}
+  /* el modelo ya viaja como chip al lado del nombre */
+  #vista-productos td[data-col=Modelo]{display:none}
+  .modelo-chip{
+    display:inline-block;margin-top:5px;font-size:10px;color:var(--humo);
+    border:1px solid var(--linea);padding:1px 6px;text-transform:uppercase;
+  }
+  #vista-productos td[data-col]:not([data-col=foto]):not([data-col=producto]):not([data-col=acciones])::before{
+    content:attr(data-col);
+    color:var(--humo);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;flex:none;
+  }
+  #vista-productos td[data-col=foto]{grid-column:1;grid-row:1;padding:0;border-top:none;min-height:0}
+  #vista-productos td[data-col=foto] img{width:60px;height:60px}
+  #vista-productos td[data-col=producto]{
+    grid-column:2 / -1;grid-row:1;display:block;padding:0;border-top:none;min-height:0;
+    align-self:center;font-size:14px;line-height:1.35;
+  }
+  /* la celda de etiquetas suele venir vacia (producto activo y sin oferta) */
+  #vista-productos td[data-col=Etiquetas]:empty{display:none}
+  #vista-productos td[data-col=acciones]{justify-content:flex-end}
+  #vista-productos .acciones-fila{gap:8px}
+  #vista-productos .icono-btn{width:auto;min-width:44px;height:40px;padding:0 14px;font-size:13px}
+  #vista-productos .btn-txt{display:inline;margin-left:6px}
+  #vista-productos .input-precio{width:130px;text-align:right;padding:9px 10px;font-size:14px}
+  #vista-productos .toggle{width:46px;height:26px;border-radius:13px}
+  #vista-productos .toggle::after{width:22px;height:22px}
+  #vista-productos .toggle.on::after{transform:translateX(20px)}
+  #vista-productos tr.fila-vacia{display:block;background:none;border:none;padding:0}
+  #vista-productos tr.fila-vacia td{display:block;border:none;min-height:0}
+
+  /* --- pedidos: columnas vacias no tienen por que ocupar 200 px cada una --- */
+  .kanban-col{min-height:0}
+  .kanban-lista:empty{min-height:44px}
+
+  /* --- formularios --- */
+  .fila-2{grid-template-columns:1fr}
+  .calc-envio{max-width:none}
+  /* iOS hace zoom al enfocar un input de menos de 16 px */
+  .campo input[type=text],.campo input[type=number],.campo select,.campo textarea,
+  .buscador,.input-precio{font-size:16px}
+
+  /* --- modal como hoja a pantalla completa, con los botones siempre a mano --- */
+  .modal{
+    top:auto;left:0;bottom:0;transform:none;
+    width:100%;max-width:none;max-height:92vh;
+    display:none;flex-direction:column;
+    border:none;border-top:1px solid var(--linea);
+  }
+  .modal.abierto{display:flex}
+  .modal-cab{padding:14px 16px;flex:none}
+  .modal-cuerpo{padding:16px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+  .modal-pie{
+    padding:12px 16px;flex:none;
+    position:sticky;bottom:0;background:var(--militar);
+  }
+  .modal-pie .btn{flex:1;padding:13px 16px}
+  .modal-pie .btn-peligro{flex:0 1 auto;padding:13px 14px}
+  .talle-campo{padding:8px 10px}
+  .talle-campo input[type=number]{width:52px;font-size:16px;padding:4px 2px}
+  .galeria-item{width:76px;height:76px}
+}
+
+@media(max-width:400px){
+  .contenido{padding:16px 12px 44px}
+  #vista-productos tr{grid-template-columns:52px 1fr 1fr;padding:10px}
+  #vista-productos td[data-col=foto] img{width:52px;height:52px}
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>Panel @tn_baires</h1>
+  <p>Acceso para el dueño del local. Los cambios que hagas acá se guardan en este navegador — para que se vean en la web pública, este panel y la web tienen que compartir el mismo almacenamiento (mismo dominio real).</p>
+  <input type="password" id="loginClave" placeholder="Clave" autocomplete="off">
+  <button id="loginBtn">Entrar</button>
+  <div class="err" id="loginErr"></div>
+</div>
+
+<div id="app" style="display:none">
+  <nav class="nav-lateral">
+    <div class="nav-marca">
+      <img src="assets/logo.jpg" alt="">
+      <b>@tn_baires</b>
+    </div>
+    <div class="nav-item activo" data-vista="dashboard"><span class="ico">◆</span> Dashboard</div>
+    <div class="nav-item" data-vista="productos"><span class="ico">▤</span> Productos</div>
+    <div class="nav-item" data-vista="pedidos"><span class="ico">▣</span> Pedidos</div>
+    <div class="nav-item" data-vista="envios"><span class="ico">▲</span> Envíos</div>
+    <div class="nav-item" data-vista="promos"><span class="ico">✱</span> Promociones</div>
+    <div class="nav-item" data-vista="pagos"><span class="ico">$</span> Pagos</div>
+    <div class="nav-pie">
+      <a href="index.html" target="_blank">Ver la web →</a>
+    </div>
+  </nav>
+
+  <main class="contenido">
+
+    <!-- DASHBOARD -->
+    <section class="vista activa" id="vista-dashboard">
+      <div class="contenido-cab"><div><h2>Dashboard</h2><p>Un vistazo rápido a cómo está el negocio.</p></div></div>
+      <div class="aviso-local">
+        ⚠ Estos números salen de lo que hay guardado en <em>este</em> navegador (productos, pedidos cargados a mano, promos). No incluye visitas reales del sitio ni ventas hechas desde otro dispositivo — eso requiere conectar analítica real y una base de datos compartida.
+      </div>
+      <div class="tarjetas" id="tarjetasDash"></div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="vista" id="vista-productos">
+      <div class="contenido-cab">
+        <div><h2>Productos</h2><p>Agregá, editá o dá de baja pares del catálogo.</p></div>
+      </div>
+      <div class="barra-acciones">
+        <input class="buscador" id="buscadorProd" placeholder="Buscar por nombre o colorway…">
+        <button class="btn btn-primario" id="btnNuevoProducto">+ Agregar producto</button>
+      </div>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr>
+          <th></th><th>Producto</th><th>Modelo</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Destacado</th><th>Activo</th><th></th>
+        </tr></thead>
+        <tbody id="tablaProductos"></tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- PEDIDOS -->
+    <section class="vista" id="vista-pedidos">
+      <div class="contenido-cab">
+        <div><h2>Pedidos</h2><p>Los pedidos por WhatsApp no entran acá solos — cargalos vos cuando te escriban, y andá moviéndolos.</p></div>
+        <button class="btn btn-primario" id="btnNuevoPedido">+ Cargar pedido</button>
+      </div>
+      <div class="kanban" id="kanbanPedidos"></div>
+    </section>
+
+    <!-- ENVIOS -->
+    <section class="vista" id="vista-envios">
+      <div class="contenido-cab"><div><h2>Envíos</h2><p>Moto: el cliente escribe su dirección, se calcula la ruta con OpenStreetMap y se cobra por km. Correo a tarifa fija.</p></div></div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Ruta real por calles (OpenStreetMap)</h3>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:24px;max-width:480px">
+        Usa OpenStreetMap (Nominatim para buscar la dirección, OSRM para calcular la ruta) — es gratis y no hace falta ninguna clave. Si el servicio de ruteo no responde, el sitio calcula distancia en línea recta × un factor de corrección como respaldo, así el cálculo nunca se rompe.
+      </p>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Ubicación del local</h3>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
+        Parate en el local (o donde salen los envíos) y tocá el botón.
+      </p>
+      <div class="fila-2" style="max-width:420px;margin-bottom:10px">
+        <div class="campo"><label>Latitud</label><input type="text" id="envioLat" readonly placeholder="Sin configurar"></div>
+        <div class="campo"><label>Longitud</label><input type="text" id="envioLng" readonly placeholder="Sin configurar"></div>
+      </div>
+      <button class="btn btn-primario" id="btnUbicacionLocal" style="margin-bottom:28px">📍 Usar mi ubicación actual</button>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Tarifas</h3>
+      <div class="campo fila-2" style="max-width:420px">
+        <div>
+          <label>Tarifa por km ($)</label>
+          <input type="number" id="envioTarifaKm" step="10">
+        </div>
+        <div>
+          <label>Factor de corrección (solo si falla la ruta real)</label>
+          <input type="number" id="envioFactorRuta" step="0.05">
+        </div>
+      </div>
+      <p style="color:var(--humo);font-size:11px;line-height:1.5;max-width:420px;margin-bottom:14px">
+        Precio del envío en moto = km recorridos × tarifa por km.
+      </p>
+      <div class="campo" style="max-width:200px">
+        <label>Correo Argentino — tarifa fija ($)</label>
+        <input type="number" id="envioCostoCorreo" step="100">
+      </div>
+      <button class="btn btn-primario" id="btnGuardarEnvios" style="margin-bottom:28px">Guardar</button>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Probar la calculadora — así la ve el cliente</h3>
+      <div class="calc-envio">
+        <div class="campo">
+          <label>Distancia hasta la entrega (km)</label>
+          <input type="number" id="calcKm" placeholder="Ej: 7.4" step="0.1">
+        </div>
+        <div class="calc-resultado" id="calcResultado">
+          <span class="mono" style="color:var(--humo);font-size:11px">🚚 ENVÍO EN MOTO</span>
+          <div style="margin-top:6px"><span id="calcKmTexto"></span> — <b id="calcPrecioTexto"></b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOS -->
+    <section class="vista" id="vista-promos">
+      <div class="contenido-cab">
+        <div><h2>Promociones</h2><p>Se aplican a todo el catálogo mientras estén vigentes — aparecen solas en la web (mismo navegador).</p></div>
+        <button class="btn btn-primario" id="btnNuevaPromo">+ Crear promoción</button>
+      </div>
+      <div id="listaPromos"></div>
+    </section>
+
+    <!-- PAGOS -->
+    <section class="vista" id="vista-pagos">
+      <div class="contenido-cab"><div><h2>Pagos</h2><p>Datos que ve el cliente al elegir cada método. Sin backend propio, la confirmación de pago la hacés vos a mano cuando te llega el comprobante — ver nota al pie.</p></div></div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Recargo por transferencia / Mercado Pago</h3>
+      <div class="campo" style="max-width:200px">
+        <label>Recargo (%)</label>
+        <input type="number" id="pagoRecargo" step="1" min="0">
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px;margin-top:14px">Transferencia bancaria</h3>
+      <div class="fila-2" style="max-width:480px">
+        <div class="campo"><label>Alias</label><input type="text" id="pagoTransferenciaAlias" placeholder="tn.baires.mp"></div>
+        <div class="campo"><label>CBU / CVU</label><input type="text" id="pagoTransferenciaCbu" placeholder="0000003100...">
+        </div>
+      </div>
+      <div class="campo" style="max-width:480px">
+        <label>Titular (opcional)</label>
+        <input type="text" id="pagoTransferenciaTitular" placeholder="Nombre del titular de la cuenta">
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px;margin-top:14px">Mercado Pago</h3>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
+        Sin la URL de la función de abajo: el cliente te transfiere desde su app de Mercado Pago a tu alias (transferencia entre personas, sin comisión) y vos confirmás el pago a mano.
+      </p>
+      <div class="fila-2" style="max-width:480px;margin-bottom:10px">
+        <div class="campo"><label>Alias de Mercado Pago</label><input type="text" id="pagoMpAlias" placeholder="tn.baires"></div>
+        <div class="campo"><label>Usuario (opcional)</label><input type="text" id="pagoMpUsuario" placeholder="@tn_baires"></div>
+      </div>
+      <p style="color:var(--humo);font-size:12px;line-height:1.5;margin-bottom:10px;max-width:480px">
+        Con la URL cargada: el cliente paga de verdad con Mercado Pago (tarjeta, dinero en cuenta, etc.) y el pago se confirma solo, automáticamente — requiere el backend de <code>backend/README.md</code> ya desplegado con las credenciales reales de Mercado Pago.
+      </p>
+      <div class="campo" style="max-width:480px;margin-bottom:24px">
+        <label>URL de la función "crear preferencia" (Supabase)</label>
+        <input type="text" id="pagoMpFuncionUrl" placeholder="https://TU-PROYECTO.supabase.co/functions/v1/mp-crear-preferencia">
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Rapipago</h3>
+      <div class="campo" style="max-width:480px">
+        <label>Instrucciones para el cliente</label>
+        <textarea id="pagoRapipagoTexto" rows="3" placeholder="Ej: Decile al cajero que es un pago a favor de... / código..."></textarea>
+      </div>
+
+      <h3 class="mono" style="font-size:12px;color:var(--humo);text-transform:uppercase;margin-bottom:10px">Pago Fácil</h3>
+      <div class="campo" style="max-width:480px">
+        <label>Instrucciones para el cliente</label>
+        <textarea id="pagoPagofacilTexto" rows="3" placeholder="Ej: Decile al cajero que es un pago a favor de... / código..."></textarea>
+      </div>
+
+      <button class="btn btn-primario" id="btnGuardarPagos" style="margin-bottom:20px">Guardar</button>
+      <p style="color:var(--humo);font-size:11px;line-height:1.6;max-width:520px">
+        Rapipago y Pago Fácil acá son solo texto informativo (sin cupón con código de barras real):
+        generar un cupón válido requiere integrarse con un procesador de pagos (el mismo problema
+        de backend que Mercado Pago). Si en algún momento querés eso, hace falta desarrollo adicional.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-fondo" id="modalProductoFondo"></div>
+<div class="modal" id="modalProducto">
+  <div class="modal-cab">
+    <h3 id="modalProductoTitulo">Agregar producto</h3>
+    <button class="icono-btn" id="cerrarModalProducto">✕</button>
+  </div>
+  <div class="modal-cuerpo">
+    <input type="hidden" id="prodId">
+    <div class="campo">
+      <label>Fotos (la primera es la que se ve en el catálogo)</label>
+      <div class="galeria-editor" id="prodGaleriaEditor"></div>
+      <label class="btn-archivo" for="prodFotoInput">+ Agregar foto</label>
+      <input type="file" id="prodFotoInput" accept="image/*" class="input-archivo">
+    </div>
+    <div class="fila-2">
+      <div class="campo"><label>Nombre</label><input type="text" id="prodNombre" placeholder="Nike Air Max Plus"></div>
+      <div class="campo"><label>Colorway</label><input type="text" id="prodColorway" placeholder="Triple Black"></div>
+    </div>
+    <div class="fila-2">
+      <div class="campo"><label>Modelo (para filtros)</label>
+        <select id="prodModelo">
+          <option value="tn">TN</option>
+          <option value="am95">Air Max 95</option>
+          <option value="shox">Shox</option>
+          <option value="jordan">Jordan</option>
+          <option value="mizuno">Mizuno</option>
+          <option value="nocta">NOCTA</option>
+          <option value="uptempo">Uptempo</option>
+        </select>
+      </div>
+      <div class="campo"><label>Precio</label><input type="number" id="prodPrecio" step="1000"></div>
+    </div>
+    <div class="campo">
+      <label>Talles y stock</label>
+      <div class="talles-editor" id="prodTalles"></div>
+    </div>
+    <div class="campo">
+      <label>Descripción (se muestra en la página del producto)</label>
+      <textarea id="prodDescripcion" rows="4" placeholder="Contá algo real del producto: diseño, historia, para qué sirve, con qué combina..."></textarea>
+    </div>
+    <div class="check-linea"><input type="checkbox" id="prodEnOferta"> <label for="prodEnOferta" style="margin:0">Está en oferta</label></div>
+    <div class="campo" id="prodPrecioOfertaWrap" style="display:none;max-width:200px">
+      <label>Precio de oferta</label>
+      <input type="number" id="prodPrecioOferta" step="1000">
+    </div>
+    <div class="check-linea"><input type="checkbox" id="prodDestacado"> <label for="prodDestacado" style="margin:0">Marcar como destacado</label></div>
+    <div class="check-linea"><input type="checkbox" id="prodActivo" checked> <label for="prodActivo" style="margin:0">Producto activo (visible en la web)</label></div>
+  </div>
+  <div class="modal-pie">
+    <button class="btn btn-peligro" id="btnEliminarProducto" style="display:none">Eliminar</button>
+    <button class="btn" id="cancelarModalProducto">Cancelar</button>
+    <button class="btn btn-primario" id="guardarProducto">Guardar</button>
+  </div>
+</div>
+
+<!-- MODAL PEDIDO -->
+<div class="modal-fondo" id="modalPedidoFondo"></div>
+<div class="modal" id="modalPedido">
+  <div class="modal-cab"><h3>Cargar pedido</h3><button class="icono-btn" id="cerrarModalPedido">✕</button></div>
+  <div class="modal-cuerpo">
+    <div class="campo"><label>Cliente</label><input type="text" id="pedCliente" placeholder="Juan Pérez"></div>
+    <div class="campo"><label>Productos (descripción libre)</label><textarea id="pedProductos" rows="2" placeholder="2x TN Triple Black talle 42"></textarea></div>
+    <div class="fila-2">
+      <div class="campo"><label>Total</label><input type="number" id="pedTotal" step="1000"></div>
+      <div class="campo"><label>Envío</label>
+        <select id="pedEnvio">
+          <option>Retiro en local</option>
+          <option>Moto</option>
+          <option>Correo</option>
+          <option>Envío propio</option>
+        </select>
+      </div>
+    </div>
+    <div class="campo"><label>Dirección / zona</label><input type="text" id="pedDireccion" placeholder="Ramos Mejía"></div>
+  </div>
+  <div class="modal-pie">
+    <button class="btn" id="cancelarModalPedido">Cancelar</button>
+    <button class="btn btn-primario" id="guardarPedido">Cargar pedido</button>
+  </div>
+</div>
+
+<!-- MODAL PROMO -->
+<div class="modal-fondo" id="modalPromoFondo"></div>
+<div class="modal" id="modalPromo">
+  <div class="modal-cab"><h3>Crear promoción</h3><button class="icono-btn" id="cerrarModalPromo">✕</button></div>
+  <div class="modal-cuerpo">
+    <div class="campo"><label>Nombre</label><input type="text" id="promoNombre" placeholder="Oferta fin de semana"></div>
+    <div class="fila-2">
+      <div class="campo"><label>Descuento (%)</label><input type="number" id="promoDescuento" min="1" max="90"></div>
+      <div class="campo"></div>
+    </div>
+    <div class="fila-2">
+      <div class="campo"><label>Desde</label><input type="date" id="promoDesde"></div>
+      <div class="campo"><label>Hasta</label><input type="date" id="promoHasta"></div>
+    </div>
+  </div>
+  <div class="modal-pie">
+    <button class="btn" id="cancelarModalPromo">Cancelar</button>
+    <button class="btn btn-primario" id="guardarPromo">Crear</button>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   Comparte las MISMAS claves de localStorage que index.html.
+   ⚠ localStorage es por origen (dominio), no por carpeta: si este panel y
+   la web pública están hosteados en el mismo dominio real, comparten datos
+   automáticamente. Abriendo los archivos con doble click (file://) cada uno
+   puede quedar aislado según el navegador — para probarlo de verdad, subilos
+   a un hosting (o corré un server local) y abrí ambos desde ahí.
+   ========================================================================== */
+var LS_PRODUCTOS = 'tn_baires_productos';
+var LS_PROMOS    = 'tn_baires_promos';
+var LS_PEDIDOS   = 'tn_baires_pedidos';
+var LS_ENVIOS    = 'tn_baires_envios';
+var LS_PAGOS     = 'tn_baires_pagos';
+var CLAVE_ADMIN  = 'tnbaires2026'; /* ⚠ PLACEHOLDER — cambiala. Esto NO es seguridad real: */
+                                    /* cualquiera que vea el código fuente la puede leer.   */
+                                    /* Para acceso realmente protegido hace falta un backend */
+                                    /* con login de verdad (usuario/contraseña con servidor). */
+
+var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"],"enOferta":false,"precioOferta":0}];
+
+function leer(key, fallback){
+  try{ var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }
+  catch(e){ return fallback; }
+}
+function guardar(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+function cargarProductos(){ return leer(LS_PRODUCTOS, PRODUCTOS_DEFAULT); }
+function guardarProductos(p){ guardar(LS_PRODUCTOS, p); }
+function cargarPromos(){ return leer(LS_PROMOS, []); }
+function guardarPromos(p){ guardar(LS_PROMOS, p); }
+function cargarPedidos(){ return leer(LS_PEDIDOS, []); }
+function guardarPedidos(p){ guardar(LS_PEDIDOS, p); }
+function cargarEnvios(){
+  return leer(LS_ENVIOS, {
+    lat: null, lng: null, tarifaKm: 500, factorRuta: 1.35, costoCorreo: 4500
+  });
+}
+function guardarEnvios(e){ guardar(LS_ENVIOS, e); }
+function cargarPagos(){
+  return leer(LS_PAGOS, {
+    recargoPorcentaje: 10,
+    transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
+    mpAlias: '', mpUsuario: '', mpFuncionUrl: '',
+    rapipagoTexto: '', pagofacilTexto: ''
+  });
+}
+function guardarPagos(p){ guardar(LS_PAGOS, p); }
+
+function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
+function hoyISO(){ return new Date().toISOString().slice(0,10); }
+
+/* ---------- login ---------- */
+var loginEl = document.getElementById('login');
+var appEl = document.getElementById('app');
+if(sessionStorage.getItem('tn_admin_ok') === '1'){
+  loginEl.classList.add('oculto');
+  appEl.style.display = 'flex';
+}
+document.getElementById('loginBtn').addEventListener('click', intentarLogin);
+document.getElementById('loginClave').addEventListener('keydown', function(ev){ if(ev.key==='Enter') intentarLogin(); });
+function intentarLogin(){
+  var val = document.getElementById('loginClave').value;
+  if(val === CLAVE_ADMIN){
+    sessionStorage.setItem('tn_admin_ok','1');
+    loginEl.classList.add('oculto');
+    appEl.style.display = 'flex';
+    iniciarApp();
+  }else{
+    document.getElementById('loginErr').textContent = 'Clave incorrecta';
+  }
+}
+
+/* ---------- navegacion ---------- */
+document.querySelectorAll('.nav-item').forEach(function(it){
+  it.addEventListener('click', function(){
+    document.querySelectorAll('.nav-item').forEach(function(o){o.classList.remove('activo');});
+    document.querySelectorAll('.vista').forEach(function(o){o.classList.remove('activa');});
+    it.classList.add('activo');
+    document.getElementById('vista-'+it.dataset.vista).classList.add('activa');
+    if(it.dataset.vista === 'dashboard') renderDashboard();
+    if(it.dataset.vista === 'productos') renderTablaProductos();
+    if(it.dataset.vista === 'pedidos') renderKanban();
+    if(it.dataset.vista === 'envios') renderEnvios();
+    if(it.dataset.vista === 'promos') renderPromos();
+    if(it.dataset.vista === 'pagos') renderPagos();
+  });
+});
+
+/* ==========================================================================
+   DASHBOARD
+   ========================================================================== */
+function renderDashboard(){
+  var productos = cargarProductos();
+  var pedidos = cargarPedidos();
+  var promo = cargarPromos().find(function(p){ return p.desde<=hoyISO() && hoyISO()<=p.hasta; });
+
+  var activos = productos.filter(function(p){return p.activo;}).length;
+  var agotados = productos.filter(function(p){ return p.talles.reduce(function(a,t){return a+t.stock;},0)===0; }).length;
+  var inactivos = productos.filter(function(p){return !p.activo;}).length;
+
+  var porEstado = {Nuevo:0,Confirmado:0,Preparando:0,Enviado:0,Entregado:0};
+  pedidos.forEach(function(p){ if(porEstado[p.estado]!==undefined) porEstado[p.estado]++; });
+
+  var hoy = hoyISO();
+  var mesActual = hoy.slice(0,7);
+  var ventasHoy = pedidos.filter(function(p){return p.fecha===hoy;}).reduce(function(a,p){return a+p.total;},0);
+  var ventasMes = pedidos.filter(function(p){return p.fecha && p.fecha.slice(0,7)===mesActual;}).reduce(function(a,p){return a+p.total;},0);
+
+  var html = '';
+  html += '<div class="tarjeta"><div class="tarjeta-titulo"><span class="punto-online"></span> Tu página</div><div class="tarjeta-filas">' +
+    '<div class="tarjeta-fila"><span>Estado</span><b style="color:var(--verde);font-size:13px">Online</b></div>' +
+    '<div class="tarjeta-fila"><span>Promo activa</span><b style="font-size:13px">'+(promo?promo.nombre:'Ninguna')+'</b></div>' +
+    '</div><div class="tarjeta-nota">Visitas y origen de tráfico necesitan conectar Google Analytics — no están simulados acá.</div></div>';
+
+  html += '<div class="tarjeta"><div class="tarjeta-titulo">📦 Productos</div><div class="tarjeta-filas">' +
+    '<div class="tarjeta-fila"><span>Activos</span><b>'+activos+'</b></div>' +
+    '<div class="tarjeta-fila"><span>Agotados</span><b style="color:var(--rojo)">'+agotados+'</b></div>' +
+    '<div class="tarjeta-fila"><span>Desactivados</span><b style="color:var(--humo)">'+inactivos+'</b></div>' +
+    '</div></div>';
+
+  html += '<div class="tarjeta"><div class="tarjeta-titulo">▣ Pedidos (cargados a mano)</div><div class="tarjeta-filas">' +
+    '<div class="tarjeta-fila"><span>Nuevos</span><b>'+porEstado.Nuevo+'</b></div>' +
+    '<div class="tarjeta-fila"><span>Preparando</span><b>'+porEstado.Preparando+'</b></div>' +
+    '<div class="tarjeta-fila"><span>Enviados</span><b>'+porEstado.Enviado+'</b></div>' +
+    '</div></div>';
+
+  html += '<div class="tarjeta"><div class="tarjeta-titulo">💰 Ventas (pedidos cargados)</div><div class="tarjeta-filas">' +
+    '<div class="tarjeta-fila"><span>Hoy</span><b>'+fmt(ventasHoy)+'</b></div>' +
+    '<div class="tarjeta-fila"><span>Este mes</span><b>'+fmt(ventasMes)+'</b></div>' +
+    '</div><div class="tarjeta-nota">Suma el total de los pedidos que cargaste en la pestaña Pedidos, con fecha de hoy / este mes.</div></div>';
+
+  html += '<div class="tarjeta"><div class="tarjeta-titulo">💬 Consultas</div><div class="tarjeta-filas">' +
+    '<div class="tarjeta-fila"><span>WhatsApp / Instagram</span><b style="font-size:13px;color:var(--humo)">Sin conectar</b></div>' +
+    '</div><div class="tarjeta-nota">Para contar consultas reales hace falta conectar la cuenta de WhatsApp Business / Instagram por API.</div></div>';
+
+  document.getElementById('tarjetasDash').innerHTML = html;
+}
+
+/* ==========================================================================
+   PRODUCTOS
+   ========================================================================== */
+var TALLES_POSIBLES = [39,40,41,42,43,44,45];
+var fotosProductoActual = [];
+function renderGaleriaEditor(){
+  var cont = document.getElementById('prodGaleriaEditor');
+  if(fotosProductoActual.length === 0){
+    cont.innerHTML = '<span style="color:var(--humo);font-size:12px">Todavía no hay fotos — agregá al menos una.</span>';
+    return;
+  }
+  cont.innerHTML = fotosProductoActual.map(function(f, i){
+    return '<div class="galeria-item'+(i===0?' principal':'')+'">' +
+      '<img src="'+f+'" alt="">' +
+      '<button type="button" class="galeria-item-quitar" data-idx="'+i+'" title="Quitar foto">✕</button>' +
+    '</div>';
+  }).join('');
+  cont.querySelectorAll('.galeria-item-quitar').forEach(function(b){
+    b.addEventListener('click', function(){
+      fotosProductoActual.splice(parseInt(b.dataset.idx, 10), 1);
+      renderGaleriaEditor();
+    });
+  });
+}
+
+function renderTablaProductos(filtro){
+  filtro = (filtro || '').toLowerCase();
+  var productos = cargarProductos();
+  var filas = productos
+    .filter(function(p){ return !filtro || (p.nombre+' '+p.colorway).toLowerCase().indexOf(filtro) > -1; })
+    .map(function(p){
+      var stock = p.talles.reduce(function(a,t){return a+t.stock;},0);
+      var estado = stock === 0
+        ? '<span class="badge badge-agotado">Agotado</span>'
+        : '<span class="badge badge-ok">'+stock+' pares</span>';
+      /* data-col lo usa el CSS de celular para etiquetar cada dato cuando la
+         tabla se convierte en tarjetas (en una pantalla de 390 px no entran
+         nueve columnas, y sin esto los toggles y los botones quedaban fuera
+         de la pantalla). */
+      return '<tr data-id="'+p.id+'">' +
+        '<td data-col="foto"><img src="'+p.img+'" alt=""></td>' +
+        '<td data-col="producto"><b>'+p.nombre+'</b><br><span style="color:var(--humo)">'+p.colorway+'</span>' +
+          '<span class="modelo-chip mono">'+p.modelo+'</span></td>' +
+        '<td class="mono" data-col="Modelo">'+p.modelo+'</td>' +
+        '<td data-col="Precio"><div class="celda-precio-edit"><input type="number" class="input-precio" data-campo="precio" value="'+p.precio+'"></div></td>' +
+        '<td data-col="Stock">'+estado+'</td>' +
+        '<td data-col="Etiquetas">'+(p.activo ? '' : '<span class="badge badge-inactivo">Inactivo</span>')+(p.enOferta ? ' <span class="badge badge-oferta">Oferta</span>' : '')+'</td>' +
+        '<td data-col="Destacado"><div class="toggle'+(p.destacado?' on':'')+'" data-toggle="destacado"></div></td>' +
+        '<td data-col="Activo"><div class="toggle'+(p.activo?' on':'')+'" data-toggle="activo"></div></td>' +
+        '<td data-col="acciones"><div class="acciones-fila">' +
+          '<button class="icono-btn" data-accion="editar" title="Editar">✎<span class="btn-txt">Editar</span></button>' +
+          '<button class="icono-btn" data-accion="eliminar" title="Eliminar">🗑</button>' +
+        '</div></td>' +
+      '</tr>';
+    }).join('');
+  document.getElementById('tablaProductos').innerHTML = filas || '<tr class="fila-vacia"><td colspan="9" class="vacio">No hay productos que coincidan.</td></tr>';
+
+  /* precio rapido */
+  document.querySelectorAll('.input-precio').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      var id = inp.closest('tr').dataset.id;
+      var productos = cargarProductos();
+      var p = productos.find(function(x){return x.id===id;});
+      if(p){ p.precio = parseInt(inp.value,10) || 0; guardarProductos(productos); renderDashboard(); }
+    });
+  });
+  /* toggles */
+  document.querySelectorAll('[data-toggle]').forEach(function(tg){
+    tg.addEventListener('click', function(){
+      var id = tg.closest('tr').dataset.id;
+      var campo = tg.dataset.toggle;
+      var productos = cargarProductos();
+      var p = productos.find(function(x){return x.id===id;});
+      if(p){ p[campo] = !p[campo]; guardarProductos(productos); renderTablaProductos(document.getElementById('buscadorProd').value); renderDashboard(); }
+    });
+  });
+  /* editar / eliminar */
+  document.querySelectorAll('[data-accion="editar"]').forEach(function(b){
+    b.addEventListener('click', function(){ abrirModalProducto(b.closest('tr').dataset.id); });
+  });
+  document.querySelectorAll('[data-accion="eliminar"]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.closest('tr').dataset.id;
+      if(!confirm('¿Eliminar este producto del catálogo?')) return;
+      var productos = cargarProductos().filter(function(x){return x.id!==id;});
+      guardarProductos(productos);
+      renderTablaProductos(document.getElementById('buscadorProd').value);
+      renderDashboard();
+    });
+  });
+}
+document.getElementById('buscadorProd').addEventListener('input', function(){ renderTablaProductos(this.value); });
+
+function construirTallesEditor(tallesActuales){
+  var mapa = {};
+  (tallesActuales||[]).forEach(function(t){ mapa[t.talle] = t.stock; });
+  document.getElementById('prodTalles').innerHTML = TALLES_POSIBLES.map(function(t){
+    var v = mapa[t] !== undefined ? mapa[t] : 0;
+    return '<div class="talle-campo"><span>'+t+'</span><input type="number" min="0" data-talle="'+t+'" value="'+v+'"></div>';
+  }).join('');
+}
+
+function abrirModalProducto(id){
+  var productos = cargarProductos();
+  var p = id ? productos.find(function(x){return x.id===id;}) : null;
+  fotosProductoActual = p ? (p.fotos && p.fotos.length ? p.fotos.slice() : [p.img]) : [];
+  document.getElementById('modalProductoTitulo').textContent = p ? 'Editar producto' : 'Agregar producto';
+  document.getElementById('prodId').value = p ? p.id : '';
+  document.getElementById('prodNombre').value = p ? p.nombre : '';
+  document.getElementById('prodColorway').value = p ? p.colorway : '';
+  document.getElementById('prodModelo').value = p ? p.modelo : 'tn';
+  document.getElementById('prodPrecio').value = p ? p.precio : '';
+  document.getElementById('prodDescripcion').value = p ? (p.descripcion || '') : '';
+  document.getElementById('prodEnOferta').checked = p ? !!p.enOferta : false;
+  document.getElementById('prodPrecioOferta').value = p && p.precioOferta ? p.precioOferta : '';
+  document.getElementById('prodPrecioOfertaWrap').style.display = (p && p.enOferta) ? '' : 'none';
+  document.getElementById('prodDestacado').checked = p ? !!p.destacado : false;
+  document.getElementById('prodActivo').checked = p ? !!p.activo : true;
+  document.getElementById('btnEliminarProducto').style.display = p ? '' : 'none';
+  construirTallesEditor(p ? p.talles : []);
+  renderGaleriaEditor();
+  document.getElementById('modalProductoFondo').classList.add('abierto');
+  document.getElementById('modalProducto').classList.add('abierto');
+}
+function cerrarModalProducto(){
+  document.getElementById('modalProductoFondo').classList.remove('abierto');
+  document.getElementById('modalProducto').classList.remove('abierto');
+}
+document.getElementById('prodEnOferta').addEventListener('change', function(){
+  document.getElementById('prodPrecioOfertaWrap').style.display = this.checked ? '' : 'none';
+});
+document.getElementById('btnNuevoProducto').addEventListener('click', function(){ abrirModalProducto(null); });
+document.getElementById('cerrarModalProducto').addEventListener('click', cerrarModalProducto);
+document.getElementById('cancelarModalProducto').addEventListener('click', cerrarModalProducto);
+document.getElementById('modalProductoFondo').addEventListener('click', cerrarModalProducto);
+
+document.getElementById('prodFotoInput').addEventListener('change', function(ev){
+  var file = ev.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    fotosProductoActual.push(e.target.result);
+    renderGaleriaEditor();
+  };
+  reader.readAsDataURL(file);
+  ev.target.value = '';
+});
+
+document.getElementById('guardarProducto').addEventListener('click', function(){
+  var id = document.getElementById('prodId').value;
+  var productos = cargarProductos();
+  var nombre = document.getElementById('prodNombre').value.trim();
+  var colorway = document.getElementById('prodColorway').value.trim();
+  if(!nombre){ alert('Poné un nombre para el producto.'); return; }
+  if(fotosProductoActual.length === 0){ alert('Agregá al menos una foto.'); return; }
+
+  var talles = Array.from(document.querySelectorAll('#prodTalles input')).map(function(inp){
+    return {talle: parseInt(inp.dataset.talle,10), stock: parseInt(inp.value,10) || 0};
+  });
+  var descripcion = document.getElementById('prodDescripcion').value.trim();
+  var precio = parseInt(document.getElementById('prodPrecio').value,10) || 0;
+  var enOferta = document.getElementById('prodEnOferta').checked;
+  var precioOferta = parseInt(document.getElementById('prodPrecioOferta').value,10) || 0;
+  if(enOferta && (precioOferta <= 0 || precioOferta >= precio)){
+    alert('El precio de oferta tiene que ser mayor a cero y menor al precio normal.');
+    return;
+  }
+
+  if(id){
+    var p = productos.find(function(x){return x.id===id;});
+    p.nombre = nombre; p.colorway = colorway;
+    p.modelo = document.getElementById('prodModelo').value;
+    p.precio = precio;
+    p.talles = talles;
+    p.descripcion = descripcion;
+    p.enOferta = enOferta;
+    p.precioOferta = enOferta ? precioOferta : 0;
+    p.destacado = document.getElementById('prodDestacado').checked;
+    p.activo = document.getElementById('prodActivo').checked;
+    p.fotos = fotosProductoActual.slice();
+    p.img = p.fotos[0];
+  }else{
+    productos.push({
+      id: 'prod-' + Date.now(),
+      modelo: document.getElementById('prodModelo').value,
+      nombre: nombre, colorway: colorway,
+      precio: precio,
+      fotos: fotosProductoActual.slice(),
+      img: fotosProductoActual[0],
+      talles: talles,
+      descripcion: descripcion,
+      enOferta: enOferta,
+      precioOferta: enOferta ? precioOferta : 0,
+      activo: document.getElementById('prodActivo').checked,
+      destacado: document.getElementById('prodDestacado').checked,
+      layout: 'c'
+    });
+  }
+  guardarProductos(productos);
+  cerrarModalProducto();
+  renderTablaProductos(document.getElementById('buscadorProd').value);
+  renderDashboard();
+});
+document.getElementById('btnEliminarProducto').addEventListener('click', function(){
+  var id = document.getElementById('prodId').value;
+  if(!confirm('¿Eliminar este producto del catálogo?')) return;
+  guardarProductos(cargarProductos().filter(function(x){return x.id!==id;}));
+  cerrarModalProducto();
+  renderTablaProductos();
+  renderDashboard();
+});
+
+/* ==========================================================================
+   PEDIDOS (log manual — no se auto-completa con ventas reales)
+   ========================================================================== */
+var ETAPAS = ['Nuevo','Confirmado','Preparando','Enviado','Entregado'];
+function renderKanban(){
+  var pedidos = cargarPedidos();
+  var html = ETAPAS.map(function(etapa){
+    var enEsta = pedidos.filter(function(p){return p.estado===etapa;});
+    var cards = enEsta.map(function(p){
+      var idx = ETAPAS.indexOf(etapa);
+      var siguiente = ETAPAS[idx+1];
+      return '<div class="pedido-card" data-id="'+p.id+'">' +
+        '<div class="num">#'+p.id.slice(-4)+'</div>' +
+        '<div class="cliente">'+p.cliente+'</div>' +
+        '<div class="detalle">'+p.productos+'<br>🚚 '+p.envio+(p.direccion ? ' · 📍 '+p.direccion : '')+'</div>' +
+        '<div class="total">'+fmt(p.total)+'</div>' +
+        (siguiente ? '<button class="btn avanzar" data-siguiente="'+siguiente+'">Marcar '+siguiente.toLowerCase()+'</button>' : '') +
+      '</div>';
+    }).join('');
+    return '<div class="kanban-col">' +
+      '<div class="kanban-col-cab"><span>'+etapa+'</span><b>'+enEsta.length+'</b></div>' +
+      '<div class="kanban-lista">'+(cards || '')+'</div>' +
+    '</div>';
+  }).join('');
+  document.getElementById('kanbanPedidos').innerHTML = html;
+
+  document.querySelectorAll('.avanzar').forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.closest('.pedido-card').dataset.id;
+      var pedidos = cargarPedidos();
+      var p = pedidos.find(function(x){return x.id===id;});
+      if(p){ p.estado = b.dataset.siguiente; guardarPedidos(pedidos); renderKanban(); renderDashboard(); }
+    });
+  });
+}
+function abrirModalPedido(){
+  document.getElementById('pedCliente').value = '';
+  document.getElementById('pedProductos').value = '';
+  document.getElementById('pedTotal').value = '';
+  document.getElementById('pedEnvio').value = 'Retiro en local';
+  document.getElementById('pedDireccion').value = '';
+  document.getElementById('modalPedidoFondo').classList.add('abierto');
+  document.getElementById('modalPedido').classList.add('abierto');
+}
+function cerrarModalPedido(){
+  document.getElementById('modalPedidoFondo').classList.remove('abierto');
+  document.getElementById('modalPedido').classList.remove('abierto');
+}
+document.getElementById('btnNuevoPedido').addEventListener('click', abrirModalPedido);
+document.getElementById('cerrarModalPedido').addEventListener('click', cerrarModalPedido);
+document.getElementById('cancelarModalPedido').addEventListener('click', cerrarModalPedido);
+document.getElementById('modalPedidoFondo').addEventListener('click', cerrarModalPedido);
+document.getElementById('guardarPedido').addEventListener('click', function(){
+  var cliente = document.getElementById('pedCliente').value.trim();
+  if(!cliente){ alert('Poné el nombre del cliente.'); return; }
+  var pedidos = cargarPedidos();
+  pedidos.unshift({
+    id: 'ped-' + Date.now(),
+    cliente: cliente,
+    productos: document.getElementById('pedProductos').value.trim() || '—',
+    total: parseInt(document.getElementById('pedTotal').value,10) || 0,
+    envio: document.getElementById('pedEnvio').value,
+    direccion: document.getElementById('pedDireccion').value.trim(),
+    estado: 'Nuevo',
+    fecha: hoyISO()
+  });
+  guardarPedidos(pedidos);
+  cerrarModalPedido();
+  renderKanban();
+  renderDashboard();
+});
+
+/* ==========================================================================
+   ENVIOS — mismo esquema y misma formula que usa la web publica
+   ========================================================================== */
+function renderEnvios(){
+  var e = cargarEnvios();
+  document.getElementById('envioLat').value = e.lat !== null ? e.lat.toFixed(6) : '';
+  document.getElementById('envioLng').value = e.lng !== null ? e.lng.toFixed(6) : '';
+  document.getElementById('envioTarifaKm').value = e.tarifaKm;
+  document.getElementById('envioFactorRuta').value = e.factorRuta;
+  document.getElementById('envioCostoCorreo').value = e.costoCorreo;
+}
+document.getElementById('btnUbicacionLocal').addEventListener('click', function(){
+  if(!navigator.geolocation){ alert('Tu navegador no permite compartir ubicación.'); return; }
+  var btn = this;
+  var textoOriginal = btn.textContent;
+  btn.textContent = 'Buscando…';
+  btn.disabled = true;
+  navigator.geolocation.getCurrentPosition(function(pos){
+    btn.textContent = textoOriginal;
+    btn.disabled = false;
+    document.getElementById('envioLat').value = pos.coords.latitude.toFixed(6);
+    document.getElementById('envioLng').value = pos.coords.longitude.toFixed(6);
+  }, function(){
+    btn.textContent = textoOriginal;
+    btn.disabled = false;
+    alert('No pudimos acceder a tu ubicación. ¿Le diste permiso al navegador?');
+  }, {timeout: 10000});
+});
+document.getElementById('btnGuardarEnvios').addEventListener('click', function(){
+  var lat = parseFloat(document.getElementById('envioLat').value);
+  var lng = parseFloat(document.getElementById('envioLng').value);
+  guardarEnvios({
+    lat: isNaN(lat) ? null : lat,
+    lng: isNaN(lng) ? null : lng,
+    tarifaKm: parseInt(document.getElementById('envioTarifaKm').value,10) || 0,
+    factorRuta: parseFloat(document.getElementById('envioFactorRuta').value) || 1.3,
+    costoCorreo: parseInt(document.getElementById('envioCostoCorreo').value,10) || 0
+  });
+  alert('Guardado.');
+});
+document.getElementById('calcKm').addEventListener('input', function(){
+  var km = parseFloat(this.value);
+  var res = document.getElementById('calcResultado');
+  if(!km || km <= 0){ res.classList.remove('mostrar'); return; }
+  var e = cargarEnvios();
+  var precio = Math.round(km * e.tarifaKm);
+  document.getElementById('calcKmTexto').textContent = km.toFixed(1) + ' km';
+  document.getElementById('calcPrecioTexto').textContent = fmt(precio);
+  res.classList.add('mostrar');
+});
+
+/* ==========================================================================
+   PAGOS — alias/CBU de transferencia y Mercado Pago, instrucciones de
+   Rapipago/Pago Fácil. La web publica los lee para mostrarlos al cliente
+   en el paso de pago del carrito.
+   ========================================================================== */
+function renderPagos(){
+  var p = cargarPagos();
+  document.getElementById('pagoRecargo').value = p.recargoPorcentaje;
+  document.getElementById('pagoTransferenciaAlias').value = p.transferenciaAlias;
+  document.getElementById('pagoTransferenciaCbu').value = p.transferenciaCbu;
+  document.getElementById('pagoTransferenciaTitular').value = p.transferenciaTitular;
+  document.getElementById('pagoMpAlias').value = p.mpAlias;
+  document.getElementById('pagoMpUsuario').value = p.mpUsuario;
+  document.getElementById('pagoMpFuncionUrl').value = p.mpFuncionUrl || '';
+  document.getElementById('pagoRapipagoTexto').value = p.rapipagoTexto;
+  document.getElementById('pagoPagofacilTexto').value = p.pagofacilTexto;
+}
+document.getElementById('btnGuardarPagos').addEventListener('click', function(){
+  guardarPagos({
+    recargoPorcentaje: parseInt(document.getElementById('pagoRecargo').value,10) || 0,
+    transferenciaAlias: document.getElementById('pagoTransferenciaAlias').value.trim(),
+    transferenciaCbu: document.getElementById('pagoTransferenciaCbu').value.trim(),
+    transferenciaTitular: document.getElementById('pagoTransferenciaTitular').value.trim(),
+    mpAlias: document.getElementById('pagoMpAlias').value.trim(),
+    mpUsuario: document.getElementById('pagoMpUsuario').value.trim(),
+    mpFuncionUrl: document.getElementById('pagoMpFuncionUrl').value.trim(),
+    rapipagoTexto: document.getElementById('pagoRapipagoTexto').value.trim(),
+    pagofacilTexto: document.getElementById('pagoPagofacilTexto').value.trim()
+  });
+  alert('Guardado.');
+});
+
+/* ==========================================================================
+   PROMOCIONES
+   ========================================================================== */
+function renderPromos(){
+  var promos = cargarPromos();
+  var hoy = hoyISO();
+  if(promos.length === 0){
+    document.getElementById('listaPromos').innerHTML = '<div class="vacio">Todavía no creaste ninguna promoción.</div>';
+    return;
+  }
+  document.getElementById('listaPromos').innerHTML = promos.map(function(p, i){
+    var activa = p.desde <= hoy && hoy <= p.hasta;
+    var vencida = hoy > p.hasta;
+    return '<div class="promo-card'+(vencida?' vencida':'')+'">' +
+      '<div class="info"><b>'+p.nombre+' '+(activa?'<span class="promo-activa-tag">Activa</span>':'')+'</b>' +
+      '<span>'+p.descuento+'% OFF · '+p.desde.split('-').reverse().join('/')+' al '+p.hasta.split('-').reverse().join('/')+'</span></div>' +
+      '<button class="icono-btn" data-idx="'+i+'">🗑</button>' +
+    '</div>';
+  }).join('');
+  document.querySelectorAll('#listaPromos [data-idx]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var promos = cargarPromos();
+      promos.splice(parseInt(b.dataset.idx,10),1);
+      guardarPromos(promos);
+      renderPromos();
+      renderDashboard();
+    });
+  });
+}
+function abrirModalPromo(){
+  document.getElementById('promoNombre').value = '';
+  document.getElementById('promoDescuento').value = '';
+  document.getElementById('promoDesde').value = hoyISO();
+  document.getElementById('promoHasta').value = hoyISO();
+  document.getElementById('modalPromoFondo').classList.add('abierto');
+  document.getElementById('modalPromo').classList.add('abierto');
+}
+function cerrarModalPromo(){
+  document.getElementById('modalPromoFondo').classList.remove('abierto');
+  document.getElementById('modalPromo').classList.remove('abierto');
+}
+document.getElementById('btnNuevaPromo').addEventListener('click', abrirModalPromo);
+document.getElementById('cerrarModalPromo').addEventListener('click', cerrarModalPromo);
+document.getElementById('cancelarModalPromo').addEventListener('click', cerrarModalPromo);
+document.getElementById('modalPromoFondo').addEventListener('click', cerrarModalPromo);
+document.getElementById('guardarPromo').addEventListener('click', function(){
+  var nombre = document.getElementById('promoNombre').value.trim();
+  var descuento = parseInt(document.getElementById('promoDescuento').value,10);
+  var desde = document.getElementById('promoDesde').value;
+  var hasta = document.getElementById('promoHasta').value;
+  if(!nombre || !descuento || !desde || !hasta){ alert('Completá todos los campos.'); return; }
+  var promos = cargarPromos();
+  promos.push({nombre:nombre, descuento:descuento, desde:desde, hasta:hasta});
+  guardarPromos(promos);
+  cerrarModalPromo();
+  renderPromos();
+  renderDashboard();
+});
+
+/* ---------- arranque ---------- */
+function iniciarApp(){
+  renderDashboard();
+  renderTablaProductos();
+  renderKanban();
+  renderEnvios();
+  renderPromos();
+}
+if(sessionStorage.getItem('tn_admin_ok') === '1') iniciarApp();
+</script>
+</body>
+</html>

@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@tn_baires — TN, Air Max 95, Jordan y más · Streetwear Buenos Aires</title>
+<meta name="description" content="Zapatillas originales TN, Air Max 95, Shox, Jordan, Mizuno, NOCTA y más. Stock real, drops semanales, envíos a todo el país. @tn_baires, Buenos Aires.">
+<meta name="theme-color" content="#0A0A09">
+<link rel="canonical" href="https://tnbaires.ar/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="@tn_baires">
+<meta property="og:title" content="@tn_baires — TN, Air Max 95, Jordan y más">
+<meta property="og:description" content="Zapatillas originales con stock real. Drops semanales, envíos a todo el país.">
+<meta property="og:image" content="assets/hero-1.jpg">
+<meta property="og:url" content="https://tnbaires.ar/">
+<meta property="og:locale" content="es_AR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@tn_baires — TN, Air Max 95, Jordan y más">
+<meta name="twitter:description" content="Zapatillas originales con stock real. Drops semanales, envíos a todo el país.">
+<meta name="twitter:image" content="assets/hero-1.jpg">
+
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+<link rel="apple-touch-icon" href="assets/logo.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wght@200..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalto:#0A0A09;
+  --militar:#141310;
+  --cuero:#1C1916;
+  --hueso:#F5F2EA;
+  --humo:#8A867B;
+  --linea:rgba(245,242,234,.14);
+  --oro:#F0C247;
+  --oro-texto:#F0C247;
+  --rojo:#E5202F;
+  --tinta:#0A0805;
+  --gutter:18px;
+}
+html[data-tema="claro"]{
+  --asfalto:#F1EEE4;
+  --militar:#E7E2D3;
+  --cuero:#DBD5C4;
+  --hueso:#12100C;
+  --humo:#6C665A;
+  --linea:rgba(18,16,12,.14);
+  --oro-texto:#93690D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{transition:background 90ms linear}
+body{
+  background:var(--asfalto);
+  color:var(--hueso);
+  font-family:'Archivo',system-ui,sans-serif;
+  font-variation-settings:'wdth' 100;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--oro);color:var(--tinta)}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+
+/* ---------- grano de pelicula ---------- */
+.grano{
+  position:fixed;inset:0;z-index:200;pointer-events:none;
+  opacity:.30;mix-blend-mode:overlay;
+  transition:opacity 90ms linear;
+}
+html[data-tema="claro"] .grano{opacity:.12}
+.grano svg{width:100%;height:100%}
+
+/* ---------- tipografia ---------- */
+.disp{
+  font-weight:900;
+  font-variation-settings:'wdth' 64,'wght' 900;
+  text-transform:uppercase;
+  line-height:.82;
+  letter-spacing:-.015em;
+}
+.mono{
+  font-family:'Martian Mono',ui-monospace,monospace;
+  font-weight:400;
+  font-size:9.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+/* ---------- barra superior ---------- */
+.top{
+  position:fixed;top:0;left:0;right:0;z-index:150;
+  display:flex;align-items:stretch;justify-content:space-between;
+  gap:16px;
+  padding:0 var(--gutter);
+  border-bottom:1px solid var(--linea);
+  background:rgba(10,10,9,.82);
+  backdrop-filter:blur(14px);
+}
+html[data-tema="claro"] .top{background:rgba(241,238,228,.86)}
+.marca-zona{display:flex;align-items:center;gap:26px;padding:9px 0}
+.marca{
+  display:flex;align-items:center;gap:8px;white-space:nowrap;padding:4px 0;
+}
+.marca-logo{width:34px;height:34px;border-radius:50%;overflow:hidden;flex:none;border:1px solid var(--linea)}
+.marca-logo img{width:100%;height:100%;object-fit:cover}
+.marca-nombre{display:flex;align-items:center;gap:5px}
+.marca-nombre b{
+  font-variation-settings:'wdth' 66,'wght' 900;
+  font-size:16.5px;letter-spacing:.005em;font-weight:900;
+}
+.verif{width:14px;height:14px;flex:none}
+.nav{display:flex;gap:22px}
+.nav a{position:relative;padding:2px 0}
+.nav a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--oro);transform:scaleX(0);transform-origin:left;transition:transform 70ms linear}
+.nav a:hover::after{transform:scaleX(1)}
+.top-der{display:flex;align-items:center;gap:10px;padding:9px 0}
+.tema-btn{border:1px solid var(--linea);padding:6px 11px;display:flex;align-items:center;gap:6px;transition:background 60ms linear,color 60ms linear}
+.tema-btn:hover{background:var(--hueso);color:var(--asfalto)}
+.bolsa{border:1px solid var(--linea);padding:6px 11px;transition:background 60ms linear,color 60ms linear}
+.bolsa:hover{background:var(--hueso);color:var(--asfalto)}
+.bolsa[data-lleno="1"]{background:var(--oro);color:var(--tinta);border-color:var(--oro)}
+.bolsa.pulso{animation:pulso-bolsa 420ms ease}
+@keyframes pulso-bolsa{0%{transform:scale(1)}35%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+/* ---------- mega menu ---------- */
+.mega{
+  position:absolute;top:100%;left:0;right:0;
+  background:var(--militar);
+  border-bottom:1px solid var(--linea);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity 110ms linear,transform 110ms linear,visibility 110ms;
+  pointer-events:none;
+}
+.top.abierto .mega{
+  opacity:1;visibility:visible;transform:none;pointer-events:auto;
+}
+@media (hover:hover){
+  .marca-zona:hover .mega,
+  .marca-zona:focus-within .mega{
+    opacity:1;visibility:visible;transform:none;pointer-events:auto;
+  }
+}
+.top.cerrando-menu .mega{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(-6px)!important}
+.mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--linea);margin:0 var(--gutter)}
+.mega-col{background:var(--militar);padding:20px 18px 24px;display:flex;flex-direction:column;gap:10px}
+.mega-col h4{font-family:'Martian Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--oro-texto);font-weight:600;margin-bottom:2px}
+.mega-col a{color:var(--humo);font-size:12.5px;padding:2px 0;transition:color 60ms linear}
+.mega-col a:hover{color:var(--hueso)}
+
+/* ---------- bolsa (carrito real) ---------- */
+.bolsa-fondo{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.55);
+  opacity:0;visibility:hidden;
+  transition:opacity 160ms linear,visibility 160ms;
+}
+.bolsa-fondo.abierta{opacity:1;visibility:visible}
+.bolsa-panel{
+  position:fixed;top:0;right:0;bottom:0;z-index:301;
+  width:min(420px,100vw);
+  background:var(--asfalto);
+  border-left:1px solid var(--linea);
+  display:flex;flex-direction:column;
+  overflow-y:auto; /* red de seguridad si el contenido no entra en pantallas muy chicas */
+  transform:translateX(100%);
+  transition:transform 200ms cubic-bezier(.16,1,.3,1);
+}
+.bolsa-panel.abierta{transform:translateX(0)}
+.bolsa-cab{display:flex;align-items:center;justify-content:space-between;padding:14px var(--gutter);border-bottom:1px solid var(--linea);flex:none}
+.bolsa-cab h3{font-variation-settings:'wdth' 66,'wght' 800;font-size:19px;text-transform:uppercase}
+.bolsa-cerrar{width:30px;height:30px;border:1px solid var(--linea);color:var(--hueso);font-size:14px;transition:background 60ms linear,color 60ms linear}
+.bolsa-cerrar:hover{background:var(--hueso);color:var(--asfalto)}
+.bolsa-lista{flex:1;min-height:0;overflow-y:auto;padding:8px var(--gutter)}
+.bolsa-vacia{color:var(--humo);font-size:12.5px;padding:30px 0;text-align:center}
+.bolsa-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--linea)}
+.bolsa-item img{width:64px;height:64px;object-fit:contain;background:var(--asfalto);flex:none;border:1px solid var(--linea)}
+.bolsa-item-info{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.bolsa-item-info b{font-variation-settings:'wdth' 72,'wght' 700;font-size:13px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bolsa-item-info span{color:var(--humo);font-family:'Martian Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase}
+.bolsa-item-fila{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.bolsa-item-precio{font-variation-settings:'wdth' 78,'wght' 700;font-size:13px}
+.bolsa-item-quitar{color:var(--humo);font-family:'Martian Mono',monospace;font-size:9.5px;text-transform:uppercase;text-decoration:underline;background:none;border:none;cursor:pointer}
+.bolsa-item-quitar:hover{color:var(--rojo)}
+.bolsa-pie{padding:10px var(--gutter) 12px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:7px;flex:none}
+#bolsaAccionesResumen,#bolsaAccionesEntrega,#bolsaAccionesPago{display:flex;flex-direction:column;gap:7px}
+.bolsa-total{display:flex;justify-content:space-between;align-items:baseline;font-family:'Martian Mono',monospace;text-transform:uppercase;font-size:11px;color:var(--humo)}
+.bolsa-total b{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78,'wght' 800;font-size:22px;color:var(--hueso);letter-spacing:-.01em}
+.bolsa-pie .btn{padding:11px 16px}
+
+/* ---------- envio (moto con calculo real de nafta) ---------- */
+.bolsa-envio{padding:12px var(--gutter);border-top:1px solid var(--linea);flex:none}
+.bolsa-envio-titulo{color:var(--humo);margin-bottom:8px}
+.envio-opciones{display:flex;flex-direction:column;gap:6px}
+.envio-op{
+  display:flex;align-items:center;gap:8px;padding:9px 10px;
+  border:1px solid var(--linea);cursor:pointer;font-size:12.5px;
+}
+.envio-op span{flex:1}
+.envio-op b{font-family:'Martian Mono',monospace;font-size:11px;font-weight:400;color:var(--humo)}
+.envio-op:has(input:checked){border-color:var(--oro);background:rgba(240,194,71,.06)}
+.envio-op:has(input:checked) b{color:var(--oro-texto)}
+.envio-moto-panel{margin-top:10px;padding:12px;background:var(--militar);border:1px solid var(--linea);display:flex;flex-direction:column;gap:8px}
+.envio-moto-panel .btn{font-size:11px;padding:9px}
+.envio-o{color:var(--humo);text-align:center;font-size:9.5px}
+.envio-moto-panel input[type=number]{
+  background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);
+  padding:8px 10px;font-size:13px;width:100%;
+}
+.envio-resultado{background:var(--asfalto);border:1px solid var(--oro);padding:9px 10px;color:var(--oro-texto);font-size:11px;line-height:1.6}
+.envio-error{color:var(--rojo);font-size:11px;line-height:1.5}
+
+.envio-correo-panel{margin-top:10px;padding:12px;background:var(--militar);border:1px solid var(--linea)}
+.correo-tabs{display:flex;gap:1px;background:var(--linea);margin-bottom:10px}
+.correo-tab{
+  flex:1;background:var(--asfalto);color:var(--humo);border:none;padding:9px;
+  font-family:'Martian Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;
+}
+.correo-tab.activo{background:var(--oro);color:var(--tinta)}
+.correo-form{display:flex;flex-direction:column;gap:7px}
+.correo-form input{
+  background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);
+  padding:8px 10px;font-size:12.5px;width:100%;
+}
+.correo-form input:focus{border-color:var(--oro);outline:none}
+.bolsa-vaciar{background:none;border:none;color:var(--humo);text-decoration:underline;cursor:pointer;text-align:center;padding-top:2px}
+.bolsa-vaciar:hover{color:var(--hueso)}
+@media(max-width:480px){ .bolsa-panel{width:100vw} }
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:contrast(1.12) saturate(.85) brightness(.65);
+  opacity:0;transition:opacity 1100ms ease;
+}
+.hero-img img.activa{opacity:1}
+.hero-img::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,10,9,.72) 0%,rgba(10,10,9,.18) 38%,rgba(10,10,9,.58) 72%,#0A0A09 100%);
+}
+.hero-cuerpo{position:relative;z-index:2;padding:0 var(--gutter) 26px}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;color:#F5F2EA;margin-bottom:20px}
+.hero-tags span{border:1px solid rgba(245,242,234,.22);padding:5px 9px;background:rgba(10,10,9,.45)}
+h1.hero-h{
+  font-size:clamp(42px,9.6vw,138px);
+  margin-left:-.012em;
+  margin-bottom:22px;
+  color:#F5F2EA;
+}
+h1.hero-h span{display:block;overflow:hidden}
+h1.hero-h b{display:block;font-weight:inherit;transform:translateY(102%)}
+.reveal h1.hero-h b{transform:translateY(0);transition:transform 460ms cubic-bezier(.16,1,.3,1)}
+.reveal h1.hero-h span:nth-child(2) b{transition-delay:70ms}
+.reveal h1.hero-h span:nth-child(3) b{transition-delay:140ms}
+h1.hero-h i{font-style:normal;color:var(--oro)}
+.hero-pie{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid rgba(245,242,234,.18);padding-top:16px}
+.hero-meta{display:flex;gap:20px;color:#B8B4A9;flex-wrap:wrap}
+.hero-meta b{color:var(--oro);font-weight:400}
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  border:1px solid #F5F2EA;color:#F5F2EA;
+  padding:13px 20px;
+  font-family:'Martian Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  transition:background 60ms linear,color 60ms linear,border-color 60ms linear;
+}
+.btn:hover{background:#F5F2EA;color:#0A0A09}
+.btn-oro{border-color:var(--oro);color:var(--oro)}
+.btn-oro:hover{background:var(--oro);color:var(--tinta)}
+.hero-scroll{position:absolute;right:var(--gutter);bottom:26px;z-index:2;color:#B8B4A9;writing-mode:vertical-rl}
+
+/* ---------- ticker ---------- */
+.ticker{
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
+  background:var(--oro);color:var(--tinta);
+  overflow:hidden;padding:7px 0;white-space:nowrap;
+}
+.ticker-pista{display:inline-flex;animation:correr 14s linear infinite}
+.ticker-pista span{font-family:'Martian Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;padding:0 16px;font-weight:600}
+@keyframes correr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- slider de zapatillas (arrastrable) ---------- */
+.slider-sneakers{
+  border-bottom:1px solid var(--linea);
+  background:var(--militar);
+  padding:20px 0 24px;
+}
+.slider-titulo{padding:0 var(--gutter) 14px;color:var(--humo)}
+.slider-pista{
+  display:flex;align-items:center;gap:12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:0 var(--gutter);
+  cursor:grab;
+  touch-action:pan-x;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;
+  user-select:none;
+}
+.slider-pista::-webkit-scrollbar{display:none}
+.slider-pista.arrastrando{cursor:grabbing;scroll-behavior:auto}
+.slider-item{
+  display:block;flex:none;width:190px;height:276px;
+  border:1px solid var(--linea);overflow:hidden;background:var(--asfalto);
+  -webkit-user-drag:none;user-select:none;
+}
+.slider-pista img{
+  width:100%;height:100%;object-fit:contain;object-position:center;display:block;
+  filter:contrast(1.08) saturate(.9) brightness(.92);
+  -webkit-user-drag:none;user-select:none;pointer-events:none;
+}
+@media(max-width:660px){
+  .slider-item{width:140px;height:203px}
+}
+
+/* ---------- encabezado de seccion ---------- */
+.sec{padding:0 var(--gutter)}
+.sec-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:52px 0 20px;border-bottom:1px solid var(--linea)}
+.sec-cab h2{font-size:clamp(34px,7.4vw,88px);font-variation-settings:'wdth' 64,'wght' 900;text-transform:uppercase;line-height:.84;letter-spacing:-.015em}
+.sec-cab p{color:var(--humo);max-width:34ch;line-height:1.55;font-size:12.5px}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;padding:16px var(--gutter) 22px}
+.filtro-chip{
+  font-family:'Martian Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--linea);padding:8px 13px;color:var(--humo);background:none;cursor:pointer;
+  transition:background 60ms linear,color 60ms linear,border-color 60ms linear;
+}
+.filtro-chip:hover{border-color:var(--hueso);color:var(--hueso)}
+.filtro-chip.activo{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+.filtro-chip-oferta{border-color:var(--rojo);color:var(--rojo)}
+.filtro-chip-oferta:hover{border-color:var(--rojo);color:#fff;background:var(--rojo)}
+.filtro-chip-oferta.activo{background:var(--rojo);border-color:var(--rojo);color:#fff}
+
+/* ---------- grilla catalogo ---------- */
+.grilla{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--linea);border-bottom:1px solid var(--linea)}
+.item{background:var(--asfalto);position:relative;display:flex;flex-direction:column}
+.item.a{grid-column:span 7}
+.item.b{grid-column:span 5}
+.item.c,.item.d,.item.e{grid-column:span 4}
+.item-foto{position:relative;overflow:hidden;background:var(--asfalto);display:block}
+.item-titulo-link{color:inherit;text-decoration:none}
+.item.a .item-foto{aspect-ratio:1/1}
+.item.b .item-foto{aspect-ratio:3/4}
+.item.c .item-foto,.item.d .item-foto,.item.e .item-foto{aspect-ratio:4/5}
+.item-foto img{object-fit:contain;filter:contrast(1.1) saturate(.82) brightness(.86);transition:filter 70ms linear,transform 90ms linear}
+.item:hover .item-foto img{filter:contrast(1.18) saturate(1) brightness(1);transform:scale(1.015)}
+.item.agotado .item-foto img{filter:grayscale(1) brightness(.42) contrast(1.1)}
+.item.agotado:hover .item-foto img{filter:grayscale(1) brightness(.5) contrast(1.1);transform:none}
+.chapa{
+  position:absolute;top:0;left:0;z-index:3;
+  background:var(--oro);color:var(--tinta);
+  font-family:'Martian Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  padding:5px 9px;
+}
+.chapa.neg{background:#F5F2EA;color:#0A0A09}
+.chapa-oferta{left:auto;right:0;background:var(--rojo);color:#fff}
+.chapa.muerta{background:transparent;color:#B8B4A9;border-right:1px solid rgba(245,242,234,.2);border-bottom:1px solid rgba(245,242,234,.2);display:flex;align-items:center;gap:6px}
+.chapa.muerta::before{content:'';width:5px;height:5px;background:var(--rojo);border-radius:50%;flex:none}
+.item-ficha{padding:14px 14px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.item-ficha h3{font-size:clamp(17px,2.1vw,26px);font-variation-settings:'wdth' 68,'wght' 800;text-transform:uppercase;line-height:.92;letter-spacing:-.01em}
+.item-cw{color:var(--oro-texto)}
+.item.agotado .item-cw{color:var(--humo)}
+.item-talles{display:flex;gap:6px;flex-wrap:wrap;color:var(--humo)}
+.talle-mini{
+  font-family:'Martian Mono',monospace;font-size:10px;
+  border:1px solid var(--linea);padding:4px 7px;color:var(--humo);
+  background:none;cursor:pointer;line-height:1;
+  transition:background 60ms linear,color 60ms linear,border-color 60ms linear;
+}
+button.talle-mini:hover{border-color:var(--hueso);color:var(--hueso)}
+.talle-mini.activo{background:var(--hueso);color:var(--asfalto);border-color:var(--hueso)}
+span.talle-mini.agotada{text-decoration:line-through;opacity:.4;padding:4px 7px;font-family:'Martian Mono',monospace;font-size:10px}
+.item.agotado .talle-mini{pointer-events:none}
+.item-fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:10px;border-top:1px solid var(--linea)}
+.precio{font-variation-settings:'wdth' 78,'wght' 700;font-size:16px;letter-spacing:-.01em}
+.precio-promo{font-variation-settings:'wdth' 78,'wght' 700;font-size:16px;letter-spacing:-.01em;color:var(--rojo)}
+.precio-promo s{color:var(--humo);font-weight:400;font-size:12px;margin-right:6px}
+.promo-banner{
+  background:var(--rojo);color:#fff;text-align:center;
+  padding:8px var(--gutter);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+}
+.item.agotado .precio{color:var(--humo);text-decoration:line-through;text-decoration-thickness:1px}
+.mini{
+  font-family:'Martian Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--hueso);padding:8px 12px;
+  transition:background 60ms linear,color 60ms linear;
+}
+.mini:hover{background:var(--hueso);color:var(--asfalto)}
+.mini[disabled]{border-color:var(--linea);color:var(--humo);cursor:not-allowed}
+.mini[disabled]:hover{background:none;color:var(--humo)}
+.mini.hecho{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+
+/* ---------- producto destacado ---------- */
+.destacado{display:grid;grid-template-columns:1.15fr .85fr;background:var(--militar);border-bottom:1px solid var(--linea)}
+.dest-foto{position:relative;min-height:520px;overflow:hidden;background:var(--militar)}
+.dest-foto img{object-fit:contain;filter:contrast(1.15) saturate(.8) brightness(.8)}
+.dest-marco{position:absolute;inset:14px;border:1px solid rgba(245,242,234,.18);pointer-events:none}
+.dest-sku{position:absolute;left:26px;bottom:26px;z-index:2;color:#F5F2EA;background:rgba(10,10,9,.6);padding:6px 9px;border:1px solid rgba(245,242,234,.16)}
+.dest-info{padding:44px var(--gutter) 44px 40px;display:flex;flex-direction:column;gap:22px;justify-content:center;border-left:1px solid var(--linea)}
+.dest-info h3{font-size:clamp(36px,5.2vw,68px);font-variation-settings:'wdth' 64,'wght' 900;text-transform:uppercase;line-height:.82;letter-spacing:-.02em}
+.dest-cw{color:var(--oro-texto);font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.dest-txt{color:var(--humo);font-size:13px;line-height:1.65;max-width:44ch}
+.bloque-dato{display:flex;flex-direction:column;gap:9px}
+.bloque-dato > .mono{color:var(--humo)}
+.talles{display:flex;gap:7px;flex-wrap:wrap}
+.talla{
+  font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.05em;
+  border:1px solid var(--linea);padding:10px 13px;min-width:46px;text-align:center;
+  transition:background 60ms linear,color 60ms linear,border-color 60ms linear;
+}
+.talla:hover:not([disabled]){border-color:var(--hueso)}
+.talla[aria-pressed="true"]{background:var(--hueso);color:var(--asfalto);border-color:var(--hueso)}
+.talla[disabled]{color:var(--humo);opacity:.42;cursor:not-allowed;text-decoration:line-through}
+.pd-talles-cab{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pd-talles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pd-talles-grid .talla{
+  min-width:0;padding:15px 10px;font-size:13px;letter-spacing:.08em;
+}
+.dest-precio{font-variation-settings:'wdth' 74,'wght' 800;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em}
+.dest-cuotas{color:var(--humo);margin-top:5px}
+.stock{display:flex;align-items:center;gap:9px;color:var(--oro-texto)}
+.punto{width:7px;height:7px;background:var(--oro);border-radius:50%;animation:latir 1.5s steps(1,end) infinite}
+@keyframes latir{0%,49%{opacity:1}50%,100%{opacity:.15}}
+.dest-acciones{display:flex;gap:10px;flex-wrap:wrap}
+.btn-full{flex:1;min-width:200px;justify-content:center;background:var(--oro);border-color:var(--oro);color:var(--tinta);font-weight:700}
+.btn-full:hover{background:var(--hueso);border-color:var(--hueso);color:var(--asfalto)}
+.btn-full.hecho{background:var(--hueso);border-color:var(--hueso);color:var(--asfalto)}
+
+/* ---------- tira info ---------- */
+.tira{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);border-bottom:1px solid var(--linea)}
+.tira div{background:var(--asfalto);padding:26px var(--gutter);display:flex;flex-direction:column;gap:7px}
+.tira b{font-variation-settings:'wdth' 72,'wght' 800;font-size:14px;text-transform:uppercase;letter-spacing:.01em;font-weight:400}
+.tira p{color:var(--humo);font-size:11.5px;line-height:1.55}
+
+/* ---------- footer ---------- */
+footer{padding:44px var(--gutter) 26px;background:var(--asfalto)}
+.pie-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:34px}
+.pie-col{display:flex;flex-direction:column;gap:9px;color:var(--humo)}
+.pie-col b{color:var(--hueso);font-weight:400;margin-bottom:4px}
+.pie-col a:hover{color:var(--oro-texto)}
+.link-info{
+  background:none;border:none;color:inherit;font:inherit;text-align:left;cursor:pointer;
+  padding:0;letter-spacing:.06em;
+}
+.link-info:hover{color:var(--oro-texto)}
+
+/* ---------- modal de info (talles / cambios / envios / autenticidad) ---------- */
+.info-fondo{
+  position:fixed;inset:0;z-index:310;
+  background:rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transition:opacity 160ms linear,visibility 160ms;
+}
+.info-fondo.abierta{opacity:1;visibility:visible}
+.info-modal{
+  position:fixed;left:50%;top:50%;z-index:311;
+  width:min(480px,92vw);max-height:82vh;overflow-y:auto;
+  background:var(--militar);border:1px solid var(--linea);
+  transform:translate(-50%,-48%);opacity:0;visibility:hidden;
+  transition:opacity 160ms linear,transform 160ms linear,visibility 160ms;
+}
+.info-modal.abierta{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
+.info-cab{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gutter);border-bottom:1px solid var(--linea);position:sticky;top:0;background:var(--militar)}
+.info-cab h3{font-variation-settings:'wdth' 66,'wght' 800;font-size:17px;text-transform:uppercase}
+.info-cuerpo{padding:18px var(--gutter) 26px;color:var(--humo);font-size:13px;line-height:1.65}
+.info-cuerpo p{margin-bottom:12px}
+.info-cuerpo h4{color:var(--hueso);font-variation-settings:'wdth' 70,'wght' 700;font-size:13px;text-transform:uppercase;margin:16px 0 6px}
+.info-cuerpo table{width:100%;border-collapse:collapse;margin-top:6px;font-family:'Martian Mono',monospace;font-size:11px}
+.info-cuerpo th,.info-cuerpo td{border:1px solid var(--linea);padding:6px 8px;text-align:center;color:var(--hueso)}
+.info-cuerpo th{color:var(--oro-texto);font-weight:400}
+.info-cuerpo ul{padding-left:18px;margin-bottom:12px}
+.info-cuerpo li{margin-bottom:6px}
+
+.pie-marca{display:flex;align-items:center;gap:6px;color:var(--hueso)}
+.logo-gigante{
+  font-variation-settings:'wdth' 60,'wght' 900;
+  font-size:clamp(40px,16vw,196px);
+  text-transform:uppercase;line-height:.78;letter-spacing:-.03em;
+  border-top:1px solid var(--linea);padding-top:18px;
+  color:var(--hueso);white-space:nowrap;
+}
+.logo-gigante em{font-style:normal;color:var(--oro-texto)}
+.pie-fin{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--humo);padding-top:16px;border-top:1px solid var(--linea);margin-top:6px}
+
+/* ---------- pago (dentro de la bolsa) ---------- */
+.pago-metodos{display:flex;flex-direction:column;gap:6px}
+.pago-op{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;
+  border:1px solid var(--linea);cursor:pointer;
+  font-family:'Martian Mono',monospace;font-size:11px;text-transform:uppercase;
+}
+.pago-op span{flex:1}
+.pago-op b{font-weight:400;color:var(--humo)}
+.pago-op:has(input:checked){border-color:var(--oro);background:rgba(240,194,71,.06)}
+.pago-op:has(input:checked) b{color:var(--oro-texto)}
+.pago-detalle{margin-top:10px;padding:12px;background:var(--militar);border:1px solid var(--linea);font-size:11px;line-height:1.7;color:var(--humo)}
+.pago-detalle b{color:var(--hueso)}
+
+/* ---------- direccion con autocompletado (calculadora de envio) ---------- */
+.envio-direccion-wrap{position:relative}
+.envio-direccion-wrap input[type=text]{
+  width:100%;background:var(--asfalto);border:1px solid var(--linea);color:var(--hueso);
+  padding:9px 10px;font-family:'Archivo',sans-serif;font-size:13px;
+}
+.envio-direccion-wrap input[type=text]:focus{border-color:var(--oro);outline:none}
+.envio-sugerencias{
+  position:absolute;left:0;right:0;top:100%;z-index:5;
+  background:var(--militar);border:1px solid var(--linea);border-top:none;
+  max-height:180px;overflow-y:auto;
+}
+.envio-sug-item{
+  display:block;width:100%;text-align:left;background:none;border:none;color:var(--hueso);
+  padding:8px 10px;font-size:11.5px;line-height:1.4;cursor:pointer;border-bottom:1px solid var(--linea);
+}
+.envio-sug-item:hover{background:rgba(240,194,71,.08)}
+.envio-sug-item:last-child{border-bottom:none}
+
+/* ---------- pagina de detalle de producto ---------- */
+.migas{color:var(--humo);padding:70px var(--gutter) 14px;border-bottom:1px solid var(--linea)}
+.migas a{color:var(--humo);text-decoration:underline}
+.migas a:hover{color:var(--hueso)}
+.pd-layout{display:grid;grid-template-columns:1.1fr .9fr;border-bottom:1px solid var(--linea)}
+.pd-galeria{background:var(--asfalto);display:flex;gap:8px;padding:8px}
+.pd-miniaturas{display:flex;flex-direction:column;gap:8px;width:64px;flex:none;overflow-y:auto;max-height:min(72vh,640px)}
+.pd-miniatura{
+  width:64px;height:64px;flex:none;border:1px solid var(--linea);background:var(--asfalto);
+  padding:0;cursor:pointer;overflow:hidden;opacity:.6;
+  transition:opacity 60ms linear,border-color 60ms linear;
+}
+.pd-miniatura img{width:100%;height:100%;object-fit:contain;display:block}
+.pd-miniatura:hover{opacity:.85}
+.pd-miniatura.activo{opacity:1;border-color:var(--oro)}
+.pd-galeria-principal{position:relative;flex:1;min-width:0}
+.pd-galeria-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pd-galeria-pista::-webkit-scrollbar{display:none}
+.pd-galeria-item{scroll-snap-align:start;flex:0 0 100%}
+.pd-galeria-item img{width:100%;height:min(72vh,640px);object-fit:contain;background:var(--asfalto);display:block;filter:contrast(1.1) saturate(.85) brightness(.9)}
+.pd-flecha{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:34px;height:34px;background:rgba(10,10,9,.55);color:var(--hueso);
+  border:1px solid rgba(245,242,234,.25);font-size:14px;line-height:1;
+}
+.pd-flecha:hover{background:rgba(10,10,9,.85)}
+.pd-flecha-izq{left:12px}
+.pd-flecha-der{right:12px}
+.pd-dots{position:absolute;bottom:14px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:7px}
+.pd-dot{width:7px;height:7px;border-radius:50%;background:rgba(245,242,234,.35);border:none;padding:0;cursor:pointer}
+.pd-dot.activo{background:var(--oro)}
+.pd-info{padding:36px var(--gutter) 36px 40px;display:flex;flex-direction:column;gap:16px;border-left:1px solid var(--linea)}
+.pd-info h1{font-size:clamp(26px,3.4vw,40px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;line-height:.94;letter-spacing:-.01em}
+.pd-cantidad-fila{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pd-cantidad{display:flex;align-items:center;border:1px solid var(--linea)}
+.pd-cantidad button{width:34px;height:38px;background:none;border:none;color:var(--hueso);font-size:16px;cursor:pointer}
+.pd-cantidad button:hover{background:var(--linea)}
+.pd-cantidad span{width:32px;text-align:center;font-family:'Martian Mono',monospace}
+.pd-cantidad-fila .btn{flex:1;justify-content:center}
+.pd-agregado{color:var(--oro-texto)}
+.pd-agregado a{color:var(--oro-texto);text-decoration:underline;cursor:pointer}
+.pd-error{color:var(--rojo);font-size:11px}
+.pd-descripcion{color:var(--humo);font-size:13.5px;line-height:1.7;max-width:56ch}
+.pd-similares{padding:28px var(--gutter) 36px;border-bottom:1px solid var(--linea)}
+.pd-similares h2{font-size:clamp(16px,1.6vw,20px);font-variation-settings:'wdth' 66,'wght' 800;text-transform:uppercase;margin-bottom:14px}
+.similares-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.similares-pista{display:flex}
+.similares-item{
+  scroll-snap-align:start;flex:0 0 200px;min-width:170px;background:var(--asfalto);
+  text-decoration:none;color:inherit;display:flex;flex-direction:column;
+  border-right:1px solid var(--linea);
+}
+.similares-foto{aspect-ratio:4/5;overflow:hidden;background:var(--asfalto)}
+.similares-foto img{width:100%;height:100%;object-fit:contain;filter:contrast(1.1) saturate(.82) brightness(.86);transition:transform 90ms linear}
+.similares-item:hover .similares-foto img{transform:scale(1.02)}
+.similares-info{padding:12px 14px;display:flex;flex-direction:column;gap:5px}
+.similares-info b{font-variation-settings:'wdth' 68,'wght' 800;font-size:14px;text-transform:uppercase;line-height:1}
+.similares-info span{color:var(--oro-texto);font-family:'Martian Mono',monospace;font-size:10px;text-transform:uppercase}
+.similares-flechas{display:flex;gap:8px;margin-top:14px}
+.similares-flechas button{width:36px;height:36px;border:1px solid var(--linea);color:var(--hueso);background:none;font-size:14px}
+.similares-flechas button:hover{background:var(--linea)}
+
+/* ---------- responsive ---------- */
+@media(max-width:1000px){
+  .pd-layout{grid-template-columns:1fr}
+  .pd-info{border-left:none;border-top:1px solid var(--linea);padding:30px var(--gutter)}
+  .similares-item{flex:0 0 70%}
+  .destacado{grid-template-columns:1fr}
+  .dest-info{border-left:none;border-top:1px solid var(--linea);padding:34px var(--gutter)}
+  .dest-foto{min-height:400px}
+  .tira{grid-template-columns:repeat(2,1fr)}
+  .item.a,.item.b{grid-column:span 6}
+  .item.c,.item.d,.item.e{grid-column:span 6}
+  .item.a .item-foto,.item.b .item-foto{aspect-ratio:4/5}
+  .mega-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:660px){
+  .nav{display:none}
+  .marca-zona{gap:14px}
+  .pd-miniaturas{width:48px}
+  .pd-miniatura{width:48px;height:48px}
+  .item.a,.item.b,.item.c,.item.d,.item.e{grid-column:span 12}
+  .tira{grid-template-columns:1fr}
+  .hero-pie{align-items:flex-start;flex-direction:column;gap:16px}
+  .hero-scroll{display:none}
+  .tema-btn span{display:none}
+  .mega-grid{grid-template-columns:1fr;margin:0}
+  .similares-item{flex:0 0 84%}
+  .pd-cantidad-fila{flex-direction:column;align-items:stretch}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  h1.hero-h b{transform:none!important}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ShoeStore",
+  "name": "@tn_baires",
+  "url": "https://tnbaires.ar/",
+  "areaServed": "AR",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Buenos Aires",
+    "addressCountry": "AR"
+  },
+  "sameAs": [
+    "https://instagram.com/tn_baires"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Drop Septiembre — @tn_baires",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Air Max Plus Triple Black",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 365000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max Plus Black White Sole",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 370000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max Plus Violet Fade",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 375000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max Plus Triple White",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 360000,
+          "availability": "https://schema.org/OutOfStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max Plus White Green",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 380000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Air Max 95 OG Blue / Red",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 420000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Air Max 95 Neon Yellow",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 440000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max 95 Triple White",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 395000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max 95 Black Grey",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 405000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "Product",
+        "name": "Air Max 95 Navy Jewel",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 430000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Shox R4 Olive Green",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 300000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Shox R4 Cream Red",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 310000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+        "@type": "Product",
+        "name": "Nike Shox R4 Full Black",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 295000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+        "@type": "Product",
+        "name": "Air Jordan 3 White Cement",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 520000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+        "@type": "Product",
+        "name": "Air Jordan 3 Black Cat",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 545000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "item": {
+        "@type": "Product",
+        "name": "Mizuno Wave Prophecy Black Teal",
+        "brand": {
+          "@type": "Brand",
+          "name": "Mizuno"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 345000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "item": {
+        "@type": "Product",
+        "name": "Mizuno Wave Prophecy Triple White",
+        "brand": {
+          "@type": "Brand",
+          "name": "Mizuno"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 340000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "item": {
+        "@type": "Product",
+        "name": "NOCTA Hot Step Triple Black",
+        "brand": {
+          "@type": "Brand",
+          "name": "NOCTA"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 460000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "item": {
+        "@type": "Product",
+        "name": "NOCTA Hot Step Triple White",
+        "brand": {
+          "@type": "Brand",
+          "name": "NOCTA"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 475000,
+          "availability": "https://schema.org/InStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "item": {
+        "@type": "Product",
+        "name": "Air More Uptempo Black / White",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nike"
+        },
+        "category": "Zapatillas",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "ARS",
+          "price": 430000,
+          "availability": "https://schema.org/OutOfStock",
+          "url": "https://tnbaires.ar/#drop"
+        }
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="grano" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)" opacity="0.55"/></svg>
+</div>
+
+<div class="bolsa-fondo" id="bolsaFondo"></div>
+<aside class="bolsa-panel" id="bolsaPanel" role="dialog" aria-modal="true" aria-label="Tu bolsa">
+  <div class="bolsa-cab">
+    <h3>Tu bolsa</h3>
+    <button class="bolsa-cerrar" id="bolsaCerrar" aria-label="Cerrar bolsa">✕</button>
+  </div>
+  <div class="bolsa-lista" id="bolsaLista"></div>
+  <div class="bolsa-envio" id="bolsaEnvio" style="display:none">
+    <div class="mono bolsa-envio-titulo">Envío</div>
+    <div class="envio-opciones" id="envioOpciones">
+      <label class="envio-op"><input type="radio" name="tipoEnvio" value="retiro" checked><span>Retiro en el local</span><b>Gratis</b></label>
+      <label class="envio-op"><input type="radio" name="tipoEnvio" value="moto"><span>Moto</span><b id="envioMotoPrecioMini">—</b></label>
+      <label class="envio-op"><input type="radio" name="tipoEnvio" value="correo"><span>Correo Argentino</span><b id="envioCorreoPrecioMini">—</b></label>
+    </div>
+    <div class="envio-moto-panel" id="envioMotoPanel" style="display:none">
+      <div class="envio-direccion-wrap">
+        <input type="text" id="envioDireccionInput" placeholder="Tu dirección (calle, altura, localidad)" autocomplete="off">
+        <div class="envio-sugerencias" id="envioSugerencias" style="display:none"></div>
+      </div>
+      <div class="envio-o mono">o compartí tu ubicación</div>
+      <button class="btn" id="btnUbicacion" type="button">📍 Usar mi ubicación</button>
+      <div class="envio-resultado mono" id="envioResultado" style="display:none"></div>
+      <div class="envio-error mono" id="envioError" style="display:none"></div>
+    </div>
+    <div class="envio-correo-panel" id="envioCorreoPanel" style="display:none">
+      <div class="correo-tabs" id="correoTabs">
+        <button type="button" class="correo-tab activo" data-modo="sucursal">A sucursal</button>
+        <button type="button" class="correo-tab" data-modo="domicilio">A domicilio</button>
+      </div>
+
+      <div class="correo-form" id="correoFormSucursal">
+        <input type="text" data-campo="nombre" placeholder="Nombre">
+        <input type="text" data-campo="dni" placeholder="DNI">
+        <input type="text" data-campo="provincia" placeholder="Provincia">
+        <input type="text" data-campo="localidad" placeholder="Localidad">
+        <input type="text" data-campo="direccionSucursal" placeholder="Dirección de la sucursal">
+        <input type="text" data-campo="codigoPostal" placeholder="Código postal">
+        <input type="text" data-campo="telefono" placeholder="Teléfono">
+      </div>
+
+      <div class="correo-form" id="correoFormDomicilio" style="display:none">
+        <input type="text" data-campo="nombre" placeholder="Nombre y apellido">
+        <input type="text" data-campo="dni" placeholder="DNI">
+        <input type="text" data-campo="provincia" placeholder="Provincia">
+        <input type="text" data-campo="localidad" placeholder="Localidad">
+        <input type="text" data-campo="calle" placeholder="Calle">
+        <input type="text" data-campo="altura" placeholder="Altura">
+        <input type="text" data-campo="codigoPostal" placeholder="Código postal">
+        <input type="text" data-campo="usuarioIg" placeholder="Usuario de Instagram (opcional)">
+        <input type="text" data-campo="telefono" placeholder="Teléfono">
+      </div>
+      <div class="envio-error mono" id="correoError" style="display:none"></div>
+    </div>
+  </div>
+  <div class="bolsa-envio" id="bolsaPago" style="display:none">
+    <div class="mono bolsa-envio-titulo">Pago</div>
+    <div class="pago-metodos" id="pagoMetodos">
+      <label class="pago-op"><input type="radio" name="metodoPago" value="efectivo" checked><span>Efectivo</span><b></b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="transferencia"><span>Transferencia bancaria</span><b id="pagoRecargoTransferenciaTxt">+10%</b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="mercadopago"><span>Mercado Pago</span><b id="pagoRecargoMpTxt">+10%</b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="rapipago"><span>Rapipago</span><b></b></label>
+      <label class="pago-op"><input type="radio" name="metodoPago" value="pagofacil"><span>Pago Fácil</span><b></b></label>
+    </div>
+    <div class="pago-detalle" id="pagoDetalle"></div>
+  </div>
+  <div class="bolsa-pie" id="bolsaPie">
+    <div class="bolsa-total">
+      <span>Total</span>
+      <b id="bolsaTotal">$0</b>
+    </div>
+    <div id="bolsaAccionesResumen">
+      <button class="btn btn-full" id="bolsaIniciarCompra" type="button">Iniciar compra</button>
+      <button class="bolsa-vaciar mono" id="bolsaVerMasProductos" type="button">Ver más productos</button>
+    </div>
+    <div id="bolsaAccionesEntrega" style="display:none">
+      <button class="btn btn-full" id="bolsaContinuarPago" type="button">Continuar a pago</button>
+      <button class="bolsa-vaciar mono" id="bolsaVolverResumen" type="button">← Volver</button>
+    </div>
+    <div id="bolsaAccionesPago" style="display:none">
+      <button class="btn btn-full" id="bolsaWhatsapp" type="button">Finalizar por WhatsApp</button>
+      <button class="btn btn-full" id="bolsaPagarMP" type="button" style="display:none">Pagar con Mercado Pago</button>
+      <div class="pd-error mono" id="bolsaPagarMPError" style="display:none"></div>
+      <button class="bolsa-vaciar mono" id="bolsaVolverEntrega" type="button">← Volver</button>
+    </div>
+    <button class="bolsa-vaciar mono" id="bolsaVaciar" type="button">Vaciar bolsa</button>
+  </div>
+</aside>
+
+<header class="top" id="top">
+  <div class="marca-zona">
+    <a href="#inicio" class="marca">
+      <span class="marca-logo"><img src="assets/logo.jpg" alt="Logo de tn_baires"></span>
+      <span class="marca-nombre">
+        <b>@tn_baires</b>
+        <svg class="verif" viewBox="0 0 22 22" aria-label="Cuenta verificada" role="img">
+          <path fill="#3897F0" d="M11 0l2.1 1.9 2.8-.6 1.2 2.6 2.8.9-.2 2.9 2.1 2.1-.9 2.8.9 2.8-2.1 2.1.2 2.9-2.8.9-1.2 2.6-2.8-.6L11 22l-2.1-1.9-2.8.6-1.2-2.6-2.8-.9.2-2.9L.2 12.2l.9-2.8-.9-2.8 2.1-2.1-.2-2.9 2.8-.9L6.3 1.3l2.8.6z"/>
+          <path fill="#fff" d="M9.6 15.3L5.9 11.6l1.2-1.2 2.5 2.5 5.4-5.4 1.2 1.2z"/>
+        </svg>
+      </span>
+    </a>
+    <nav class="nav mono" aria-label="Principal">
+      <a href="#drop">Drop Septiembre</a>
+      <a href="#pieza">Destacado</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="mega" id="mega">
+      <div class="mega-grid">
+        <div class="mega-col">
+          <h4>Zapatillas</h4>
+          <a href="#drop" data-filtro-modelo="am95">Air Max 95</a>
+          <a href="#drop" data-filtro-modelo="tn">TN</a>
+          <a href="#drop" data-filtro-modelo="tn">TN 2</a>
+          <a href="#drop" data-filtro-modelo="shox">Shox 2 SP</a>
+          <a href="#drop" data-filtro-modelo="shox">Shox TL</a>
+          <a href="#drop" data-filtro-modelo="mizuno">Mizuno</a>
+          <a href="#drop" data-filtro-modelo="jordan">Jordan</a>
+          <a href="#drop" data-filtro-modelo="nocta">NOCTA</a>
+          <a href="#drop" data-filtro-modelo="uptempo">Uptempo</a>
+        </div>
+        <div class="mega-col">
+          <h4>Buzos</h4>
+          <a href="#drop">Buzo Nike Tech Fleece</a>
+          <a href="#drop">Crewneck OG</a>
+          <a href="#drop">Hoodie Bootleg</a>
+        </div>
+        <div class="mega-col">
+          <h4>Pantalones</h4>
+          <a href="#drop">Cargo Nike Tech</a>
+          <a href="#drop">Jogger Track</a>
+          <a href="#drop">Pantalón OG</a>
+        </div>
+        <div class="mega-col">
+          <h4>Remeras</h4>
+          <a href="#drop">Remera Bootleg OG</a>
+          <a href="#drop">Remera Swoosh</a>
+          <a href="#drop">Remera Streetwear</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-der">
+    <button class="tema-btn mono" id="temaBtn" aria-pressed="false">
+      <svg id="temaIcono" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="4.3" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span id="temaTexto">Claro</span>
+    </button>
+    <button class="bolsa mono" id="bolsa" data-lleno="0">Bolsa (<span id="cuenta">00</span>)</button>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-img" id="heroImg">
+    <img class="activa" src="assets/hero-1.jpg" alt="Diego Maradona con Nike Air Max Plus TN naranjas y negras, foto de archivo" style="object-position:50% 40%">
+    <img src="assets/hero-2.jpg" alt="Nike Air Max Plus negras de charol en una calle de noche" style="object-position:50% 60%">
+    <img src="assets/hero-3.jpg" alt="Grupo con buzos negros de logo náutico" style="object-position:50% 35%">
+  </div>
+  <div class="hero-cuerpo">
+    <div class="hero-tags mono">
+      <span>TN</span><span>AIR MAX 95</span><span>OG</span><span>STREETWEAR</span>
+    </div>
+    <h1 class="hero-h disp">
+      <span><b>Los pares</b></span>
+      <span><b>que no ves</b></span>
+      <span><b><i>en todos lados.</i></b></span>
+    </h1>
+    <div class="hero-pie">
+      <div class="hero-meta mono">
+        <span>Drop Septiembre — 02.09</span>
+        <span><b>08 pares</b> esta semana</span>
+        <span>Envíos a todo el país</span>
+      </div>
+      <a href="#drop" class="btn btn-oro">Ver drop</a>
+    </div>
+  </div>
+  <div class="hero-scroll mono" aria-hidden="true">Scroll ↓</div>
+</section>
+
+<div class="promo-banner mono" id="promoBanner" style="display:none">
+  <span></span>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-pista">
+    <span>New drop</span><span>·</span><span>Limited stock</span><span>·</span><span>OG</span><span>·</span><span>Exclusive</span><span>·</span><span>Available now</span><span>·</span><span>Last pairs</span><span>·</span><span>Selected pairs</span><span>·</span>
+    <span>New drop</span><span>·</span><span>Limited stock</span><span>·</span><span>OG</span><span>·</span><span>Exclusive</span><span>·</span><span>Available now</span><span>·</span><span>Last pairs</span><span>·</span><span>Selected pairs</span><span>·</span>
+  </div>
+</div>
+
+<section class="slider-sneakers" aria-label="Todos los modelos">
+  <div class="slider-titulo mono">Todos los modelos — mirá el resto en el drop</div>
+  <div class="slider-pista" id="sliderPista">
+    <a href="#producto/tn-1" class="slider-item"><img src="assets/sl-tn-1.jpg" alt="Nike Air Max Plus TN Triple Black" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-3" class="slider-item"><img src="assets/sl-tn-2.jpg" alt="Nike Air Max Plus TN Violet Fade" loading="lazy" decoding="async"></a>
+    <a href="#pieza" class="slider-item"><img src="assets/sl-tn-3.jpg" alt="Nike Air Max Plus TN degradé fuego" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-5" class="slider-item"><img src="assets/sl-tn-4.jpg" alt="Nike Air Max Plus TN White Green" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-1" class="slider-item"><img src="assets/sl-am95-1.jpg" alt="Nike Air Max 95 OG Blue Red" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-2" class="slider-item"><img src="assets/sl-am95-2.jpg" alt="Nike Air Max 95 Neon Yellow" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-5" class="slider-item"><img src="assets/sl-am95-3.jpg" alt="Nike Air Max 95 Navy Jewel" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-1" class="slider-item"><img src="assets/sl-shox-1.jpg" alt="Nike Shox R4 Olive Green" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-2" class="slider-item"><img src="assets/sl-shox-2.jpg" alt="Nike Shox R4 Cream Red" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-1" class="slider-item"><img src="assets/sl-jordan-1.jpg" alt="Air Jordan 3 White Cement" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-2" class="slider-item"><img src="assets/sl-jordan-2.jpg" alt="Air Jordan 3 Black Cat" loading="lazy" decoding="async"></a>
+    <a href="#producto/mizuno-1" class="slider-item"><img src="assets/sl-mizuno-1.jpg" alt="Mizuno Wave Prophecy Black Teal" loading="lazy" decoding="async"></a>
+    <a href="#producto/nocta-1" class="slider-item"><img src="assets/sl-nocta-1.jpg" alt="NOCTA Hot Step Triple Black" loading="lazy" decoding="async"></a>
+    <a href="#producto/uptempo-1" class="slider-item"><img src="assets/sl-uptempo-1.jpg" alt="Air More Uptempo Black White" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-tn-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-3" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-tn-2.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#pieza" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-tn-3.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/tn-5" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-tn-4.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-am95-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-am95-2.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/am95-5" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-am95-3.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-shox-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/shox-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-shox-2.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-jordan-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/jordan-2" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-jordan-2.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/mizuno-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-mizuno-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/nocta-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-nocta-1.jpg" alt="" loading="lazy" decoding="async"></a>
+    <a href="#producto/uptempo-1" class="slider-item" aria-hidden="true" tabindex="-1"><img src="assets/sl-uptempo-1.jpg" alt="" loading="lazy" decoding="async"></a>
+  </div>
+</section>
+
+<section class="sec" id="drop">
+  <div class="sec-cab">
+    <h2>Drop Septiembre</h2>
+    <p id="dropDesc">Veinte pares en el local. Cuando se van, se van: no reponemos numeración.</p>
+  </div>
+  <div class="filtros mono" id="filtros">
+    <button class="filtro-chip activo" data-filtro="todos">Todos</button>
+    <button class="filtro-chip filtro-chip-oferta" data-filtro="ofertas">Ofertas</button>
+    <button class="filtro-chip" data-filtro="tn">TN</button>
+    <button class="filtro-chip" data-filtro="am95">Air Max 95</button>
+    <button class="filtro-chip" data-filtro="shox">Shox</button>
+    <button class="filtro-chip" data-filtro="jordan">Jordan</button>
+    <button class="filtro-chip" data-filtro="mizuno">Mizuno</button>
+    <button class="filtro-chip" data-filtro="nocta">NOCTA</button>
+    <button class="filtro-chip" data-filtro="uptempo">Uptempo</button>
+  </div>
+</section>
+
+<div class="grilla" id="grilla"></div>
+
+<section class="producto-detalle" id="vistaProducto" style="display:none">
+  <div class="migas mono" id="pdMigas"></div>
+  <div class="pd-layout">
+    <div class="pd-galeria">
+      <div class="pd-miniaturas" id="pdMiniaturas"></div>
+      <div class="pd-galeria-principal">
+        <div class="pd-galeria-pista" id="pdGaleriaPista"></div>
+        <button class="pd-flecha pd-flecha-izq" id="pdFlechaIzq" type="button" aria-label="Foto anterior">←</button>
+        <button class="pd-flecha pd-flecha-der" id="pdFlechaDer" type="button" aria-label="Foto siguiente">→</button>
+        <div class="pd-dots" id="pdDots"></div>
+      </div>
+    </div>
+    <div class="pd-info">
+      <div class="mono item-cw" id="pdColorway"></div>
+      <h1 id="pdNombre"></h1>
+      <div id="pdPrecio"></div>
+      <div class="bloque-dato">
+        <div class="pd-talles-cab">
+          <div class="mono">Seleccionar talle</div>
+          <button class="link-info mono" data-info="talles" type="button" style="font-size:11px;text-decoration:underline">Guía de talles</button>
+        </div>
+        <div class="pd-talles-grid" id="pdTalles" role="group" aria-label="Elegir talle"></div>
+      </div>
+      <div class="pd-cantidad-fila">
+        <div class="pd-cantidad">
+          <button type="button" id="pdMenos" aria-label="Restar cantidad">−</button>
+          <span id="pdCantidadTxt">1</span>
+          <button type="button" id="pdMas" aria-label="Sumar cantidad">+</button>
+        </div>
+        <button class="btn btn-full" id="pdAgregar" type="button">Agregar al carrito</button>
+      </div>
+      <div class="pd-error mono" id="pdAgregarError" style="display:none"></div>
+      <div class="pd-agregado mono" id="pdAgregadoMsg" style="display:none">Ya agregaste este producto. <a id="pdVerCarrito">Ver carrito</a></div>
+      <p class="pd-descripcion" id="pdDescripcion"></p>
+    </div>
+  </div>
+  <div class="pd-similares" id="pdSimilaresWrap">
+    <h2>Productos similares</h2>
+    <div class="similares-viewport">
+      <div class="similares-pista" id="similaresPista"></div>
+    </div>
+    <div class="similares-flechas">
+      <button type="button" id="similaresIzq" aria-label="Anterior">←</button>
+      <button type="button" id="similaresDer" aria-label="Siguiente">→</button>
+    </div>
+  </div>
+</section>
+
+<section class="destacado" id="pieza">
+  <div class="dest-foto">
+    <img src="assets/tn-fuego.jpg" alt="Nike Air Max Plus TN degradé rojo y naranja, foto real de stock tn_baires" loading="lazy" decoding="async">
+    <div class="dest-marco"></div>
+    <div class="dest-sku mono">SKU 604133-611 · AR · Drop Septiembre</div>
+  </div>
+  <div class="dest-info">
+    <div>
+      <div class="dest-cw">Pieza de la semana</div>
+      <h3 style="margin-top:12px">Nike<br>Air Max Plus</h3>
+    </div>
+    <p class="dest-txt">La TN original de 1998, en degradé fuego. Cuero sintético con el degradé de olas, cámara Tuned Air visible y suela de tacos. Par nuevo, con caja y etiqueta.</p>
+
+    <div class="bloque-dato">
+      <div class="mono">Talle — AR / US</div>
+      <div class="talles" role="group" aria-label="Elegir talle">
+        <button class="talla" data-talle="40" data-stock="3" aria-pressed="false">40</button>
+        <button class="talla" data-talle="41" data-stock="4" aria-pressed="false">41</button>
+        <button class="talla" data-talle="42" data-stock="5" aria-pressed="true">42</button>
+        <button class="talla" data-talle="43" data-stock="2" aria-pressed="false">43</button>
+        <button class="talla" disabled aria-label="Talle 44 sin stock">44</button>
+        <button class="talla" data-talle="45" data-stock="1" aria-pressed="false">45</button>
+      </div>
+    </div>
+
+    <div class="bloque-dato">
+      <div class="dest-precio">$395.000</div>
+      <div class="mono dest-cuotas">3 cuotas sin interés de $131.666 · Transferencia −10%</div>
+    </div>
+
+    <div class="stock mono"><span class="punto"></span> Available — <span id="stock-n">05</span> pairs</div>
+
+    <div class="dest-acciones">
+      <button class="btn btn-full" id="btn-pieza" data-agregar data-nombre="Nike Air Max Plus" data-cw="Fuego" data-precio="395000">Quiero el par</button>
+      <a href="https://wa.me/5491165668692?text=Hola!%20Te%20consulto%20por%20la%20Nike%20Air%20Max%20Plus%20TN%20Fuego" class="btn" target="_blank" rel="noopener">Consultar</a>
+    </div>
+  </div>
+</section>
+
+<div class="tira">
+  <div>
+    <b>🚚 Moto en el día</b>
+    <p>CABA y GBA cercano. El precio se calcula según tu distancia real al local.</p>
+  </div>
+  <div>
+    <b>Envíos a todo el país</b>
+    <p>Correo Argentino. AMBA en 24/48 hs, interior 3 a 5 días.</p>
+  </div>
+  <div>
+    <b>3 y 6 cuotas</b>
+    <p>Mercado Pago, tarjeta o transferencia con 10% off.</p>
+  </div>
+</div>
+
+<footer id="contacto">
+  <div class="pie-top">
+    <div class="pie-col mono">
+      <b>Tienda</b>
+      <a href="#drop">Drop Septiembre</a>
+      <a href="#pieza">Air Max Plus</a>
+      <a href="#drop">Air Max 95</a>
+    </div>
+    <div class="pie-col mono">
+      <b>Ayuda</b>
+      <button class="link-info" data-info="talles">Guía de talles</button>
+      <button class="link-info" data-info="cambios">Cambios</button>
+      <button class="link-info" data-info="envios">Envíos</button>
+      <button class="link-info" data-info="autenticidad">Autenticidad</button>
+    </div>
+    <div class="pie-col mono">
+      <b>Escribinos</b>
+      <span class="pie-marca">
+        @tn_baires
+        <svg class="verif" viewBox="0 0 22 22" aria-label="Cuenta verificada" role="img"><path fill="#3897F0" d="M11 0l2.1 1.9 2.8-.6 1.2 2.6 2.8.9-.2 2.9 2.1 2.1-.9 2.8.9 2.8-2.1 2.1.2 2.9-2.8.9-1.2 2.6-2.8-.6L11 22l-2.1-1.9-2.8.6-1.2-2.6-2.8-.9.2-2.9L.2 12.2l.9-2.8-.9-2.8 2.1-2.1-.2-2.9 2.8-.9L6.3 1.3l2.8.6z"/><path fill="#fff" d="M9.6 15.3L5.9 11.6l1.2-1.2 2.5 2.5 5.4-5.4 1.2 1.2z"/></svg>
+      </span>
+      <a href="https://wa.me/5491165668692" target="_blank" rel="noopener">WhatsApp 11 6566-8692</a>
+      <a href="mailto:hola@tnbaires.ar">hola@tnbaires.ar</a>
+    </div>
+    <div class="pie-col mono">
+      <b>Drop Octubre</b>
+      <span>01.10 · 20:00 hs</span>
+      <span>Aviso solo por Instagram</span>
+    </div>
+  </div>
+  <div class="logo-gigante">@<em>TN</em>_BAIRES</div>
+  <div class="pie-fin mono">
+    <span>Buenos Aires — Argentina</span>
+    <span>© 2026 @tn_baires. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<div class="info-fondo" id="infoFondo"></div>
+<div class="info-modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitulo">
+  <div class="info-cab">
+    <h3 id="infoTitulo">Guía de talles</h3>
+    <button class="bolsa-cerrar" id="infoCerrar" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="info-cuerpo" id="infoCuerpo"></div>
+</div>
+
+<script>
+/* ==========================================================================
+   CATALOGO — datos editables. El panel admin.html escribe sobre
+   localStorage['tn_baires_productos']; si no hay nada guardado todavia,
+   se usa este catalogo de fabrica (PRODUCTOS_DEFAULT).
+   ========================================================================== */
+var PRODUCTOS_DEFAULT = [{"id":"tn-1","modelo":"tn","nombre":"Nike Air Max Plus","colorway":"Triple Black","precio":365000,"img":"assets/tn-triple-black.jpg","talles":[{"talle":40,"stock":4},{"talle":41,"stock":3},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":0}],"activo":true,"destacado":true,"layout":"a","descripcion":"La TN de siempre, ahora en negro total. Líneas onduladas y cámara Tuned Air visible en la suela — la silueta que no pasa de moda. En triple black combina con cualquier fit, de día o de noche.","fotos":["assets/tn-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-1","modelo":"am95","nombre":"Nike Air Max 95","colorway":"OG Blue / Red","precio":420000,"img":"assets/am95-og-blue-red.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"b","descripcion":"La 95 original, con el degradé que la hizo clásica: capas de gris, azul y rojo simulando el cuerpo humano en corte transversal, la idea de diseño más citada de los 90. Cámara de aire visible en el talón.","fotos":["assets/am95-og-blue-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-2","modelo":"tn","nombre":"Air Max Plus","colorway":"Black White Sole","precio":370000,"img":"assets/tn-black-white.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN clásica en negro con suela blanca — contraste directo, sin vueltas. Para quien quiere la silueta de siempre pero con un toque más limpio en la base.","fotos":["assets/tn-black-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-3","modelo":"tn","nombre":"Air Max Plus","colorway":"Violet Fade","precio":375000,"img":"assets/tn-violet-fade.jpg","talles":[{"talle":40,"stock":3},{"talle":41,"stock":2},{"talle":42,"stock":4},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Degradé violeta sobre base negra, una de las colorways más buscadas de la TN. Se destaca sin gritar — ideal para diferenciarte del negro y blanco de siempre.","fotos":["assets/tn-violet-fade.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-4","modelo":"tn","nombre":"Air Max Plus","colorway":"Triple White","precio":360000,"img":"assets/tn-triple-white.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"TN en blanco total, la opción más versátil de todas: combina con cualquier outfit. Se ensucia fácil, así que conviene tener un buen limpiador de cuero a mano.","fotos":["assets/tn-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"tn-5","modelo":"tn","nombre":"Air Max Plus","colorway":"White Green","precio":380000,"img":"assets/tn-white-green.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":1},{"talle":42,"stock":0},{"talle":43,"stock":2},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Base blanca con detalles verdes — un guiño más deportivo dentro de la familia TN, sin perder la silueta original de 1998.","fotos":["assets/tn-white-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-2","modelo":"am95","nombre":"Nike Air Max 95","colorway":"Neon Yellow","precio":440000,"img":"assets/am95-neon-yellow.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":3},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"El amarillo neón es la colorway más statement de la 95: ideal si buscás que el calzado sea el protagonista del fit.","fotos":["assets/am95-neon-yellow.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-3","modelo":"am95","nombre":"Air Max 95","colorway":"Triple White","precio":395000,"img":"assets/am95-triple-white.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":3},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Versión monocromática de la 95 — mismo diseño de capas superpuestas, pero en blanco total, más fácil de combinar en el día a día.","fotos":["assets/am95-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-4","modelo":"am95","nombre":"Air Max 95","colorway":"Black Grey","precio":405000,"img":"assets/am95-black-grey.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":2},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Tonos grises y negros sobre el diseño clásico de la 95 — una opción más discreta para uso diario.","fotos":["assets/am95-black-grey.jpg"],"enOferta":false,"precioOferta":0},{"id":"am95-5","modelo":"am95","nombre":"Air Max 95","colorway":"Navy Jewel","precio":430000,"img":"assets/am95-navy-jewel.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":3},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Azul marino con detalles jewel — una de las paletas más elegantes de la línea 95, para combinar con looks más prolijos dentro del streetwear.","fotos":["assets/am95-navy-jewel.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-1","modelo":"shox","nombre":"Nike Shox R4","colorway":"Olive Green","precio":300000,"img":"assets/shox-olive-green.jpg","talles":[{"talle":39,"stock":0},{"talle":40,"stock":2},{"talle":41,"stock":0},{"talle":42,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Las Shox con el sistema de columnas visibles en el talón, tecnología de amortiguación que Nike usó a fines de los 90 y volvió con fuerza. En verde oliva, un tono más terroso y menos visto.","fotos":["assets/shox-olive-green.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-2","modelo":"shox","nombre":"Nike Shox R4","colorway":"Cream Red","precio":310000,"img":"assets/shox-cream-red.jpg","talles":[{"talle":39,"stock":1},{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en crema con detalles rojos — combinación cálida, ideal para diferenciarte de los colores clásicos de la silueta.","fotos":["assets/shox-cream-red.jpg"],"enOferta":false,"precioOferta":0},{"id":"shox-3","modelo":"shox","nombre":"Nike Shox R4","colorway":"Full Black","precio":295000,"img":"assets/shox-full-black.jpg","talles":[{"talle":39,"stock":2},{"talle":40,"stock":0},{"talle":41,"stock":3},{"talle":42,"stock":1},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Shox R4 en negro total, la opción más sobria de la línea, para quien quiere el diseño de las columnas sin llamar tanto la atención con el color.","fotos":["assets/shox-full-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-1","modelo":"jordan","nombre":"Air Jordan 3","colorway":"White Cement","precio":520000,"img":"assets/jordan3-white-cement.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":0},{"talle":44,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La 3 que Michael Jordan usó en el 88, con el print de cemento en punta y talón que se volvió icónico. Colorway original, una de las más históricas del básquet.","fotos":["assets/jordan3-white-cement.jpg"],"enOferta":false,"precioOferta":0},{"id":"jordan-2","modelo":"jordan","nombre":"Air Jordan 3","colorway":"Black Cat","precio":545000,"img":"assets/jordan3-black-cat.jpg","talles":[{"talle":40,"stock":0},{"talle":41,"stock":0},{"talle":42,"stock":1},{"talle":43,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"Air Jordan 3 en negro total, sin el print de cemento: versión más agresiva y minimalista de la silueta, para quienes buscan un negro sobre negro real.","fotos":["assets/jordan3-black-cat.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-1","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Black Teal","precio":345000,"img":"assets/mizuno-black-teal.jpg","talles":[{"talle":40,"stock":1},{"talle":41,"stock":2},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"La Wave Prophecy es la silueta running de alta gama de Mizuno, con la tecnología Infinity Wave visible en la suela. En negro con detalles teal, distinta a lo que se ve normalmente en el streetwear local.","fotos":["assets/mizuno-black-teal.jpg"],"enOferta":false,"precioOferta":0},{"id":"mizuno-2","modelo":"mizuno","nombre":"Mizuno Wave Prophecy","colorway":"Triple White","precio":340000,"img":"assets/mizuno-triple-white.jpg","talles":[{"talle":40,"stock":2},{"talle":41,"stock":1},{"talle":42,"stock":3},{"talle":43,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"Wave Prophecy en blanco total — el diseño de la suela Infinity Wave queda más marcado en un colorway limpio como este.","fotos":["assets/mizuno-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-1","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple Black","precio":460000,"img":"assets/nocta-triple-black.jpg","talles":[{"talle":41,"stock":1},{"talle":42,"stock":2},{"talle":43,"stock":1},{"talle":44,"stock":2}],"activo":true,"destacado":false,"layout":"c","descripcion":"La colaboración entre Nike y NOCTA (el sello de Drake), con la silueta Hot Step: diseño exagerado, pensado para destacar. En triple black, la versión más discreta de la línea.","fotos":["assets/nocta-triple-black.jpg"],"enOferta":false,"precioOferta":0},{"id":"nocta-2","modelo":"nocta","nombre":"NOCTA Hot Step","colorway":"Triple White","precio":475000,"img":"assets/nocta-triple-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":1}],"activo":true,"destacado":false,"layout":"c","descripcion":"Hot Step de NOCTA en blanco total — misma silueta exagerada, pero en un colorway que resalta más las formas del diseño.","fotos":["assets/nocta-triple-white.jpg"],"enOferta":false,"precioOferta":0},{"id":"uptempo-1","modelo":"uptempo","nombre":"Air More Uptempo","colorway":"Black / White","precio":430000,"img":"assets/uptempo-black-white.jpg","talles":[{"talle":41,"stock":0},{"talle":42,"stock":0},{"talle":43,"stock":0},{"talle":44,"stock":0}],"activo":true,"destacado":false,"layout":"c","descripcion":"El diseño con el AIR gigante en el costado, ícono de los 90 gracias a Scottie Pippen. En negro y blanco, la colorway más reconocible de toda la línea.","fotos":["assets/uptempo-black-white.jpg"],"enOferta":false,"precioOferta":0}];
+var LS_PRODUCTOS = 'tn_baires_productos';
+var LS_PROMOS    = 'tn_baires_promos';
+
+function cargarProductos(){
+  try{
+    var raw = localStorage.getItem(LS_PRODUCTOS);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return PRODUCTOS_DEFAULT;
+}
+function cargarPromos(){
+  try{
+    var raw = localStorage.getItem(LS_PROMOS);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function promoActiva(){
+  var hoy = new Date().toISOString().slice(0,10);
+  var promos = cargarPromos();
+  for(var i=0;i<promos.length;i++){
+    var p = promos[i];
+    if(p.desde <= hoy && hoy <= p.hasta) return p;
+  }
+  return null;
+}
+function fmtPrecio(n){
+  return '$' + Math.round(n).toLocaleString('es-AR');
+}
+/* precio a mostrar de un producto: la oferta propia del producto (si tiene)
+   gana por sobre la promo general del sitio, para no acumular descuentos */
+function precioMostrar(prod, promo, fontSize){
+  var estilo = fontSize ? ' style="font-size:'+fontSize+'"' : '';
+  if(prod.enOferta && prod.precioOferta > 0 && prod.precioOferta < prod.precio){
+    return {
+      final: prod.precioOferta,
+      html: '<div class="precio-promo"'+estilo+'><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(prod.precioOferta)+'</div>'
+    };
+  }
+  if(promo && promo.descuento > 0){
+    var final = prod.precio * (1 - promo.descuento/100);
+    return {final: final, html: '<div class="precio-promo"'+estilo+'><s>'+fmtPrecio(prod.precio)+'</s> '+fmtPrecio(final)+'</div>'};
+  }
+  return {final: prod.precio, html: '<div class="precio"'+estilo+'>'+fmtPrecio(prod.precio)+'</div>'};
+}
+function totalStock(prod){
+  return prod.talles.reduce(function(a,t){ return a + t.stock; }, 0);
+}
+function estadoStock(total){
+  if(total <= 0) return {texto:'Sold out', clase:'muerta'};
+  if(total <= 2) return {texto:'Last pairs', clase:'neg'};
+  return {texto:'In stock', clase:''};
+}
+
+function tarjetaProducto(prod, idx, promo){
+  var total = totalStock(prod);
+  var agotado = total <= 0;
+  var estado = estadoStock(total);
+  var chapaClase = 'chapa' + (estado.clase ? ' ' + estado.clase : '');
+  var cls = 'item ' + (prod.layout || 'c') + (agotado ? ' agotado' : '');
+
+  var primerDisp = null;
+  var talleshtml = prod.talles.slice().sort(function(a,b){return a.talle-b.talle;}).map(function(t, i2){
+    if(t.stock > 0){
+      if(primerDisp === null) primerDisp = t;
+      var activo = (primerDisp && primerDisp.talle === t.talle);
+      return '<button type="button" class="talle-mini' + (activo?' activo':'') + '" data-talle="'+t.talle+'" data-stock="'+t.stock+'" aria-pressed="'+(activo?'true':'false')+'">'+t.talle+'</button>';
+    }
+    return '<span class="talle-mini agotada" aria-hidden="true">'+t.talle+'</span>';
+  }).join('');
+
+  var precio = precioMostrar(prod, promo);
+  var precioFinal = precio.final, precioHtml = precio.html;
+  var enOferta = !!(prod.enOferta && prod.precioOferta > 0 && prod.precioOferta < prod.precio);
+
+  var stockTxt = agotado ? 'Sold out — 24.08' : (estado.texto + ' — ' + (primerDisp ? String(primerDisp.stock).padStart(2,'0') : '00') + ' pairs');
+  var boton = agotado
+    ? '<button class="mini" data-notificar data-nombre="'+prod.nombre+'" data-cw="'+prod.colorway+'">Avisame</button>'
+    : '<button class="mini" data-agregar data-id="'+prod.id+'" data-nombre="'+prod.nombre+'" data-cw="'+prod.colorway+'" data-precio="'+Math.round(precioFinal)+'">Quiero el par</button>';
+
+  return '' +
+  '<article class="'+cls+'" data-modelo="'+prod.modelo+'" data-id="'+prod.id+'" data-oferta="'+(enOferta?'1':'0')+'">' +
+    '<a class="item-foto" href="#producto/'+prod.id+'" aria-label="Ver '+prod.nombre+' '+prod.colorway+'">' +
+      '<span class="'+chapaClase+'">'+(agotado?'Sold out':estado.texto)+'</span>' +
+      (enOferta ? '<span class="chapa chapa-oferta">Oferta</span>' : '') +
+      '<img src="'+prod.img+'" alt="'+prod.nombre+' '+prod.colorway+', foto real de stock tn_baires" loading="lazy" decoding="async">' +
+    '</a>' +
+    '<div class="item-ficha">' +
+      '<a href="#producto/'+prod.id+'" class="item-titulo-link"><h3>'+prod.nombre+'</h3></a>' +
+      '<div class="mono item-cw">'+prod.colorway+'</div>' +
+      '<div class="mono item-talles">'+talleshtml+'</div>' +
+      '<div class="item-fila">' +
+        '<div>' + precioHtml +
+          '<div class="mono item-stock-txt" style="color:var(--humo);margin-top:4px">'+stockTxt+'</div>' +
+        '</div>' + boton +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+
+function renderGrilla(){
+  var productos = cargarProductos().filter(function(p){ return p.activo; });
+  var promo = promoActiva();
+  var cont = document.getElementById('grilla');
+  if(!cont) return;
+  cont.innerHTML = productos.map(function(p,i){ return tarjetaProducto(p,i,promo); }).join('');
+}
+renderGrilla();
+
+/* ==========================================================================
+   VISTA DE DETALLE DE PRODUCTO — navegacion por hash (#producto/ID), sin
+   recargar la pagina. Al clickear una zapatilla en la grilla o en
+   "productos similares" se abre esta vista; el boton "atras" del
+   navegador vuelve al catalogo.
+   ========================================================================== */
+var HOME_SELECTORES = ['#inicio', '.slider-sneakers', '#drop', '#grilla', '#pieza', '.tira'];
+function seccionesHome(){
+  return HOME_SELECTORES.map(function(sel){ return document.querySelector(sel); }).filter(Boolean);
+}
+var pdCantidad = 1;
+var pdTalleSeleccionado = null;
+
+function mostrarHome(){
+  seccionesHome().forEach(function(el){ el.style.display = ''; });
+  document.getElementById('vistaProducto').style.display = 'none';
+}
+
+function mostrarProductoDetalle(prod){
+  seccionesHome().forEach(function(el){ el.style.display = 'none'; });
+  var vista = document.getElementById('vistaProducto');
+  vista.style.display = '';
+  window.scrollTo(0, 0);
+
+  pdCantidad = 1;
+  pdTalleSeleccionado = null;
+  document.getElementById('pdCantidadTxt').textContent = '1';
+  document.getElementById('pdAgregadoMsg').style.display = 'none';
+  document.getElementById('pdAgregarError').style.display = 'none';
+
+  var nombreModeloTxt = nombresModelo[prod.modelo] || prod.modelo;
+  document.getElementById('pdMigas').innerHTML =
+    '<a href="#inicio">Inicio</a> . <a href="#drop" data-filtro-modelo="'+prod.modelo+'">'+nombreModeloTxt.toUpperCase()+'</a> . ' +
+    (prod.nombre+' '+prod.colorway).toUpperCase();
+  document.querySelectorAll('#pdMigas [data-filtro-modelo]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      ev.preventDefault();
+      /* ir directo con mostrarHome() + replaceState en vez de location.hash=
+         para no disparar el salto instantaneo nativo del navegador antes de
+         que irAFiltro() haga su scroll suave */
+      mostrarHome();
+      history.replaceState(null, '', '#drop');
+      irAFiltro(prod.modelo);
+    });
+  });
+
+  var fotos = (prod.fotos && prod.fotos.length) ? prod.fotos : [prod.img];
+  document.getElementById('pdGaleriaPista').innerHTML = fotos.map(function(f){
+    return '<div class="pd-galeria-item"><img src="'+f+'" alt="'+prod.nombre+' '+prod.colorway+'" loading="lazy"></div>';
+  }).join('');
+  document.getElementById('pdDots').innerHTML = fotos.map(function(_, i){
+    return '<button type="button" class="pd-dot'+(i===0?' activo':'')+'" data-idx="'+i+'" aria-label="Foto '+(i+1)+'"></button>';
+  }).join('');
+  document.getElementById('pdMiniaturas').innerHTML = fotos.map(function(f, i){
+    return '<button type="button" class="pd-miniatura'+(i===0?' activo':'')+'" data-idx="'+i+'" aria-label="Ver foto '+(i+1)+'"><img src="'+f+'" alt="" loading="lazy"></button>';
+  }).join('');
+  document.getElementById('pdFlechaIzq').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdFlechaDer').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdDots').style.display = fotos.length > 1 ? '' : 'none';
+  document.getElementById('pdMiniaturas').style.display = fotos.length > 1 ? '' : 'none';
+  inicializarGaleria();
+
+  document.getElementById('pdColorway').textContent = prod.colorway;
+  document.getElementById('pdNombre').textContent = prod.nombre;
+
+  var promo = promoActiva();
+  var precio = precioMostrar(prod, promo, '28px');
+  var precioFinal = precio.final;
+  document.getElementById('pdPrecio').innerHTML = precio.html;
+
+  var tallesOrdenados = prod.talles.slice().sort(function(a,b){ return a.talle - b.talle; });
+  document.getElementById('pdTalles').innerHTML = tallesOrdenados.map(function(t){
+    if(t.stock <= 0) return '<button class="talla" disabled aria-label="Talle '+t.talle+' sin stock">'+t.talle+'</button>';
+    return '<button class="talla" data-talle="'+t.talle+'" aria-pressed="false">'+t.talle+'</button>';
+  }).join('');
+  document.querySelectorAll('#pdTalles .talla[data-talle]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#pdTalles .talla').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      pdTalleSeleccionado = b.dataset.talle;
+      document.getElementById('pdAgregarError').style.display = 'none';
+    });
+  });
+
+  document.getElementById('pdDescripcion').textContent = prod.descripcion || '';
+  var btnAgregar = document.getElementById('pdAgregar');
+  btnAgregar.dataset.nombre = prod.nombre;
+  btnAgregar.dataset.cw = prod.colorway;
+  btnAgregar.dataset.precio = Math.round(precioFinal);
+  btnAgregar.dataset.img = fotos[0];
+
+  renderSimilares(prod);
+}
+
+function inicializarGaleria(){
+  var pista = document.getElementById('pdGaleriaPista');
+  var dots = document.querySelectorAll('#pdDots .pd-dot');
+  var miniaturas = document.querySelectorAll('#pdMiniaturas .pd-miniatura');
+  function anchoItem(){
+    var it = pista.querySelector('.pd-galeria-item');
+    return it ? it.getBoundingClientRect().width : pista.getBoundingClientRect().width;
+  }
+  function irAFoto(idx){
+    pista.scrollTo({left: anchoItem() * idx, behavior:'smooth'});
+  }
+  document.getElementById('pdFlechaIzq').onclick = function(){ pista.scrollBy({left: -anchoItem(), behavior:'smooth'}); };
+  document.getElementById('pdFlechaDer').onclick = function(){ pista.scrollBy({left: anchoItem(), behavior:'smooth'}); };
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){ irAFoto(parseInt(d.dataset.idx, 10)); });
+  });
+  miniaturas.forEach(function(m){
+    m.addEventListener('click', function(){ irAFoto(parseInt(m.dataset.idx, 10)); });
+  });
+  pista.onscroll = function(){
+    var idx = Math.round(pista.scrollLeft / anchoItem());
+    dots.forEach(function(d, i){ d.classList.toggle('activo', i === idx); });
+    miniaturas.forEach(function(m, i){ m.classList.toggle('activo', i === idx); });
+  };
+}
+
+function renderSimilares(prodActual){
+  var similares = cargarProductos().filter(function(p){
+    return p.activo && p.modelo === prodActual.modelo && p.id !== prodActual.id;
+  });
+  var wrap = document.getElementById('pdSimilaresWrap');
+  if(similares.length === 0){ wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  var promo = promoActiva();
+  document.getElementById('similaresPista').innerHTML = similares.map(function(p){
+    var precioHtml = precioMostrar(p, promo).html;
+    return '<a href="#producto/'+p.id+'" class="similares-item">' +
+      '<div class="similares-foto"><img src="'+p.img+'" alt="'+p.nombre+' '+p.colorway+'" loading="lazy"></div>' +
+      '<div class="similares-info"><b>'+p.nombre+'</b><span>'+p.colorway+'</span>'+precioHtml+'</div>' +
+    '</a>';
+  }).join('');
+  var vp = document.querySelector('#pdSimilaresWrap .similares-viewport');
+  function anchoItemSim(){
+    var it = vp.querySelector('.similares-item');
+    return it ? it.getBoundingClientRect().width : vp.getBoundingClientRect().width;
+  }
+  document.getElementById('similaresIzq').onclick = function(){ vp.scrollBy({left: -anchoItemSim(), behavior:'smooth'}); };
+  document.getElementById('similaresDer').onclick = function(){ vp.scrollBy({left: anchoItemSim(), behavior:'smooth'}); };
+  document.querySelector('#pdSimilaresWrap .similares-flechas').style.display = similares.length > 1 ? '' : 'none';
+}
+
+function renderVistaSegunHash(){
+  var hash = location.hash.replace('#','');
+  if(hash.indexOf('producto/') === 0){
+    var id = hash.slice('producto/'.length);
+    var prod = cargarProductos().find(function(p){ return p.id === id; });
+    if(prod){ mostrarProductoDetalle(prod); return; }
+  }
+  mostrarHome();
+}
+
+function renderPromoBanner(){
+  var promo = promoActiva();
+  var el = document.getElementById('promoBanner');
+  if(!el) return;
+  if(promo){
+    el.style.display = '';
+    el.querySelector('span').textContent = (promo.nombre || 'Promo') + ' — ' + promo.descuento + '% OFF hasta el ' + promo.hasta.split('-').reverse().slice(0,2).join('.');
+  }else{
+    el.style.display = 'none';
+  }
+}
+renderPromoBanner();
+
+requestAnimationFrame(function(){requestAnimationFrame(function(){
+  document.documentElement.classList.add('reveal');
+});});
+
+/* tema claro / oscuro */
+var html = document.documentElement;
+var temaBtn = document.getElementById('temaBtn');
+var temaTexto = document.getElementById('temaTexto');
+var guardado = null;
+try{ guardado = localStorage.getItem('tn_baires_tema'); }catch(e){}
+if(guardado === 'claro'){
+  html.setAttribute('data-tema','claro');
+  temaTexto.textContent = 'Oscuro';
+  temaBtn.setAttribute('aria-pressed','true');
+}
+temaBtn.addEventListener('click', function(){
+  var esClaro = html.getAttribute('data-tema') === 'claro';
+  if(esClaro){
+    html.removeAttribute('data-tema');
+    temaTexto.textContent = 'Claro';
+    temaBtn.setAttribute('aria-pressed','false');
+  }else{
+    html.setAttribute('data-tema','claro');
+    temaTexto.textContent = 'Oscuro';
+    temaBtn.setAttribute('aria-pressed','true');
+  }
+  try{ localStorage.setItem('tn_baires_tema', html.getAttribute('data-tema') === 'claro' ? 'claro' : 'oscuro'); }catch(e){}
+});
+
+/* ---------- modal de info: Guía de talles / Cambios / Envíos / Autenticidad ---------- */
+var infoContenido = {
+  talles: {
+    titulo: 'Guía de talles',
+    html: '<p>Todo el calzado es talle real de fábrica (no hay medio talle propio). Si dudás entre dos números, en TN y Air Max recomendamos ir al más grande.</p>' +
+      '<h4>Equivalencias</h4>' +
+      '<table><tr><th>AR</th><th>US</th><th>CM</th></tr>' +
+      '<tr><td>38/39</td><td>7</td><td>25</td></tr>' +
+      '<tr><td>40</td><td>8</td><td>25</td></tr>' +
+      '<tr><td>41</td><td>8.5</td><td>26.5</td></tr>' +
+      '<tr><td>42</td><td>9.5</td><td>27.5</td></tr>' +
+      '<tr><td>43</td><td>10</td><td>28</td></tr>' +
+      '<tr><td>44</td><td>11</td><td>29</td></tr>' +
+      '<tr><td>45</td><td>12</td><td>30</td></tr></table>' +
+      '<p style="margin-top:12px">¿No estás seguro de tu talle? Escribinos por WhatsApp con el talle que usás en otra zapatilla y te ayudamos a elegir.</p>'
+  },
+  cambios: {
+    titulo: 'Cambios',
+    html: '<p>Tenés <strong style="color:var(--hueso)">7 días corridos</strong> desde que recibís el par para pedir un cambio de talle o devolución.</p>' +
+      '<h4>Condiciones</h4>' +
+      '<ul>' +
+      '<li>El par tiene que estar sin uso, con la caja original y las etiquetas puestas.</li>' +
+      '<li>El costo de envío del cambio corre por cuenta del comprador, salvo que el error haya sido nuestro.</li>' +
+      '<li>Los pares marcados como últimas unidades pueden no tener stock para cambio de talle — en ese caso se hace devolución del dinero.</li>' +
+      '</ul>' +
+      '<p>Para iniciar un cambio, escribinos por WhatsApp con tu nombre y el par que compraste.</p>'
+  },
+  envios: {
+    titulo: 'Envíos',
+    html: '<p>Tenés 3 formas de recibir tu pedido.</p>' +
+      '<h4>🚚 Moto (CABA / GBA cercano)</h4>' +
+      '<p>Coordinamos el mismo día. El precio se calcula por distancia real desde el local — lo ves al momento en la bolsa, antes de confirmar.</p>' +
+      '<h4>📦 Correo Argentino</h4>' +
+      '<ul>' +
+      '<li>AMBA: 24 a 48 hs hábiles.</li>' +
+      '<li>Interior del país: 3 a 5 días hábiles.</li>' +
+      '</ul>' +
+      '<h4>🏠 Retiro en el local</h4>' +
+      '<p>Sin costo. Coordinamos día y horario por WhatsApp.</p>' +
+      '<p style="margin-top:10px">El costo final de cualquier envío te lo mostramos en la bolsa antes de confirmar el pedido.</p>'
+  },
+  autenticidad: {
+    titulo: 'Autenticidad',
+    html: '<p>Todo lo que vendemos es <strong style="color:var(--hueso)">100% original</strong>, comprado directo a distribuidores y particulares verificados.</p>' +
+      '<h4>Cómo lo revisamos</h4>' +
+      '<ul>' +
+      '<li>Cada par se revisa a mano en el local antes de publicarlo: costuras, materiales, etiquetado interno y caja.</li>' +
+      '<li>Si un par no pasa nuestro control, no se vende — no reponemos stock replicado.</li>' +
+      '</ul>' +
+      '<p>Si querés, podemos mandarte fotos adicionales del par (incluida la caja y etiquetas) antes de que confirmes la compra.</p>'
+  }
+};
+var infoFondo = document.getElementById('infoFondo');
+var infoModal = document.getElementById('infoModal');
+function abrirInfo(clave){
+  var data = infoContenido[clave];
+  if(!data) return;
+  document.getElementById('infoTitulo').textContent = data.titulo;
+  document.getElementById('infoCuerpo').innerHTML = data.html;
+  infoFondo.classList.add('abierta');
+  infoModal.classList.add('abierta');
+}
+function cerrarInfo(){
+  infoFondo.classList.remove('abierta');
+  infoModal.classList.remove('abierta');
+}
+document.querySelectorAll('[data-info]').forEach(function(b){
+  b.addEventListener('click', function(){ abrirInfo(b.dataset.info); });
+});
+document.getElementById('infoCerrar').addEventListener('click', cerrarInfo);
+infoFondo.addEventListener('click', cerrarInfo);
+document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') cerrarInfo(); });
+
+/* mega menu: toggle por click (touch / accesibilidad), ademas del hover CSS */
+var topBar = document.getElementById('top');
+var marca = topBar.querySelector('.marca');
+marca.addEventListener('click', function(ev){
+  var vistaProd = document.getElementById('vistaProducto');
+  if(vistaProd && vistaProd.style.display !== 'none'){
+    /* viendo el detalle de un producto: el logo siempre vuelve al catalogo,
+       tanto en celular (donde si no, tocar el logo abria el menu) como en PC */
+    ev.preventDefault();
+    mostrarHome();
+    history.replaceState(null, '', '#inicio');
+    window.scrollTo(0, 0);
+    return;
+  }
+  if(window.matchMedia('(hover: hover)').matches) return; /* con mouse ya funciona por hover */
+  ev.preventDefault();
+  topBar.classList.toggle('abierto');
+});
+document.addEventListener('click', function(ev){
+  if(!topBar.contains(ev.target)) topBar.classList.remove('abierto');
+});
+
+function cerrarMenuMobile(){
+  topBar.classList.remove('abierto');
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  /* en PC el mega menu se abre con :hover puro (CSS), asi que blur() y sacar
+     la clase "abierto" no lo cierran — se queda pegado arriba tapando el
+     scroll suave. Lo forzamos cerrado un momento con esta clase. */
+  topBar.classList.add('cerrando-menu');
+  clearTimeout(cerrarMenuMobile._t);
+  cerrarMenuMobile._t = setTimeout(function(){ topBar.classList.remove('cerrando-menu'); }, 500);
+}
+
+/* links del mega menu que no filtran (Buzos/Pantalones/Remeras, nav normal): solo cierran */
+document.querySelectorAll('#top a:not(.marca):not([data-filtro-modelo])').forEach(function(a){
+  a.addEventListener('click', cerrarMenuMobile);
+});
+
+/* filtro de modelos: chips + links del mega menu */
+var chips = document.querySelectorAll('.filtro-chip');
+var itemsGrilla = document.querySelectorAll('#grilla .item');
+var dropDesc = document.getElementById('dropDesc');
+var filtros = document.getElementById('filtros');
+var nombresModelo = {
+  todos:'', ofertas:'Ofertas', tn:'TN', am95:'Air Max 95', shox:'Shox R4',
+  jordan:'Jordan', mizuno:'Mizuno', nocta:'NOCTA', uptempo:'Uptempo'
+};
+
+function aplicarFiltro(valor){
+  var visibles = 0;
+  itemsGrilla.forEach(function(it){
+    var mostrar = (valor === 'todos') || (valor === 'ofertas' ? it.dataset.oferta === '1' : it.dataset.modelo === valor);
+    it.style.display = mostrar ? '' : 'none';
+    if(mostrar) visibles++;
+  });
+  chips.forEach(function(c){ c.classList.toggle('activo', c.dataset.filtro === valor); });
+  if(dropDesc){
+    dropDesc.textContent = (valor === 'todos')
+      ? 'Veinte pares en el local. Cuando se van, se van: no reponemos numeración.'
+      : (valor === 'ofertas' && visibles === 0)
+      ? 'No hay ofertas activas por ahora — volvé a mirar pronto.'
+      : 'Mostrando ' + visibles + (visibles === 1 ? ' par' : ' pares') + ' de ' + nombresModelo[valor] + '.';
+  }
+}
+
+/* scroll suave propio, con duracion fija y easing — el scrollIntoView
+   nativo del navegador varia mucho de velocidad/sensacion entre celular
+   y PC (y entre navegadores), esto se ve igual en todos lados */
+function scrollSuaveHasta(el, duracionMs){
+  duracionMs = duracionMs || 650;
+  var headerEl = document.getElementById('top');
+  var offsetHeader = headerEl ? headerEl.offsetHeight : 0;
+  var destino = el.getBoundingClientRect().top + window.pageYOffset - offsetHeader - 12;
+  var inicio = window.pageYOffset;
+  var distancia = destino - inicio;
+  if(Math.abs(distancia) < 2) return;
+  var t0 = null;
+  function easeInOutQuad(t){ return t < 0.5 ? 2*t*t : -1 + (4-2*t)*t; }
+  function paso(ts){
+    if(t0 === null) t0 = ts;
+    var progreso = Math.min((ts - t0) / duracionMs, 1);
+    window.scrollTo(0, inicio + distancia * easeInOutQuad(progreso));
+    if(progreso < 1) requestAnimationFrame(paso);
+  }
+  requestAnimationFrame(paso);
+}
+
+/* aplica el filtro, cierra el menu mobile si estaba abierto, y siempre deja
+   la barra de filtros pegada arriba — un solo scroll, suave */
+function irAFiltro(valor){
+  aplicarFiltro(valor);
+  cerrarMenuMobile();
+  requestAnimationFrame(function(){
+    if(filtros) scrollSuaveHasta(filtros);
+  });
+}
+
+chips.forEach(function(c){
+  c.addEventListener('click', function(){ irAFiltro(c.dataset.filtro); });
+});
+
+document.querySelectorAll('[data-filtro-modelo]').forEach(function(a){
+  a.addEventListener('click', function(ev){
+    ev.preventDefault();
+    irAFiltro(a.dataset.filtroModelo);
+  });
+});
+
+/* slideshow del hero */
+var slides = document.querySelectorAll('#heroImg img');
+if(slides.length > 1){
+  var idx = 0;
+  setInterval(function(){
+    slides[idx].classList.remove('activa');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('activa');
+  }, 4200);
+}
+
+/* slider de zapatillas: auto-desliza a la derecha y se puede arrastrar con mouse o dedo.
+   Distingue click de arrastre (para que los links a los productos funcionen) y da
+   un respiro despues de soltar antes de retomar el auto-slide, para no pelear
+   contra el scroll con inercia que dejan mouse/touch al soltar. */
+(function(){
+  var pista = document.getElementById('sliderPista');
+  if(!pista) return;
+  var arrastrando = false;
+  var pausadoHasta = 0; /* timestamp: mientras Date.now() sea menor a esto, no auto-avanza */
+  var startX = 0, startScroll = 0, distanciaArrastrada = 0;
+  var velocidad = 0.28;
+  var RESPIRO_MS = 900;
+
+  function pausar(){ pausadoHasta = Date.now() + RESPIRO_MS; }
+
+  function mitad(){ return pista.scrollWidth / 2; }
+
+  /* arranca desde la mitad del contenido duplicado para poder ir hacia la derecha sin tope */
+  requestAnimationFrame(function(){
+    pista.scrollLeft = mitad();
+  });
+
+  /* mantiene el loop infinito sea cual sea la causa del scroll (auto, mouse o touch) */
+  pista.addEventListener('scroll', function(){
+    var m = mitad();
+    if(m <= 0) return;
+    if(pista.scrollLeft <= 0){
+      pista.scrollLeft += m;
+    } else if(pista.scrollLeft >= m * 2 - pista.clientWidth){
+      pista.scrollLeft -= m;
+    }
+  });
+
+  function auto(){
+    if(!arrastrando && Date.now() >= pausadoHasta){
+      pista.scrollLeft -= velocidad;
+    }
+    requestAnimationFrame(auto);
+  }
+  requestAnimationFrame(auto);
+
+  /* arrastre con mouse (desktop) */
+  pista.addEventListener('mousedown', function(ev){
+    arrastrando = true;
+    distanciaArrastrada = 0;
+    pista.classList.add('arrastrando');
+    startX = ev.pageX;
+    startScroll = pista.scrollLeft;
+  });
+  window.addEventListener('mousemove', function(ev){
+    if(!arrastrando) return;
+    var delta = ev.pageX - startX;
+    distanciaArrastrada = Math.max(distanciaArrastrada, Math.abs(delta));
+    pista.scrollLeft = startScroll - delta;
+  });
+  window.addEventListener('mouseup', function(){
+    if(!arrastrando) return;
+    arrastrando = false;
+    pista.classList.remove('arrastrando');
+    pausar();
+  });
+  /* si arrastró de verdad, cancela el click para no navegar de golpe al soltar */
+  pista.addEventListener('click', function(ev){
+    if(distanciaArrastrada > 6){ ev.preventDefault(); }
+  });
+
+  /* en celular el scroll táctil nativo ya permite arrastrar con el dedo; */
+  /* pausamos el auto-slide mientras el dedo toca y un rato despues de soltar,
+     para no chocar con la inercia del scroll nativo */
+  pista.addEventListener('touchstart', function(){ arrastrando = true; }, {passive:true});
+  pista.addEventListener('touchend', function(){ arrastrando = false; pausar(); }, {passive:true});
+  pista.addEventListener('touchcancel', function(){ arrastrando = false; pausar(); }, {passive:true});
+})();
+
+/* talles: pieza destacada, ahora con stock real por talle (antes era Math.random) */
+document.querySelectorAll('.talla[data-talle]').forEach(function(t){
+  t.addEventListener('click', function(){
+    document.querySelectorAll('.talla').forEach(function(o){o.setAttribute('aria-pressed','false');});
+    t.setAttribute('aria-pressed','true');
+    document.getElementById('stock-n').textContent = String(t.dataset.stock).padStart(2,'0');
+  });
+});
+
+/* talles: cada tarjeta de la grilla — elegir talle actualiza el stock real de esa tarjeta */
+document.querySelectorAll('.item-talles').forEach(function(grupo){
+  grupo.querySelectorAll('.talle-mini[data-talle]').forEach(function(t){
+    t.addEventListener('click', function(){
+      grupo.querySelectorAll('.talle-mini').forEach(function(o){
+        o.classList.remove('activo'); o.setAttribute('aria-pressed','false');
+      });
+      t.classList.add('activo');
+      t.setAttribute('aria-pressed','true');
+      var art = grupo.closest('.item');
+      var stockTxt = art && art.querySelector('.item-stock-txt');
+      if(stockTxt){
+        var base = stockTxt.textContent.split('—')[0].trim();
+        stockTxt.textContent = base + ' — ' + String(t.dataset.stock).padStart(2,'0') + ' pairs';
+      }
+    });
+  });
+});
+
+/* ==========================================================================
+   ENVIOS — moto calculada por distancia real (geolocalización) + nafta,
+   correo a tarifa fija, retiro gratis. Config editable desde admin.html.
+   ========================================================================== */
+var LS_ENVIOS = 'tn_baires_envios';
+var ENVIOS_DEFAULT = {
+  lat: null, lng: null,           /* ubicacion del local — la carga el dueño desde admin */
+  tarifaKm: 500,                  /* $ por km recorrido — la fija el dueño */
+  factorRuta: 1.35,               /* respaldo: si falla la consulta de ruta, linea recta x este factor */
+  costoCorreo: 4500
+};
+function cargarEnvios(){
+  try{
+    var raw = localStorage.getItem(LS_ENVIOS);
+    return raw ? Object.assign({}, ENVIOS_DEFAULT, JSON.parse(raw)) : ENVIOS_DEFAULT;
+  }catch(e){ return ENVIOS_DEFAULT; }
+}
+/* distancia en linea recta entre dos puntos (formula de Haversine) — respaldo */
+function distanciaKm(lat1, lon1, lat2, lon2){
+  var R = 6371;
+  var dLat = (lat2-lat1) * Math.PI/180;
+  var dLon = (lon2-lon1) * Math.PI/180;
+  var a = Math.sin(dLat/2)*Math.sin(dLat/2) +
+          Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180) *
+          Math.sin(dLon/2)*Math.sin(dLon/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+/* geocoding de direcciones via Nominatim (OpenStreetMap) — gratis, sin api key.
+   Uso respetuoso: 1 consulta por vez, con debounce, según la politica de uso
+   de Nominatim (nominatim.org/release-docs/latest/api/Search/). */
+function buscarDirecciones(texto){
+  var url = 'https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=ar&q=' + encodeURIComponent(texto);
+  return fetch(url).then(function(r){
+    if(!r.ok) throw new Error('nominatim http ' + r.status);
+    return r.json();
+  });
+}
+/* distancia real por calle via OSRM (gratis, sin api key). El servidor publico
+   de demo (router.project-osrm.org) no tiene garantia de disponibilidad —
+   si falla, cae automaticamente en linea recta x factorRuta como respaldo. */
+function distanciaRutaKm(lat1, lon1, lat2, lon2){
+  var url = 'https://router.project-osrm.org/route/v1/driving/' + lon1 + ',' + lat1 + ';' + lon2 + ',' + lat2 + '?overview=false';
+  return fetch(url).then(function(r){
+    if(!r.ok) throw new Error('osrm http ' + r.status);
+    return r.json();
+  }).then(function(data){
+    if(!data.routes || !data.routes.length) throw new Error('osrm sin ruta');
+    return data.routes[0].distance / 1000;
+  });
+}
+function costoMoto(km){
+  var e = cargarEnvios();
+  return Math.round(km * e.tarifaKm);
+}
+
+var envioSeleccionado = {tipo:'retiro', costo:0, km:null};
+
+function actualizarPreviosEnvio(){
+  var e = cargarEnvios();
+  document.getElementById('envioCorreoPrecioMini').textContent = formatoPrecio(e.costoCorreo);
+  document.getElementById('envioMotoPrecioMini').textContent = 'según distancia';
+}
+actualizarPreviosEnvio();
+
+document.querySelectorAll('input[name="tipoEnvio"]').forEach(function(radio){
+  radio.addEventListener('change', function(){
+    document.getElementById('envioMotoPanel').style.display = radio.value === 'moto' ? '' : 'none';
+    document.getElementById('envioCorreoPanel').style.display = radio.value === 'correo' ? '' : 'none';
+    document.getElementById('correoError').style.display = 'none';
+    document.getElementById('envioError').style.display = 'none';
+    document.getElementById('envioResultado').style.display = 'none';
+    document.getElementById('envioSugerencias').style.display = 'none';
+    var e = cargarEnvios();
+    if(radio.value === 'retiro'){ envioSeleccionado = {tipo:'retiro', costo:0, km:null}; }
+    else if(radio.value === 'correo'){ envioSeleccionado = {tipo:'correo', costo:e.costoCorreo, km:null}; }
+    else{ envioSeleccionado = {tipo:'moto', costo:0, km:null}; } /* falta calcular */
+    renderBolsa();
+  });
+});
+
+/* Correo Argentino: a sucursal / a domicilio — mismos campos que pide el correo */
+var correoModo = 'sucursal';
+document.querySelectorAll('.correo-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.correo-tab').forEach(function(t){ t.classList.remove('activo'); });
+    tab.classList.add('activo');
+    correoModo = tab.dataset.modo;
+    document.getElementById('correoFormSucursal').style.display = correoModo === 'sucursal' ? '' : 'none';
+    document.getElementById('correoFormDomicilio').style.display = correoModo === 'domicilio' ? '' : 'none';
+    document.getElementById('correoError').style.display = 'none';
+  });
+});
+
+function datosCorreo(){
+  var formId = correoModo === 'sucursal' ? '#correoFormSucursal' : '#correoFormDomicilio';
+  var datos = {};
+  document.querySelectorAll(formId + ' input').forEach(function(inp){
+    datos[inp.dataset.campo] = inp.value.trim();
+  });
+  return datos;
+}
+
+/* campos obligatorios por modalidad — usuario de IG queda opcional, como en la plantilla */
+var CAMPOS_OBLIGATORIOS = {
+  sucursal: ['nombre','dni','provincia','localidad','direccionSucursal','codigoPostal','telefono'],
+  domicilio: ['nombre','dni','provincia','localidad','calle','altura','codigoPostal','telefono']
+};
+
+function correoCompleto(){
+  var datos = datosCorreo();
+  var faltantes = CAMPOS_OBLIGATORIOS[correoModo].filter(function(c){ return !datos[c]; });
+  return faltantes.length === 0;
+}
+
+function textoCorreo(){
+  var d = datosCorreo();
+  if(correoModo === 'sucursal'){
+    return 'CORREO ARG: A SUCURSAL\n' +
+      'Nombre: ' + d.nombre + '\n' +
+      'DNI: ' + d.dni + '\n' +
+      'Provincia: ' + d.provincia + '\n' +
+      'Localidad: ' + d.localidad + '\n' +
+      'Dirección sucursal: ' + d.direccionSucursal + '\n' +
+      'Código postal: ' + d.codigoPostal + '\n' +
+      'Teléfono: ' + d.telefono;
+  }
+  return 'CORREO ARG: A DOMICILIO\n' +
+    'Nombre y apellido: ' + d.nombre + '\n' +
+    'DNI: ' + d.dni + '\n' +
+    'Provincia: ' + d.provincia + '\n' +
+    'Localidad: ' + d.localidad + '\n' +
+    'Calle: ' + d.calle + '\n' +
+    'Altura: ' + d.altura + '\n' +
+    'Código postal: ' + d.codigoPostal + '\n' +
+    (d.usuarioIg ? 'Usuario de IG: ' + d.usuarioIg + '\n' : '') +
+    'Teléfono: ' + d.telefono;
+}
+
+function calcularEnvioMoto(miLat, miLng){
+  var errEl = document.getElementById('envioError');
+  var resEl = document.getElementById('envioResultado');
+  errEl.style.display = 'none';
+  var e = cargarEnvios();
+  if(e.lat === null || e.lng === null){
+    errEl.textContent = 'El local todavía no configuró su ubicación. Consultanos por WhatsApp para coordinar el envío.';
+    errEl.style.display = '';
+    return;
+  }
+  resEl.style.display = '';
+  resEl.textContent = 'Calculando distancia…';
+  distanciaRutaKm(e.lat, e.lng, miLat, miLng).then(function(km){
+    mostrarResultadoEnvio(km, true);
+  }).catch(function(){
+    /* si falla OSRM (sin señal, servidor caido) cae en linea recta x factor */
+    var recta = distanciaKm(e.lat, e.lng, miLat, miLng) * e.factorRuta;
+    mostrarResultadoEnvio(recta, false);
+  });
+}
+function mostrarResultadoEnvio(km, esRutaReal){
+  var costo = costoMoto(km);
+  envioSeleccionado = {tipo:'moto', costo:costo, km:km};
+  var resEl = document.getElementById('envioResultado');
+  resEl.style.display = '';
+  resEl.textContent = '🚚 Envío en moto — ' + km.toFixed(1) + ' km' + (esRutaReal ? '' : ' (aprox.)') + ' — ' + formatoPrecio(costo);
+  renderBolsa();
+}
+
+/* autocompletado de direcciones (Nominatim / OpenStreetMap) con debounce,
+   para no golpear la API en cada tecla */
+var direccionDebounce = null;
+document.getElementById('envioDireccionInput').addEventListener('input', function(){
+  var texto = this.value.trim();
+  var sugEl = document.getElementById('envioSugerencias');
+  clearTimeout(direccionDebounce);
+  if(texto.length < 5){ sugEl.style.display = 'none'; sugEl.innerHTML = ''; return; }
+  direccionDebounce = setTimeout(function(){
+    buscarDirecciones(texto).then(function(resultados){
+      if(!resultados.length){
+        sugEl.innerHTML = '<div class="envio-sug-item" style="color:var(--humo);cursor:default">Sin resultados — probá con más detalle.</div>';
+        sugEl.style.display = '';
+        return;
+      }
+      sugEl.innerHTML = resultados.map(function(r, i){
+        return '<button type="button" class="envio-sug-item" data-idx="'+i+'">'+r.display_name+'</button>';
+      }).join('');
+      sugEl.style.display = '';
+      sugEl.querySelectorAll('.envio-sug-item[data-idx]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var r = resultados[parseInt(btn.dataset.idx, 10)];
+          document.getElementById('envioDireccionInput').value = r.display_name;
+          sugEl.style.display = 'none';
+          calcularEnvioMoto(parseFloat(r.lat), parseFloat(r.lon));
+        });
+      });
+    }).catch(function(){
+      sugEl.innerHTML = '<div class="envio-sug-item" style="color:var(--humo);cursor:default">No pudimos buscar direcciones ahora. Probá "Usar mi ubicación" o consultanos por WhatsApp.</div>';
+      sugEl.style.display = '';
+    });
+  }, 500);
+});
+document.addEventListener('click', function(ev){
+  var sugEl = document.getElementById('envioSugerencias');
+  if(!sugEl.contains(ev.target) && ev.target.id !== 'envioDireccionInput') sugEl.style.display = 'none';
+});
+
+document.getElementById('btnUbicacion').addEventListener('click', function(){
+  var errEl = document.getElementById('envioError');
+  errEl.style.display = 'none';
+  if(!navigator.geolocation){
+    errEl.textContent = 'Tu navegador no permite compartir ubicación. Escribí tu dirección arriba.';
+    errEl.style.display = '';
+    return;
+  }
+  var btn = this;
+  var textoOriginal = btn.textContent;
+  btn.textContent = 'Buscando tu ubicación…';
+  btn.disabled = true;
+  navigator.geolocation.getCurrentPosition(function(pos){
+    btn.textContent = textoOriginal;
+    btn.disabled = false;
+    calcularEnvioMoto(pos.coords.latitude, pos.coords.longitude);
+  }, function(){
+    btn.textContent = textoOriginal;
+    btn.disabled = false;
+    errEl.textContent = 'No pudimos acceder a tu ubicación (¿lo permitiste en el navegador?). Escribí tu dirección arriba.';
+    errEl.style.display = '';
+  }, {timeout: 10000});
+});
+
+/* ==========================================================================
+   BOLSA — carrito real, persiste en localStorage (sobrevive a recargar)
+   ========================================================================== */
+var BOLSA_KEY = 'tn_baires_bolsa_v1';
+var WHATSAPP_NUM = '5491165668692'; /* numero real: 11 6566-8692 (formato WhatsApp: 54 + 9 + area sin 0 + numero sin 15) */
+
+/* ==========================================================================
+   PAGOS — datos que carga el dueño desde el panel admin (alias/CBU de
+   transferencia y Mercado Pago, instrucciones de Rapipago/Pago Fácil).
+   Sin backend: la confirmacion del pago la hace el dueño a mano (le llega
+   el comprobante por WhatsApp), no hay verificacion automatica.
+   ========================================================================== */
+var LS_PAGOS = 'tn_baires_pagos';
+var PAGOS_DEFAULT = {
+  recargoPorcentaje: 10,
+  transferenciaAlias: '', transferenciaCbu: '', transferenciaTitular: '',
+  mpAlias: '', mpUsuario: '', mpFuncionUrl: '',
+  rapipagoTexto: '', pagofacilTexto: ''
+};
+function cargarPagos(){
+  try{
+    var raw = localStorage.getItem(LS_PAGOS);
+    return raw ? Object.assign({}, PAGOS_DEFAULT, JSON.parse(raw)) : PAGOS_DEFAULT;
+  }catch(e){ return PAGOS_DEFAULT; }
+}
+var metodoPagoSeleccionado = 'efectivo';
+function recargoAplicable(){
+  return metodoPagoSeleccionado === 'transferencia' || metodoPagoSeleccionado === 'mercadopago';
+}
+function totalConRecargo(subtotal, envioCosto){
+  var pg = cargarPagos();
+  var base = subtotal + (envioCosto || 0);
+  return recargoAplicable() ? Math.round(base * (1 + pg.recargoPorcentaje/100)) : base;
+}
+
+function leerBolsa(){
+  try{
+    var raw = localStorage.getItem(BOLSA_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function guardarBolsa(items){
+  try{ localStorage.setItem(BOLSA_KEY, JSON.stringify(items)); }catch(e){}
+}
+function formatoPrecio(n){
+  return '$' + n.toLocaleString('es-AR');
+}
+
+var bolsaItems = leerBolsa();
+var bolsaLista = document.getElementById('bolsaLista');
+var bolsaTotalEl = document.getElementById('bolsaTotal');
+var cuenta = document.getElementById('cuenta');
+var bolsa  = document.getElementById('bolsa');
+
+function renderBolsa(){
+  bolsaLista.innerHTML = '';
+  if(bolsaItems.length === 0){
+    bolsaLista.innerHTML = '<div class="bolsa-vacia">Todavía no agregaste nada.<br>Elegí un par y sumalo a la bolsa.</div>';
+  }else{
+    bolsaItems.forEach(function(it, idx){
+      var div = document.createElement('div');
+      div.className = 'bolsa-item';
+      var img = document.createElement('img');
+      img.src = it.img; img.alt = '';
+      var info = document.createElement('div');
+      info.className = 'bolsa-item-info';
+      info.innerHTML =
+        '<b></b><span></span>' +
+        '<div class="bolsa-item-fila"><span class="bolsa-item-precio"></span>' +
+        '<button class="bolsa-item-quitar" data-quitar="'+idx+'">Quitar</button></div>';
+      info.querySelector('b').textContent = it.nombre;
+      info.querySelector('span').textContent = it.cw + ' · Talle ' + it.talle;
+      info.querySelector('.bolsa-item-precio').textContent = formatoPrecio(it.precio);
+      div.appendChild(img); div.appendChild(info);
+      bolsaLista.appendChild(div);
+    });
+  }
+  var subtotal = bolsaItems.reduce(function(acc,it){ return acc + it.precio; }, 0);
+  var total = totalConRecargo(subtotal, envioSeleccionado.costo);
+  bolsaTotalEl.textContent = formatoPrecio(total);
+  cuenta.textContent = String(bolsaItems.length).padStart(2,'0');
+  bolsa.dataset.lleno = bolsaItems.length > 0 ? '1' : '0';
+  bolsaLista.querySelectorAll('[data-quitar]').forEach(function(b){
+    b.addEventListener('click', function(){
+      bolsaItems.splice(parseInt(b.dataset.quitar,10), 1);
+      guardarBolsa(bolsaItems);
+      renderBolsa();
+    });
+  });
+}
+renderBolsa();
+
+var bolsaFondo = document.getElementById('bolsaFondo');
+var bolsaPanel = document.getElementById('bolsaPanel');
+function abrirBolsa(){ bolsaFondo.classList.add('abierta'); bolsaPanel.classList.add('abierta'); mostrarPasoBolsa('resumen'); }
+function cerrarBolsa(){ bolsaFondo.classList.remove('abierta'); bolsaPanel.classList.remove('abierta'); }
+bolsa.addEventListener('click', abrirBolsa);
+document.getElementById('bolsaCerrar').addEventListener('click', cerrarBolsa);
+
+/* ==========================================================================
+   PASOS DE LA COMPRA: Resumen -> Entrega -> Pago -> Finalizar por WhatsApp
+   ========================================================================== */
+var bolsaPaso = 'resumen';
+function mostrarPasoBolsa(paso){
+  bolsaPaso = paso;
+  document.getElementById('bolsaLista').style.display = paso === 'resumen' ? '' : 'none';
+  document.getElementById('bolsaEnvio').style.display = paso === 'entrega' ? '' : 'none';
+  document.getElementById('bolsaPago').style.display = paso === 'pago' ? '' : 'none';
+  document.getElementById('bolsaAccionesResumen').style.display = paso === 'resumen' ? '' : 'none';
+  document.getElementById('bolsaAccionesEntrega').style.display = paso === 'entrega' ? '' : 'none';
+  document.getElementById('bolsaAccionesPago').style.display = paso === 'pago' ? '' : 'none';
+}
+document.getElementById('bolsaIniciarCompra').addEventListener('click', function(){
+  if(bolsaItems.length === 0) return;
+  mostrarPasoBolsa('entrega');
+});
+document.getElementById('bolsaVerMasProductos').addEventListener('click', cerrarBolsa);
+document.getElementById('bolsaVolverResumen').addEventListener('click', function(){ mostrarPasoBolsa('resumen'); });
+document.getElementById('bolsaVolverEntrega').addEventListener('click', function(){ mostrarPasoBolsa('entrega'); });
+document.getElementById('bolsaContinuarPago').addEventListener('click', function(){
+  if(envioSeleccionado.tipo === 'moto' && !envioSeleccionado.km){
+    document.getElementById('envioError').textContent = 'Calculá primero el envío en moto (dirección o ubicación).';
+    document.getElementById('envioError').style.display = '';
+    return;
+  }
+  if(envioSeleccionado.tipo === 'correo' && !correoCompleto()){
+    document.getElementById('correoError').textContent = 'Completá todos los datos para el envío por Correo Argentino.';
+    document.getElementById('correoError').style.display = '';
+    return;
+  }
+  renderPagoDetalle();
+  mostrarPasoBolsa('pago');
+});
+
+/* metodo de pago elegido — efectivo por defecto, transferencia y mercado
+   pago llevan el recargo que fija el dueño (10% por defecto) */
+document.querySelectorAll('input[name="metodoPago"]').forEach(function(radio){
+  radio.addEventListener('change', function(){
+    metodoPagoSeleccionado = radio.value;
+    renderPagoDetalle();
+    renderBolsa();
+  });
+});
+function renderPagoDetalle(){
+  var pg = cargarPagos();
+  document.getElementById('pagoRecargoTransferenciaTxt').textContent = '+' + pg.recargoPorcentaje + '%';
+  document.getElementById('pagoRecargoMpTxt').textContent = '+' + pg.recargoPorcentaje + '%';
+  var el = document.getElementById('pagoDetalle');
+  if(metodoPagoSeleccionado === 'transferencia'){
+    el.innerHTML = (pg.transferenciaAlias || pg.transferenciaCbu)
+      ? 'Transferí el total a:<br>Alias: <b>'+(pg.transferenciaAlias || '—')+'</b><br>CBU/CVU: <b>'+(pg.transferenciaCbu || '—')+'</b>' + (pg.transferenciaTitular ? '<br>Titular: '+pg.transferenciaTitular : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
+      : 'El local todavía no cargó sus datos de transferencia. Vas a coordinarlo por WhatsApp.';
+  }else if(metodoPagoSeleccionado === 'mercadopago'){
+    if(pg.mpFuncionUrl){
+      el.innerHTML = 'Pagás de verdad con Mercado Pago (tarjeta, dinero en cuenta, etc.) — se confirma solo, automáticamente.';
+    }else{
+      el.innerHTML = (pg.mpAlias || pg.mpUsuario)
+        ? 'Enviá el total desde tu app de Mercado Pago a:<br>Alias: <b>'+(pg.mpAlias || '—')+'</b>' + (pg.mpUsuario ? '<br>Usuario: '+pg.mpUsuario : '') + '<br><br>Mandanos el comprobante junto con tu pedido por WhatsApp — el dueño confirma el pago a mano.'
+        : 'El local todavía no cargó sus datos de Mercado Pago. Vas a coordinarlo por WhatsApp.';
+    }
+  }else if(metodoPagoSeleccionado === 'rapipago'){
+    el.innerHTML = pg.rapipagoTexto
+      ? pg.rapipagoTexto.replace(/\n/g,'<br>')
+      : 'El local todavía no cargó las instrucciones de Rapipago. Vas a coordinarlo por WhatsApp.';
+  }else if(metodoPagoSeleccionado === 'pagofacil'){
+    el.innerHTML = pg.pagofacilTexto
+      ? pg.pagofacilTexto.replace(/\n/g,'<br>')
+      : 'El local todavía no cargó las instrucciones de Pago Fácil. Vas a coordinarlo por WhatsApp.';
+  }else{
+    el.innerHTML = 'Pagás en efectivo al retirar o al recibir tu pedido.';
+  }
+  /* si el dueño ya conectó el checkout automático de MP, ese boton
+     reemplaza al de WhatsApp cuando el metodo elegido es Mercado Pago */
+  var usaCheckoutMP = metodoPagoSeleccionado === 'mercadopago' && !!pg.mpFuncionUrl;
+  document.getElementById('bolsaWhatsapp').style.display = usaCheckoutMP ? 'none' : '';
+  document.getElementById('bolsaPagarMP').style.display = usaCheckoutMP ? '' : 'none';
+  document.getElementById('bolsaPagarMPError').style.display = 'none';
+}
+bolsaFondo.addEventListener('click', cerrarBolsa);
+document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') cerrarBolsa(); });
+
+document.getElementById('bolsaVaciar').addEventListener('click', function(){
+  if(bolsaItems.length === 0) return;
+  bolsaItems = [];
+  guardarBolsa(bolsaItems);
+  renderBolsa();
+});
+
+/* ==========================================================================
+   FINALIZAR PEDIDO — arma el mensaje de WhatsApp con el detalle completo:
+   productos, envío y método de pago elegido (con el recargo si aplica).
+
+   Nota sobre Mercado Pago / Rapipago / Pago Fácil: sin el backend de
+   backend/README.md conectado (campo "URL de la función" en el panel,
+   pestaña Pagos) no hay forma de que el sitio confirme automáticamente que
+   el pago se acreditó — eso requiere un webhook server-side con el Access
+   Token privado de la cuenta. Por eso, mientras no esté conectado, estos
+   métodos muestran los datos para pagar y el pedido se coordina por
+   WhatsApp: el dueño confirma el pago a mano cuando le llega el
+   comprobante. Apenas se carga esa URL, "Pagar con Mercado Pago" (más
+   abajo) reemplaza a este botón para el método Mercado Pago y el pago pasa
+   a confirmarse solo.
+   ========================================================================== */
+document.getElementById('bolsaWhatsapp').addEventListener('click', function(){
+  if(bolsaItems.length === 0){ abrirBolsa(); return; }
+  var lineas = bolsaItems.map(function(it){
+    return '• ' + it.nombre + ' ' + it.cw + ' — Talle ' + it.talle + ' — ' + formatoPrecio(it.precio);
+  });
+  var subtotal = bolsaItems.reduce(function(acc,it){ return acc + it.precio; }, 0);
+  var envioTxt = envioSeleccionado.tipo === 'retiro' ? 'Retiro en el local — Gratis'
+    : envioSeleccionado.tipo === 'correo' ? 'Correo Argentino — ' + formatoPrecio(envioSeleccionado.costo)
+    : 'Moto (' + envioSeleccionado.km.toFixed(1) + ' km) — ' + formatoPrecio(envioSeleccionado.costo);
+  var pg = cargarPagos();
+  var metodoTxt = {
+    efectivo:'Efectivo', transferencia:'Transferencia bancaria', mercadopago:'Mercado Pago',
+    rapipago:'Rapipago', pagofacil:'Pago Fácil'
+  }[metodoPagoSeleccionado];
+  var recargoTxt = recargoAplicable() ? ' (+' + pg.recargoPorcentaje + '%)' : '';
+  var total = totalConRecargo(subtotal, envioSeleccionado.costo);
+  var msg = 'Hola! Quiero encargar:\n' + lineas.join('\n') +
+    '\n\nEnvío: ' + envioTxt +
+    '\nPago: ' + metodoTxt + recargoTxt +
+    '\nTotal: ' + formatoPrecio(total);
+  if(envioSeleccionado.tipo === 'correo'){
+    msg += '\n\n' + textoCorreo();
+  }
+  window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
+});
+
+/* ==========================================================================
+   CHECKOUT AUTOMATICO DE MERCADO PAGO — solo activo cuando el dueño cargó
+   la URL de la función "crear preferencia" (panel > Pagos). Le pide al
+   backend (backend/README.md) que arme el checkout real y redirige ahí;
+   la confirmación del pago la hace el backend por su cuenta (webhook),
+   no esta página.
+   ========================================================================== */
+document.getElementById('bolsaPagarMP').addEventListener('click', function(){
+  if(bolsaItems.length === 0){ abrirBolsa(); return; }
+  var pg = cargarPagos();
+  var errEl = document.getElementById('bolsaPagarMPError');
+  errEl.style.display = 'none';
+  if(!pg.mpFuncionUrl){ return; } /* no debería poder llegar acá sin URL configurada */
+
+  var items = bolsaItems.map(function(it){
+    return {nombre: it.nombre, cw: it.cw, talle: it.talle, precio: it.precio, cantidad: 1};
+  });
+  if(envioSeleccionado.costo > 0){
+    var envioNombre = envioSeleccionado.tipo === 'correo' ? 'Correo Argentino' : 'Envío en moto';
+    items.push({nombre: envioNombre, cw: '', talle: '', precio: envioSeleccionado.costo, cantidad: 1});
+  }
+  var subtotal = bolsaItems.reduce(function(acc,it){ return acc + it.precio; }, 0);
+  var recargoMonto = totalConRecargo(subtotal, envioSeleccionado.costo) - subtotal - (envioSeleccionado.costo || 0);
+  if(recargoMonto > 0){
+    items.push({nombre: 'Recargo Mercado Pago (' + pg.recargoPorcentaje + '%)', cw: '', talle: '', precio: recargoMonto, cantidad: 1});
+  }
+
+  var btn = this;
+  var textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Redirigiendo a Mercado Pago…';
+
+  fetch(pg.mpFuncionUrl, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({items: items, externalReference: 'tn-' + Date.now()})
+  }).then(function(r){
+    if(!r.ok) throw new Error('backend http ' + r.status);
+    return r.json();
+  }).then(function(data){
+    if(!data.init_point) throw new Error('el backend no devolvió init_point');
+    window.location.href = data.init_point;
+  }).catch(function(err){
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+    errEl.textContent = 'No pudimos iniciar el pago con Mercado Pago (' + err.message + '). Probá de nuevo o elegí otro método.';
+    errEl.style.display = '';
+  });
+});
+
+function agregarABolsa(item){
+  bolsaItems.push(item);
+  guardarBolsa(bolsaItems);
+  renderBolsa();
+  /* No abrimos la bolsa automáticamente: si el usuario está sumando varios
+     pares seguidos, forzarlo a cerrar el panel cada vez sería muy molesto.
+     Alcanza con el flash del botón + el contador de la bolsa actualizándose. */
+  bolsa.classList.remove('pulso');
+  void bolsa.offsetWidth; /* fuerza el reflow para poder repetir la animación */
+  bolsa.classList.add('pulso');
+}
+
+document.querySelectorAll('[data-agregar]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var art = b.closest('.item') || b.closest('.destacado');
+    var img = art ? art.querySelector('img') : null;
+    var talle = '?';
+    if(art){
+      var activoDestacado = art.querySelector('.talla[aria-pressed="true"]');
+      var activoGrilla = art.querySelector('.talle-mini.activo');
+      if(activoDestacado) talle = activoDestacado.dataset.talle;
+      else if(activoGrilla) talle = activoGrilla.dataset.talle;
+    }
+    agregarABolsa({
+      nombre: b.dataset.nombre || '',
+      cw: b.dataset.cw || '',
+      precio: parseInt(b.dataset.precio, 10) || 0,
+      talle: talle,
+      img: img ? img.src : ''
+    });
+    if(b.classList.contains('hecho')) return;
+    var previo = b.textContent;
+    b.classList.add('hecho');
+    b.textContent = 'En la bolsa';
+    setTimeout(function(){ b.classList.remove('hecho'); b.textContent = previo; }, 1400);
+  });
+});
+
+/* "Avisame" en los pares agotados: manda un WhatsApp real pidiendo el aviso */
+document.querySelectorAll('[data-notificar]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var msg = 'Hola! Quiero que me avisen cuando tengan de nuevo la ' + (b.dataset.nombre||'') + ' ' + (b.dataset.cw||'') + '.';
+    window.open('https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
+  });
+});
+
+/* ==========================================================================
+   Pagina de detalle de producto — cantidad, talle y agregar al carrito.
+   ========================================================================== */
+document.getElementById('pdMenos').addEventListener('click', function(){
+  if(pdCantidad > 1){ pdCantidad--; document.getElementById('pdCantidadTxt').textContent = pdCantidad; }
+});
+document.getElementById('pdMas').addEventListener('click', function(){
+  pdCantidad++; document.getElementById('pdCantidadTxt').textContent = pdCantidad;
+});
+document.getElementById('pdAgregar').addEventListener('click', function(){
+  var errEl = document.getElementById('pdAgregarError');
+  if(!pdTalleSeleccionado){
+    errEl.textContent = 'Elegí un talle antes de agregar al carrito.';
+    errEl.style.display = '';
+    return;
+  }
+  errEl.style.display = 'none';
+  for(var i = 0; i < pdCantidad; i++){
+    agregarABolsa({
+      nombre: this.dataset.nombre,
+      cw: this.dataset.cw,
+      precio: parseInt(this.dataset.precio, 10) || 0,
+      talle: pdTalleSeleccionado,
+      img: this.dataset.img
+    });
+  }
+  document.getElementById('pdAgregadoMsg').style.display = '';
+});
+document.getElementById('pdVerCarrito').addEventListener('click', function(ev){
+  ev.preventDefault();
+  abrirBolsa();
+});
+
+window.addEventListener('hashchange', renderVistaSegunHash);
+renderVistaSegunHash();
+</script>
+</body>
+</html>
