@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - claude/skills-token-savings-gz9hca
+      - claude/wonderful-knuth-8683eb
   workflow_dispatch:
 
 permissions:
